@@ -9,8 +9,15 @@
         </wicket:head> 
     </head> 
     <body> 
-        <wicket:extend> 
-            <h1 wicket:id="message">This gets replaced</h1>
-        </wicket:extend> 
+        <wicket:extend>
+        <h2>Example (Student Listing)</h2>
+        <table>
+            <tr wicket:id="student_list">
+                <td>
+                    (<span wicket:id="number"></span>) <span wicket:id="name"></span>
+                </td>
+            </tr>
+        </table>
+        </wicket:extend>
     </body> 
 </html>
