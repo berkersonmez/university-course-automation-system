@@ -6,3 +6,6 @@ CREATE TABLE IF NOT EXISTS `student` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `number` (`number`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+INSERT INTO `student` (`number`, `name`) VALUES (40100101, 'Berker Sönmez');
+INSERT INTO `student` (`number`, `name`) VALUES (40100105, 'Oğuz Onur Kul');
