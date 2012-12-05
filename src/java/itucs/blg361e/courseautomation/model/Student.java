@@ -4,24 +4,15 @@ package itucs.blg361e.courseautomation.model;
  *
  * @author Berker
  */
-public class Student {
-    private Integer id = null;
+public class Student extends User{
     private Integer number;
-    private String name;
+    private Integer studentID = null; // corresponds to the id in the student table (not student no)
     
-    public Student(Integer nNumber, String nName) {
+    public Student(String nName, String nUsername, String nPassword, Integer nNumber) {
+        super(nName, nUsername, nPassword);
         number = nNumber;
-        name = nName;
     }
 
-    public void setId(Integer newId) {
-        this.id = newId;
-    }
-
-    public Integer getId() {
-        return this.id;
-    }
-    
     public void setNumber(Integer newNumber) {
         this.number = newNumber;
     }
@@ -30,11 +21,11 @@ public class Student {
         return this.number;
     }
     
-    public void setName(String newName) {
-        this.name = newName;
+    public void setStudentID(Integer newStudentID) {
+        this.studentID = newStudentID;
     }
 
-    public String getName() {
-        return this.name;
+    public Integer getStudentID() {
+        return this.studentID;
     }
 }

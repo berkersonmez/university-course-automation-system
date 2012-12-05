@@ -13,47 +13,45 @@ import java.util.List;
  *
  * @author Berker
  */
-public class StudentCollectionJDBC extends DBConnection {
+public class TeacherCollectionJDBC extends DBConnection {
 
-    public StudentCollectionJDBC() {
+    public TeacherCollectionJDBC() {
         super();
     }
 
-    public List<Student> getStudents() {
-        List<Student> students = new LinkedList<Student>();
+    public List<Teacher> getTeachers() {
+        List<Teacher> teachers = new LinkedList<Teacher>();
         try {
-            String query = "SELECT user.id, student.id, number, name, username, password FROM user JOIN student ON (userID = user.id)";
+            String query = "SELECT user.id, teacher.id, name, username, password FROM user JOIN teacher ON (userID = user.id)";
             Statement statement = this.db.createStatement();
             ResultSet results = statement.executeQuery(query);
             while (results.next()) {
                 Integer id = results.getInt("user.id");
-                Integer studentID = results.getInt("student.id");
-                Integer number = results.getInt("number");
+                Integer teacherID = results.getInt("teacher.id");
                 String name = results.getString("name");
                 String username = results.getString("username");
                 String password = results.getString("password");
                 
-                Student student = new Student(name, username, password, number);
-                student.setId(id);
-                student.setStudentID(studentID);
-                students.add(student);
+                Teacher teacher = new Teacher(name, username, password);
+                teacher.setId(id);
+                teacher.setTeacherID(teacherID);
+                teachers.add(teacher);
             }
             results.close();
             statement.close();
         } catch (SQLException e) {
             throw new UnsupportedOperationException(e.getMessage());
         }
-        return students;
+        return teachers;
     }
 
-    public void addStudent(Student student) {
+    public void addTeacher(Teacher teacher) {
         try {
             UserCollectionJDBC userC = new UserCollectionJDBC();
-            Integer userID = userC.addUser(student);
-            String query = "INSERT INTO student (number, userID) VALUES (?, ?)";
+            Integer userID = userC.addUser(teacher);
+            String query = "INSERT INTO teacher (userID) VALUES (?)";
             PreparedStatement statement = this.db.prepareStatement(query);
-            statement.setInt(1, student.getNumber());
-            statement.setInt(2, userID);
+            statement.setInt(1, userID);
             statement.executeUpdate();
             
         } catch (SQLException e) {
@@ -61,33 +59,32 @@ public class StudentCollectionJDBC extends DBConnection {
         }
     }
 
-    public void deleteStudent(Student student) {
+    public void deleteTeacher(Teacher teacher) {
         try {
             UserCollectionJDBC userC = new UserCollectionJDBC();
             
-            String query = "DELETE FROM student WHERE (id = ?)";
+            String query = "DELETE FROM teacher WHERE (id = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
-            statement.setInt(1, student.getStudentID());
+            statement.setInt(1, teacher.getTeacherID());
             statement.executeUpdate();
             statement.close();
-            userC.deleteUser(student);
+            userC.deleteUser(teacher);
         } catch (SQLException e) {
             throw new UnsupportedOperationException(e.getMessage());
         }
     }
 
-    public void updateStudent(Student student) {
+    public void updateTeacher(Teacher teacher) {
         try {
             UserCollectionJDBC userC = new UserCollectionJDBC();
             
-            String query = "UPDATE student SET number = ?, userID = ? WHERE (id = ?)";
+            String query = "UPDATE student SET userID = ? WHERE (id = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
-            statement.setInt(1, student.getNumber());
-            statement.setInt(2, student.getId());
-            statement.setInt(3, student.getStudentID());
+            statement.setInt(1, teacher.getId());
+            statement.setInt(2, teacher.getTeacherID());
             statement.executeUpdate();
             statement.close();
-            userC.updateUser(student);
+            userC.updateUser(teacher);
         } catch (SQLException e) {
             throw new UnsupportedOperationException(e.getMessage());
         }
