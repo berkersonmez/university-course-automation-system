@@ -9,17 +9,22 @@ body {
 	font-size: 9pt;
 	line-height: 1.8em;
 	padding: 10px 10px 10px 10px;
-	margin: 10px 10px 10px 10px;
+	margin: 10px auto;
+        width: 960px;
+        border-width: 2px;
+        border-color: #1A7BE9;
+        border-radius: 5px;
+        border-style: solid;
 }
 
 h1,h2,h3,h4,h5,h6,h7,h8 {
-	color: #E9601A;
+	color: #1A7BE9;
 }
 
 #extitle {
 	font-size: 12pt;
 	font-weight: bold;
-	color: #E9601A;
+	color: #1A7BE9;
 	padding: 10px 10px 10px 10px;
 }
 
@@ -40,10 +45,10 @@ h1,h2,h3,h4,h5,h6,h7,h8 {
 }
 
 #titleblock {
-	background: #DEDEDE;
+	background: #2B86C2;
 	color: white;
 	font-weight: bold;
-	border-bottom: solid #E9601A;
+	border-bottom: solid #1A7BE9;
 	border-width: thin;
 	padding: 2px 2px 2px 6px;
 }

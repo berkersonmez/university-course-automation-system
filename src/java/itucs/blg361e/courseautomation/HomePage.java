@@ -20,6 +20,7 @@ import org.apache.wicket.markup.html.list.ListView;
 public class HomePage extends BasePage {
 
     public HomePage() {
+        replace(new HeaderPanel("headerpanel", "Example Page")); 
         StudentCollectionJDBC collection = new StudentCollectionJDBC();
         List<Student> students = collection.getStudents();
         ListView studentListView = new ListView("student_list", students) {
