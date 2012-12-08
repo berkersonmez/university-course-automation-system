@@ -6,6 +6,8 @@
  
 package itucs.blg361e.courseautomation;           
 
+import org.apache.wicket.request.*;
+import org.apache.wicket.Session;
 import org.apache.wicket.protocol.http.WebApplication;
 /** 
  *
@@ -20,6 +22,11 @@ public class Application extends WebApplication {
 
     public Class getHomePage() {
         return HomePage.class;
+    }
+    
+    @Override
+    public Session newSession(Request request, Response response){
+        return new CustomSession(request);
     }
 
 }

@@ -8,6 +8,8 @@ import itucs.blg361e.courseautomation.DBConnection;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -88,5 +90,30 @@ public class TeacherCollectionJDBC extends DBConnection {
         } catch (SQLException e) {
             throw new UnsupportedOperationException(e.getMessage());
         }
+    }
+    
+    public boolean isTeacher(User user){
+        try {
+            String query = "SELECT * FROM teacher WHERE (userID = ?) ";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, user.getId());
+            ResultSet result = statement.executeQuery();
+            boolean flag;
+            
+            if(result.next()){       
+                flag = true;
+                
+            }
+            else
+                flag = false;
+            
+            statement.close();
+            result.close();  
+            return flag; 
+            
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+        
     }
 }

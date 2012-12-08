@@ -14,6 +14,7 @@ public class User {
     private String name;
     private String username;
     private String password;
+    private Integer type;
     
     public User(String nName, String nUsername, String nPassword) {
         username = nUsername;
@@ -58,5 +59,13 @@ public class User {
         mdEnc.update(password.getBytes("UTF-8"), 0, password.length());
         String md5 = new BigInteger(1, mdEnc.digest()).toString(16); // Encrypted string
         return md5;
+    }
+    
+    public void setType(int i){
+        type = i;
+    }
+    
+    public int getType(){
+        return type;
     }
 }

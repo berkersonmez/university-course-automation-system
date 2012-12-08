@@ -92,4 +92,25 @@ public class StudentCollectionJDBC extends DBConnection {
             throw new UnsupportedOperationException(e.getMessage());
         }
     }
+    
+    public boolean isStudent(User user){
+        try {
+            String query = "SELECT * FROM student WHERE (userID = ?) ";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, user.getId());
+            ResultSet result = statement.executeQuery();
+            boolean flag;           
+            if(result.next()){       
+                flag = true;
+            }
+            else
+                flag = false;           
+            statement.close();
+            result.close();  
+            return flag;          
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+        
+    }
 }

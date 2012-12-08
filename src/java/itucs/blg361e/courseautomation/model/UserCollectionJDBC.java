@@ -8,6 +8,8 @@ import itucs.blg361e.courseautomation.DBConnection;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -84,4 +86,30 @@ public class UserCollectionJDBC extends DBConnection {
             throw new UnsupportedOperationException(e.getMessage());
         }
     }
+
+    //Parametre olarak user alıp o user database'de var mı diye bakar varsa onun değerlerini döndürür.
+    public User checkUserByUsernameAndPassword(User user){
+        try {
+            String query = "SELECT * FROM user WHERE (username = ? AND password = ?) ";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setString(1, user.getUsername());
+            statement.setString(2, user.getPassword());
+            ResultSet result = statement.executeQuery();
+            if(result.next()){       
+                user.setName(result.getString("name"));
+                user.setId(result.getInt("id"));
+            }
+            
+            statement.close();
+            result.close();
+            
+            return user;
+                   
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+    }
+    
+    
+
 }
