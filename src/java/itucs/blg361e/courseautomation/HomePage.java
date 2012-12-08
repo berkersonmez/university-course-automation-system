@@ -12,8 +12,10 @@ import itucs.blg361e.courseautomation.model.Student;
 import itucs.blg361e.courseautomation.model.StudentCollectionJDBC;
 import itucs.blg361e.courseautomation.model.Teacher;
 import itucs.blg361e.courseautomation.model.TeacherCollectionJDBC;
+import itucs.blg361e.courseautomation.model.User;
 import java.util.List;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 
@@ -21,6 +23,7 @@ public class HomePage extends BasePage {
 
     public HomePage() {
         replace(new HeaderPanel("headerpanel", "Example Page")); 
+        add(new LoginForm("login", new User("","","")));
         StudentCollectionJDBC collection = new StudentCollectionJDBC();
         List<Student> students = collection.getStudents();
         ListView studentListView = new ListView("student_list", students) {

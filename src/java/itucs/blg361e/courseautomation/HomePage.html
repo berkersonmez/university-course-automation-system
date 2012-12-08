@@ -10,32 +10,48 @@
     </head> 
     <body> 
         <wicket:extend>
-        <h2>Example (Student Listing)</h2>
-        <table>
-            <tr wicket:id="student_list">
-                <td>
-                    (<span wicket:id="number"></span>) <span wicket:id="name"></span> | <span wicket:id="username"></span> | <span wicket:id="password"></span>
-                </td>
-            </tr>
-        </table>
-        
-        <h2>Example (Teacher Listing)</h2>
-        <table>
-            <tr wicket:id="teacher_list">
-                <td>
-                    <span wicket:id="t_name"></span> | <span wicket:id="t_username"></span> | <span wicket:id="t_password"></span>
-                </td>
-            </tr>
-        </table>
-        
-        <h2>Example (Admin Listing)</h2>
-        <table>
-            <tr wicket:id="admin_list">
-                <td>
-                    <span wicket:id="a_name"></span> | <span wicket:id="a_username"></span> | <span wicket:id="a_password"></span>
-                </td>
-            </tr>
-        </table>
+            <div id="login">
+            <h2>Login</h2>
+            <form action="#" wicket:id="login">
+                <table>
+                    <tr>
+                        <th>Username:</th>
+                        <td><input wicket:id="username" type="text"/></td>
+                    </tr>
+                    <tr>
+                        <th>Password</th>
+                        <td><input wicket:id="password" type="password" size="4"/></td>
+                    </tr>
+                </table>
+                <input value="Login" name="login" type="submit"/>
+            </form>
+            </div>
+            <h2>Example (Student Listing)</h2>
+            <table>
+                <tr wicket:id="student_list">
+                    <td>
+                        (<span wicket:id="number"></span>) <span wicket:id="name"></span> | <span wicket:id="username"></span> | <span wicket:id="password"></span>
+                    </td>
+                </tr>
+            </table>
+
+            <h2>Example (Teacher Listing)</h2>
+            <table>
+                <tr wicket:id="teacher_list">
+                    <td>
+                        <span wicket:id="t_name"></span> | <span wicket:id="t_username"></span> | <span wicket:id="t_password"></span>
+                    </td>
+                </tr>
+            </table>
+
+            <h2>Example (Admin Listing)</h2>
+            <table>
+                <tr wicket:id="admin_list">
+                    <td>
+                        <span wicket:id="a_name"></span> | <span wicket:id="a_username"></span> | <span wicket:id="a_password"></span>
+                    </td>
+                </tr>
+            </table>
         </wicket:extend>
         
     </body> 
