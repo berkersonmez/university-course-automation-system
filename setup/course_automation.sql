@@ -105,4 +105,4 @@ INSERT INTO `teacher` (`userID`) VALUES (4);
 INSERT INTO `user` (`name`, `username`, `password`) VALUES ('Admin1', 'admin', 'e10adc3949ba59abbe56e057f20f883e'); 
 INSERT INTO `user` (`name`, `username`, `password`) VALUES ('Admin2', 'admin2', 'e10adc3949ba59abbe56e057f20f883e'); 
 INSERT INTO `admin` (`userID`) VALUES (5);
-INSERT INTO `admin` (`userID`) VALUES (6);
+INSERT INTO `admin` (`userID`) VALUES (6); 
