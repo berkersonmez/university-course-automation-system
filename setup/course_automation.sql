@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS `student`, `teacher`, `admin`, `user`;
+DROP TABLE IF EXISTS `student`, `teacher`, `admin`, `user`, `course`, `open_course`,`class`,`building`,`faculty`, `options`;
 CREATE TABLE IF NOT EXISTS `user` (
     `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
     `name` varchar(225) COLLATE utf8_unicode_ci NOT NULL,
@@ -29,6 +29,68 @@ CREATE TABLE IF NOT EXISTS `admin` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `userID` (`userID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `course` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `name` varchar(100) NOT NULL,
+    `code` varchar(8) NOT NULL,
+    `credits` smallint(1) unsigned NOT NULL,
+    `facultyID` int(10) unsigned NOT NULL REFERENCES `faculty`,
+    `length` smallint(5) unsigned NOT NULL, 
+    PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS `open_course` (
+    `CRN` int(10) unsigned NOT NULL,
+    `courseID` int(10) NOT NULL REFERENCES `course`,
+    `quota` smallint(3) NOT NULL,
+    `teacherID` int(10) unsigned NOT NULL REFERENCES `teacher`,
+    `classID` int(10) unsigned NOT NULL REFERENCES `class`,
+    `begin_time` time NULL, 
+    `end_time` time NULL,
+    PRIMARY KEY (`CRN`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10000 ;
+
+CREATE TABLE IF NOT EXISTS `class` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `quota` smallint(3) NOT NULL,
+    `name` varchar(100) NOT NULL,
+    `buildingID` int(10) NOT NULL REFERENCES `building`,
+    `is_lab` boolean NOT NULL, 
+    PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `building` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `code` varchar(10) NOT NULL,
+    `name` varchar(100) NOT NULL,
+    `facultyID` int(10) NOT NULL REFERENCES `faculty`,
+    PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE IF NOT EXISTS `faculty` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `location` varchar(10) NOT NULL,
+    `name` varchar(100) NOT NULL,
+    `code` varchar(10) NOT NULL,
+    PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `options` (
+       `isAddDrop` boolean NOT NULL
+)ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `student_courses` (
+       `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+       `studentID` int(10) unsigned NOT NULL REFERENCES `student`,
+       `CRN` int(10) unsigned NOT NULL REFERENCES `open_course`,
+       PRIMARY KEY (`id`)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
 INSERT INTO `user` (`name`, `username`, `password`) VALUES ('Berker Sönmez', 'sonmezbe', 'e10adc3949ba59abbe56e057f20f883e'); 
 INSERT INTO `user` (`name`, `username`, `password`) VALUES ('Oğuz Onur Kul', 'kulo', 'e10adc3949ba59abbe56e057f20f883e'); 
