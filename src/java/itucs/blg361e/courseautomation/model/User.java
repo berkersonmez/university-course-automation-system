@@ -15,6 +15,9 @@ public class User {
     private String username;
     private String password;
     private Integer type;
+    public static final int TYPE_ADMIN= 1;
+    public static final int TYPE_TEACHER= 2;
+    public static final int TYPE_STUDENT= 3;
     
     public User(String nName, String nUsername, String nPassword) {
         username = nUsername;

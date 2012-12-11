@@ -40,13 +40,13 @@ public class LoginForm extends Form {
             AdminCollectionJDBC aCollection = new AdminCollectionJDBC();
             
             if(aCollection.isAdmin(user)){
-                user.setType(1);
+                user.setType(User.TYPE_ADMIN);
             }
             else if(tCollection.isTeacher(user)){
-                user.setType(2);
+                user.setType(User.TYPE_TEACHER);
             }
             else if(sCollection.isStudent(user)){
-                user.setType(3);
+                user.setType(User.TYPE_STUDENT);
             }
             
             ((CustomSession)getSession()).setUser(user);
