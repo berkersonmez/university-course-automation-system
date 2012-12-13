@@ -45,8 +45,10 @@ public final class MenuPage extends BasePage {
         List<MenuObject> menuList= new LinkedList<MenuObject>();
         if (user.getType() == User.TYPE_ADMIN) {
             menuList.add(new MenuObject("Edit Course", new CourseEditPage()));
+            
         } else if (user.getType() == User.TYPE_STUDENT) {
-            // Student menu
+           menuList.add(new MenuObject("Add / Drop", new AddDropPage()));
+           
         } else if (user.getType() == User.TYPE_TEACHER) {
             // Teacher menu
         }

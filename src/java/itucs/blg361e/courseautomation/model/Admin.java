@@ -9,6 +9,7 @@ public class Admin extends User{
     
     public Admin(String nName, String nUsername, String nPassword) {
         super(nName, nUsername, nPassword);
+        type = TYPE_ADMIN;
     }
     
     public void setAdminID(Integer newAdminID) {

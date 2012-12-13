@@ -10,11 +10,11 @@ import java.security.NoSuchAlgorithmException;
  * @author Berker
  */
 public class User {
-    private Integer id = null;
-    private String name;
-    private String username;
-    private String password;
-    private Integer type;
+    protected Integer id = null;
+    protected String name;
+    protected String username;
+    protected String password;
+    protected Integer type;
     public static final int TYPE_ADMIN= 1;
     public static final int TYPE_TEACHER= 2;
     public static final int TYPE_STUDENT= 3;

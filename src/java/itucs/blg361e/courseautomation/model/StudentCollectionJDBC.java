@@ -22,7 +22,7 @@ public class StudentCollectionJDBC extends DBConnection {
     public List<Student> getStudents() {
         List<Student> students = new LinkedList<Student>();
         try {
-            String query = "SELECT user.id, student.id, number, name, username, password FROM user JOIN student ON (userID = user.id)";
+            String query = "SELECT user.id, student.id, number, name, username, password, credit_limit, current_credit FROM user JOIN student ON (userID = user.id)";
             Statement statement = this.db.createStatement();
             ResultSet results = statement.executeQuery(query);
             while (results.next()) {
@@ -32,6 +32,9 @@ public class StudentCollectionJDBC extends DBConnection {
                 String name = results.getString("name");
                 String username = results.getString("username");
                 String password = results.getString("password");
+                Integer credit_limit = results.getInt("credit_limit");
+                Integer current_credit = results.getInt("current_credit");
+                
                 
                 Student student = new Student(name, username, password, number);
                 student.setId(id);
