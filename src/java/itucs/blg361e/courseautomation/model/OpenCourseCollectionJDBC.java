@@ -51,7 +51,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
 
     public void addStudentCourse(StudentCourse sCourse) {
         try {
-            String query = "INSERT INTO student_courses (userID, CRN) VALUES (?, ?)";
+            String query = "INSERT INTO student_course (userID, CRN) VALUES (?, ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, sCourse.getUserID());
             statement.setInt(2, sCourse.getCRN());
@@ -64,7 +64,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
 
     public void deleteStudent(StudentCourse sCourse) {
         try {
-            String query = "DELETE FROM student_courses WHERE (userID = ?) AND (CRN = ?)";
+            String query = "DELETE FROM student_course WHERE (userID = ?) AND (CRN = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, sCourse.getUserID());
             statement.setInt(2, sCourse.getCRN());
