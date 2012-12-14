@@ -70,7 +70,6 @@ CREATE TABLE IF NOT EXISTS `building` (
     `code` varchar(10) NOT NULL,
     `name` varchar(100) NOT NULL,
     `location` varchar(100) NOT NULL,
-    `facultyID` int(10) NOT NULL REFERENCES `faculty`,
     PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
@@ -111,8 +110,8 @@ INSERT INTO `user` (`name`, `username`, `password`) VALUES ('Admin2', 'admin2', 
 INSERT INTO `admin` (`userID`) VALUES (5);
 INSERT INTO `admin` (`userID`) VALUES (6); 
 
-INSERT INTO `building` (`code`, `name`, `location`, `facultyID`) VALUES ('EEB', 'Elektrik Elektronik Fakültesi Binası', 'Maslak Kampüsü', 4); 
-INSERT INTO `building` (`code`, `name`, `location`, `facultyID`) VALUES ('FEB', 'Fen Edebiyat Fakültesi Binası', 'Maslak Kampüsü', 3); 
+INSERT INTO `building` (`code`, `name`, `location`) VALUES ('EEB', 'Elektrik Elektronik Fakültesi Binası', 'Maslak Kampüsü'); 
+INSERT INTO `building` (`code`, `name`, `location`) VALUES ('FEB', 'Fen Edebiyat Fakültesi Binası', 'Maslak Kampüsü'); 
 
 INSERT INTO `faculty` (`id`, `building`, `name`, `code`) VALUES ('4', 1, 'Elektrik Elektronik Fakültesi', 'EE'); 
 INSERT INTO `faculty` (`id`, `building`, `name`, `code`) VALUES ('3', 2, 'Fen Edebiyat Fakültesi', 'FE'); 
