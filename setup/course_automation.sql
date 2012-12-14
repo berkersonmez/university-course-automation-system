@@ -55,12 +55,12 @@ CREATE TABLE IF NOT EXISTS `open_course` (
     PRIMARY KEY (`CRN`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10000 ;
 
-CREATE TABLE IF NOT EXISTS `class` (
+CREATE TABLE IF NOT EXISTS `class_room` (
     `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
     `quota` smallint(3) NOT NULL,
     `name` varchar(100) NOT NULL,
     `buildingID` int(10) NOT NULL REFERENCES `building`,
-    `is_lab` boolean NOT NULL, 
+    `lab` boolean NOT NULL, 
     PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
@@ -70,7 +70,6 @@ CREATE TABLE IF NOT EXISTS `building` (
     `code` varchar(10) NOT NULL,
     `name` varchar(100) NOT NULL,
     `location` varchar(100) NOT NULL,
-    `facultyID` int(10) NOT NULL REFERENCES `faculty`,
     PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
@@ -78,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `building` (
 
 CREATE TABLE IF NOT EXISTS `faculty` (
     `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-    `building` int(10) NOT NULL REFERENCES `building`,
+    `buildingID` int(10) NOT NULL REFERENCES `building`,
     `name` varchar(100) NOT NULL,
     `code` varchar(10) NOT NULL,
     PRIMARY KEY (`id`),

@@ -77,7 +77,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
 
     public void updateStudent(StudentCourse sCourse) {
         try {      
-            String query = "UPDATE student_courses SET userID = ?, CRN = ? WHERE (userID = ?)";
+            String query = "UPDATE student_course SET userID = ?, CRN = ? WHERE (userID = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, sCourse.getUserID());
             statement.setInt(2, sCourse.getCRN());
