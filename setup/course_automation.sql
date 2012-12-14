@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `course` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS `open_course` (
-    `CRN` int(10) unsigned NOT NULL,
+    `CRN` int(10) unsigned NOT NULL AUTO_INCREMENT,
     `courseID` int(10) NOT NULL REFERENCES `course`,
     `quota` smallint(3) NOT NULL,
     `current_student_count` smallint(3) NOT NULL,
@@ -124,5 +124,7 @@ INSERT INTO `class` (`quota`, `name`, `buildingID`, `is_lab` ) VALUES ('30', 'F-
 INSERT INTO `course` (`name`, `code`, `credits`, `facultyID`, `length` ) VALUES ('Mathematic 1', 'MAT101', 5, 3, 6);
 INSERT INTO `course` (`name`, `code`, `credits`, `facultyID`, `length` ) VALUES ('Turkish 1', 'TUR101', 2, 3, 2);
 
-INSERT INTO `open_course` (`CRN`, `courseId`, `quota`, `current_student_count`, `teacherID`, `classID`, `begin_time`, `end_time` ) VALUES (1, 1, 80, 60, 1, 1, '8:30', '10:30');
-INSERT INTO `open_course` (`CRN`, `courseId`, `quota`, `current_student_count`, `teacherID`, `classID`, `begin_time`, `end_time` ) VALUES (2, 2, 50, 40, 2, 2, '8:30', '11:30');
+INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `classID`, `begin_time`, `end_time` ) VALUES (1, 80, 60, 1, 1, '8:30', '10:30');
+INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `classID`, `begin_time`, `end_time` ) VALUES (2, 50, 40, 2, 2, '8:30', '11:30');
+
+INSERT INTO `course` (`name`, `code`, `credits`, `facultyID`, `length`) VALUES ('Database Management Systems', 'BLG361E', 3, 1, 3); 
