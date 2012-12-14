@@ -110,8 +110,8 @@ INSERT INTO `user` (`name`, `username`, `password`) VALUES ('Admin2', 'admin2', 
 INSERT INTO `admin` (`userID`) VALUES (5);
 INSERT INTO `admin` (`userID`) VALUES (6); 
 
-INSERT INTO `building` (`code`, `name`, `location`, `facultyID`) VALUES ('EEB', 'Elektrik Elektronik Fakültesi Binası', 'Maslak Kampüsü', 4); 
-INSERT INTO `building` (`code`, `name`, `location`, `facultyID`) VALUES ('FEB', 'Fen Edebiyat Fakültesi Binası', 'Maslak Kampüsü', 3); 
+INSERT INTO `building` (`code`, `name`, `location`) VALUES ('EEB', 'Elektrik Elektronik Fakültesi Binası', 'Maslak Kampüsü'); 
+INSERT INTO `building` (`code`, `name`, `location`) VALUES ('FEB', 'Fen Edebiyat Fakültesi Binası', 'Maslak Kampüsü'); 
 
 INSERT INTO `faculty` (`id`, `building`, `name`, `code`) VALUES ('4', 1, 'Elektrik Elektronik Fakültesi', 'EE'); 
 INSERT INTO `faculty` (`id`, `building`, `name`, `code`) VALUES ('3', 2, 'Fen Edebiyat Fakültesi', 'FE'); 
