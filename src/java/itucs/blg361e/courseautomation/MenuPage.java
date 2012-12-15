@@ -44,7 +44,11 @@ public final class MenuPage extends BasePage {
         
         List<MenuObject> menuList= new LinkedList<MenuObject>();
         if (user.getType() == User.TYPE_ADMIN) {
-            menuList.add(new MenuObject("Edit Course", new CourseEditPage()));
+            menuList.add(new MenuObject("Add Student", new StudentAddPage()));
+            menuList.add(new MenuObject("Add Course", new CourseAddPage()));
+            menuList.add(new MenuObject("Edit Course", new CourseSelectPage()));
+            menuList.add(new MenuObject("Edit Admin", new AdminEditPage()));
+            menuList.add(new MenuObject("Options", new OptionsPage()));
             
         } else if (user.getType() == User.TYPE_STUDENT) {
            menuList.add(new MenuObject("Add / Drop", new AddDropPage()));
@@ -69,6 +73,17 @@ public final class MenuPage extends BasePage {
             }
         };
         this.add(menuListView);
+        
+        Link logoutLink = new Link("logout_link") {
+
+            @Override
+            public void onClick() {
+                getSession().invalidateNow();
+                this.setResponsePage(HomePage.class);
+            }
+        
+        };
+        this.add(logoutLink);
     }
     
     

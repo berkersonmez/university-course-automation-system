@@ -4,7 +4,9 @@
  */
 package itucs.blg361e.courseautomation;
 
-import org.apache.wicket.markup.html.WebPage;
+import itucs.blg361e.courseautomation.model.Course;
+import itucs.blg361e.courseautomation.model.CourseCollectionJDBC;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 /**
  *
@@ -12,7 +14,13 @@ import org.apache.wicket.markup.html.WebPage;
  */
 public final class CourseEditPage extends BasePage {
 
-    public CourseEditPage() {
-        
+    public CourseEditPage(final PageParameters parameters) {
+        replace(new HeaderPanel("headerpanel","Edit Course"));
+        Integer courseID = Integer.parseInt(parameters.get("id").toString());
+        Course course = new Course();
+        course.setId(courseID);
+        CourseCollectionJDBC cCollection = new CourseCollectionJDBC();
+        course = cCollection.getCourse(course);
+        add(new CourseForm("course_edit", course));
     }
 }

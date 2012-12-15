@@ -22,7 +22,7 @@ import org.apache.wicket.markup.html.list.ListView;
 public class HomePage extends BasePage {
 
     public HomePage() {
-        replace(new HeaderPanel("headerpanel", "Example Page")); 
+        replace(new HeaderPanel("headerpanel", "Login Page")); 
         add(new LoginForm("login", new User("","","")));
         StudentCollectionJDBC collection = new StudentCollectionJDBC();
         List<Student> students = collection.getStudents();
@@ -63,7 +63,6 @@ public class HomePage extends BasePage {
             }
         };
         this.add(adminListView);
-        
     }
 
 }

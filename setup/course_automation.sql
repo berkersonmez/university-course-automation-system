@@ -127,3 +127,5 @@ INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teache
 INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `classID`, `begin_time`, `end_time` ) VALUES (2, 50, 40, 2, 2, '8:30', '11:30');
 
 INSERT INTO `course` (`name`, `code`, `credits`, `facultyID`, `length`) VALUES ('Database Management Systems', 'BLG361E', 3, 1, 3); 
+
+INSERT INTO `options` (`isAddDrop`) VALUES (true); 
