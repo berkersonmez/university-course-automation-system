@@ -39,11 +39,20 @@ public class AddCRNForm extends Form {
         StudentCourse nStudentCourse = (StudentCourse) this.getModelObject();
         Application app = (Application) this.getApplication();
         StudentCourseCollectionJDBC nStudentCourseCollectionJDBC = new StudentCourseCollectionJDBC();
+        OpenCourseCollectionJDBC nOpenCourseCollectionJDBC = new OpenCourseCollectionJDBC();
         User nUser = ((CustomSession)getSession()).getUser();
         nStudentCourse.setUserID(nUser.getId());
         
+        if(nStudentCourseCollectionJDBC.checkCode(nStudentCourse) == true){
+            error("Selected CRN is already added");
+            return;
+        }
+        else if(nOpenCourseCollectionJDBC.checkCode(nStudentCourse.getCRN()) == false){
+            error("Selected CRN does not exist");
+            return;
+        }
         
         nStudentCourseCollectionJDBC.addStudentCourse(nStudentCourse);
-          
+           
         }
     }

@@ -174,9 +174,30 @@ public class OpenCourseCollectionJDBC extends DBConnection {
     public boolean checkCode(OpenCourse iOpenCourse) {
         
         try {
-            String query = "SELECT COUNT(*) FROM course WHERE CRN = ?";
+            String query = "SELECT COUNT(*) FROM open_course WHERE CRN = ?";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, iOpenCourse.getCRN());
+            ResultSet results = statement.executeQuery();
+            if (results.next()) {
+                Integer count = results.getInt("COUNT(*)");
+                if (count > 0) {
+                    return true;
+                }
+            }
+            results.close();
+            statement.close();
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+        return false;
+    }
+    
+    public boolean checkCode(Integer iCRN) {
+        
+        try {
+            String query = "SELECT COUNT(*) FROM open_course WHERE CRN = ?";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, iCRN);
             ResultSet results = statement.executeQuery();
             if (results.next()) {
                 Integer count = results.getInt("COUNT(*)");

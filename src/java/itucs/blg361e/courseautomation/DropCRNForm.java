@@ -35,6 +35,11 @@ public class DropCRNForm extends Form {
         User nUser = ((CustomSession)getSession()).getUser();
         nStudentCourse.setUserID(nUser.getId());
      
+        if(nStudentCourseCollectionJDBC.checkCode(nStudentCourse) == false){
+            error("Selected Course is not in your course list");
+            return;
+        }
+        
         nStudentCourseCollectionJDBC.deleteStudentCourse(nStudentCourse);
           
         }
