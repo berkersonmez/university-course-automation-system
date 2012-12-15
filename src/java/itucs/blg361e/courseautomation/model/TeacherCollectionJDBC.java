@@ -80,7 +80,7 @@ public class TeacherCollectionJDBC extends DBConnection {
         try {
             UserCollectionJDBC userC = new UserCollectionJDBC();
             
-            String query = "UPDATE student SET userID = ? WHERE (id = ?)";
+            String query = "UPDATE teacher SET userID = ? WHERE (id = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, teacher.getId());
             statement.setInt(2, teacher.getTeacherID());
