@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS `open_course` (
     `teacherID` int(10) unsigned NOT NULL REFERENCES `teacher`,
     `class_roomID` int(10) unsigned NOT NULL REFERENCES `class_room`,
     `day` ENUM('Mon', 'Tue', 'Wed', 'Thu', 'Fri') NOT NULL,
-    `begin_time` time NULL, 
-    `end_time` time NULL,
+    `begin_time` time NOT NULL, 
+    `end_time` time NOT NULL,
     PRIMARY KEY (`CRN`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10000 ;
 

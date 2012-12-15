@@ -16,6 +16,7 @@ import itucs.blg361e.courseautomation.model.OpenCourseCollectionJDBC;
 import itucs.blg361e.courseautomation.model.TeacherCollectionJDBC;
 import itucs.blg361e.courseautomation.model.User;
 import itucs.blg361e.courseautomation.utility.SelectOption;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
@@ -32,6 +33,7 @@ import org.apache.wicket.model.PropertyModel;
 class TeacherOpenCourseForm extends Form {
         private final DropDownChoice<Course> courseSelect;
         private final DropDownChoice<ClassRoom> classRoomSelect;
+        private final DropDownChoice<String> daySelect;
         User user = ((CustomSession)getSession()).getUser();
         
         public TeacherOpenCourseForm(String property, OpenCourse iOpenCourse) {
@@ -51,13 +53,27 @@ class TeacherOpenCourseForm extends Form {
             }
             ChoiceRenderer cr = new ChoiceRenderer("value", "key");
             // TODO: Selectbox default value
-            courseSelect = (DropDownChoice<Course>) new DropDownChoice("course", 
-                    new PropertyModel(iOpenCourse,"course"), 
+            courseSelect = (DropDownChoice<Course>) new DropDownChoice("course",
                     selectChoices, 
                     cr).setRequired(true);
             add(courseSelect);
             
             
+            List<SelectOption> selectChoices3 = new ArrayList<SelectOption>();
+            selectChoices3.add(new SelectOption("Mon" ,"Monday"));
+            selectChoices3.add(new SelectOption("Tue" ,"Tuesday"));
+            selectChoices3.add(new SelectOption("Wed" ,"Wednesday"));
+            selectChoices3.add(new SelectOption("Thu" ,"Thursday"));
+            selectChoices3.add(new SelectOption("Fri" ,"Friday"));
+            // TODO: Selectbox default value
+            daySelect = (DropDownChoice<String>) new DropDownChoice("daySelect",
+                    selectChoices3, 
+                    cr).setRequired(true);
+            add(daySelect);
+            
+            
+            this.add(new TextField("beginTimeInString").setRequired(true));
+            this.add(new TextField("endTimeInString").setRequired(true));
             
             ClassRoomCollectionJDBC crCollection = new ClassRoomCollectionJDBC();
             BuildingCollectionJDBC bCollection = new BuildingCollectionJDBC();
@@ -71,8 +87,7 @@ class TeacherOpenCourseForm extends Form {
             }
             ChoiceRenderer cr2 = new ChoiceRenderer("value", "key");
             // TODO: Selectbox default value
-            classRoomSelect = (DropDownChoice<ClassRoom>) new DropDownChoice("class_room", 
-                    new PropertyModel(iOpenCourse,"class_room"), 
+            classRoomSelect = (DropDownChoice<ClassRoom>) new DropDownChoice("class_room",
                     selectChoices2, 
                     cr2).setRequired(false);
             add(classRoomSelect);
@@ -82,13 +97,20 @@ class TeacherOpenCourseForm extends Form {
         public void onSubmit() {
             OpenCourse formResult = (OpenCourse) getModelObject();
             formResult.setCourseID(Integer.parseInt(formResult.getCourse().getKey()));
-            formResult.setClassID(Integer.parseInt(formResult.getCourse().getKey()));
+            if (formResult.getClass_room() == null) {
+                formResult.setClassID(0);
+            } else {
+                formResult.setClassID(Integer.parseInt(formResult.getClass_room().getKey()));
+            }
+            formResult.setBeginTime(Time.valueOf(formResult.getBeginTimeInString()));
+            formResult.setEndTime(Time.valueOf(formResult.getEndTimeInString()));
+            formResult.setDay(formResult.getDaySelect().getKey());
             
             TeacherCollectionJDBC tCollection = new TeacherCollectionJDBC();
             formResult.setTeacherID(tCollection.getTeacher(user.getId()).getTeacherID());
             
             OpenCourseCollectionJDBC oCollection = new OpenCourseCollectionJDBC();
-            oCollection.updateOpenCourse(formResult);
+            oCollection.addOpenCourse(formResult);
             setResponsePage(new MenuPage());
         }
     }
