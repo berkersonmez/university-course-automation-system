@@ -82,7 +82,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
         }
     }
 
-    public void addStudentCourse(StudentCourse sCourse) {
+    public OpenCourse getOpenCourse(OpenCourse iOpenCourse) {
         try {
             String query = "SELECT * FROM open_course WHERE (CRN = ?)" ;
             PreparedStatement statement = this.db.prepareStatement(query);
@@ -110,41 +110,9 @@ public class OpenCourseCollectionJDBC extends DBConnection {
         }
     }
     
-    public OpenCourse getOpenCourseByCRN(Integer iCRN){
-        try {
-            String query = "SELECT * FROM open_course WHERE (CRN = ?)" ;
-            PreparedStatement statement = this.db.prepareStatement(query);
-            statement.setInt(1, iCRN);
-            ResultSet results = statement.executeQuery();
-            Integer CRN, courseID, quota, currentStudentCount, teacherID, classID;
-            String beginTime, endTime;
-            if (results.next()) {
-                CRN = results.getInt("CRN");
-                courseID = results.getInt("courseID");
-                quota = results.getInt("quota");
-                currentStudentCount = results.getInt("current_student_count");
-                teacherID = results.getInt("teacherID");
-                classID = results.getInt("classID");
-                beginTime = results.getString("begin_time");
-                endTime = results.getString("end_time");
-            }
-            else{
-               results.close();
-               statement.close();
-               return null;
-            }
-            OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  classID,  beginTime,  endTime); 
-            results.close();
-            statement.close();
-            return nOpenCourse;
-        } catch (SQLException e) {
-            throw new UnsupportedOperationException(e.getMessage());
-        }
-    }
-    
     public void addOpenCourse(OpenCourse iOpenCourse) {
         try {
-            String query = "INSERT INTO student_course VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO open_course VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, iOpenCourse.getCRN());
             statement.setInt(2, iOpenCourse.getCourseID());
@@ -163,7 +131,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
 
     public void deleteOpenCourse(OpenCourse iOpenCourse) {
         try {
-            String query = "DELETE FROM student_course WHERE (CRN = ?)";
+            String query = "DELETE FROM open_course WHERE (CRN = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, iOpenCourse.getCRN());
             statement.executeUpdate();
@@ -175,7 +143,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
 
     public void updateStudent(OpenCourse iOpenCourse) {
         try {      
-            String query = "UPDATE student_course SET userID = ?, CRN = ? WHERE (userID = ?)";
+            String query = "UPDATE open_course SET CRN = ?, quota = ?, current_student_count = ?, teacherID = ?, ClassID = ?, begin_time = ?, end_time = ? WHERE (userID = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, iOpenCourse.getCRN());
             statement.setInt(2, iOpenCourse.getCourseID());
