@@ -80,7 +80,7 @@ h1,h2,h3,h4,h5,h6,h7,h8 {
 	border: 1px solid #6c8cb6;
 	border-radius:10px;
 	padding: 20px;
-        color: wheat;
+        color: white;
 	
 	display:-webkit-box;
 	-webkit-box-flex:1;
@@ -133,10 +133,13 @@ a.none {
 }
 input {
     
+    
          
 }
 
-#loginbutton {
+#menu{margin:5px;}
+
+#button {
    -moz-box-shadow:inset 0px 1px 0px 0px #dcecfb;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #dcecfb;
 	box-shadow:inset 0px 1px 0px 0px #dcecfb;
@@ -159,15 +162,16 @@ input {
 	text-decoration:none;
 	text-shadow:1px 1px 0px #528ecc;
 }
-#loginbutton:hover {
+#button:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #80b5ea), color-stop(1, #bddbfa) );
 	background:-moz-linear-gradient( center top, #80b5ea 5%, #bddbfa 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eac380', endColorstr='#fae4bd');
 	background-color:#eac380;
 }
-#loginbutton:active {
+#button:active {
 	position:relative;
-	top:1px;
+        right:1px;
+        bottom:1px;
 }
 
 #logintable {
