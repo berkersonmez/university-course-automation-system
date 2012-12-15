@@ -9,23 +9,30 @@
         </wicket:head> 
     </head> 
     <body> 
+        <div id="bigwrappper">
         <wicket:extend>
             <div id="login">
-            <h2>Login</h2>
+            <h2 id="baslik">Login</h2>
             <form action="#" wicket:id="login">
-                <table>
+                <table id="logintable">
                     <tr>
-                        <th>Username:</th>
+                        <td>Username:</td>
+                    </tr>
+                    <tr>
                         <td><input wicket:id="username" type="text"/></td>
                     </tr>
                     <tr>
-                        <th>Password</th>
-                        <td><input wicket:id="password" type="password" size="4"/></td>
+                        <td>Password</td>
+                    </tr>
+                    <tr>
+                        <td><input wicket:id="password" type="password" /></td>
                     </tr>
                 </table>
-                <input value="Login" name="login" type="submit"/>
+                <input id="loginbutton" value="Login" name="login" type="submit"/>
             </form>
             </div>
+            
+            <div id="listeler">
             <h2>Example (Student Listing)</h2>
             <table>
                 <tr wicket:id="student_list">
@@ -52,7 +59,8 @@
                     </td>
                 </tr>
             </table>
+            </div>
         </wicket:extend>
-        
+        </div>   
     </body> 
 </html>
