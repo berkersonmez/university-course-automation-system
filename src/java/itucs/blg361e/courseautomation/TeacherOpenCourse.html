@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket="http://wicket.apache.org">
+    <head>
+        <wicket:head>
+            <title>Add / Drop</title>
+        </wicket:head>
+    </head>
+    <body>
+        <wicket:extend>
+            <h2>Fill in the form to add new course.</h2>
+            <form action="#" wicket:id="course_add">
+                <table>
+                    <tr>
+                        <th>CRN:</th>
+                        <td><input wicket:id="CRN" type="text"/></td>
+                    </tr>
+                    <tr>
+                        <th>Course:</th>
+                        <td><select wicket:id="course">
+                                <option value="0">Please select...</option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <th>Quota:</th>
+                        <td><input wicket:id="quota" type="text" size="8"/></td>
+                    </tr>
+                    <tr>
+                        <th>Class:</th>
+                        <td><select wicket:id="class_room">
+                                <option value="0">Please select...</option>
+                            </select></td>
+                    </tr>
+                    
+                </table>
+                <input value="Add" name="add" type="submit"/>
+            </form>
+        </wicket:extend>
+    </body>
+</html>

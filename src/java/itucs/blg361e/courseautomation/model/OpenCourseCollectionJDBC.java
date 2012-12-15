@@ -36,11 +36,11 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                 Integer quota = results.getInt("quota");
                 Integer currentStudentCount = results.getInt("current_student_count");
                 Integer teacherID = results.getInt("teacherID");
-                Integer classID = results.getInt("classID");
+                Integer class_roomID = results.getInt("class_roomID");
                 Time beginTime = results.getTime("begin_time");
                 Time endTime = results.getTime("end_time");
                 
-                OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  classID,  beginTime,  endTime);
+                OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  class_roomID,  beginTime,  endTime);
                 openCourseList.add(nOpenCourse);
             }
             results.close();
@@ -58,7 +58,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, iCRN);
             ResultSet results = statement.executeQuery();
-            Integer CRN, courseID, quota, currentStudentCount, teacherID, classID;
+            Integer CRN, courseID, quota, currentStudentCount, teacherID, class_roomID;
             Time beginTime, endTime;
             if (results.next()) {
                 CRN = results.getInt("CRN");
@@ -66,7 +66,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                 quota = results.getInt("quota");
                 currentStudentCount = results.getInt("current_student_count");
                 teacherID = results.getInt("teacherID");
-                classID = results.getInt("classID");
+                class_roomID = results.getInt("class_roomID");
                 beginTime = results.getTime("begin_time");
                 endTime = results.getTime("end_time");
             }
@@ -75,7 +75,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                statement.close();
                return null;
             }
-            OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  classID,  beginTime,  endTime); 
+            OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  class_roomID,  beginTime,  endTime); 
             results.close();
             statement.close();
             return nOpenCourse;
@@ -137,11 +137,11 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                 Integer quota = results.getInt("quota");
                 Integer currentStudentCount = results.getInt("current_student_count");
                 Integer teacherID = results.getInt("teacherID");
-                Integer classID = results.getInt("classID");
+                Integer class_roomID = results.getInt("class_roomID");
                 Time beginTime = results.getTime("begin_time");
                 Time endTime = results.getTime("end_time");
                 
-                OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  classID,  beginTime,  endTime);
+                OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  class_roomID,  beginTime,  endTime);
                 iOpenCourse = nOpenCourse;
             }
             results.close();
@@ -161,7 +161,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
             statement.setInt(2, iOpenCourse.getQuota());
             statement.setInt(2, iOpenCourse.getCurrentStudentCount());
             statement.setInt(2, iOpenCourse.getTeacherID());
-            statement.setInt(2, iOpenCourse.getClassID());
+            statement.setInt(2, iOpenCourse.getClass_roomID());
             statement.setTime(2, iOpenCourse.getBeginTime());
             statement.setTime(2, iOpenCourse.getEndTime());
             statement.executeUpdate();
@@ -171,6 +171,27 @@ public class OpenCourseCollectionJDBC extends DBConnection {
         }
     }
 
+    public boolean checkCode(OpenCourse iOpenCourse) {
+        
+        try {
+            String query = "SELECT COUNT(*) FROM course WHERE CRN = ?";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, iOpenCourse.getCRN());
+            ResultSet results = statement.executeQuery();
+            if (results.next()) {
+                Integer count = results.getInt("COUNT(*)");
+                if (count > 0) {
+                    return true;
+                }
+            }
+            results.close();
+            statement.close();
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+        return false;
+    }
+    
     public void deleteOpenCourse(OpenCourse iOpenCourse) {
         try {
             String query = "DELETE FROM open_course WHERE (CRN = ?)";
@@ -198,14 +219,14 @@ public class OpenCourseCollectionJDBC extends DBConnection {
     
     public void updateStudent(OpenCourse iOpenCourse) {
         try {      
-            String query = "UPDATE open_course SET CRN = ?, quota = ?, current_student_count = ?, teacherID = ?, ClassID = ?, begin_time = ?, end_time = ? WHERE (userID = ?)";
+            String query = "UPDATE open_course SET CRN = ?, quota = ?, current_student_count = ?, teacherID = ?, Class_roomID = ?, begin_time = ?, end_time = ? WHERE (userID = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, iOpenCourse.getCRN());
             statement.setInt(2, iOpenCourse.getCourseID());
             statement.setInt(2, iOpenCourse.getQuota());
             statement.setInt(2, iOpenCourse.getCurrentStudentCount());
             statement.setInt(2, iOpenCourse.getTeacherID());
-            statement.setInt(2, iOpenCourse.getClassID());
+            statement.setInt(2, iOpenCourse.getClass_roomID());
             statement.setTime(2, iOpenCourse.getBeginTime());
             statement.setTime(2, iOpenCourse.getEndTime());
             statement.executeUpdate();

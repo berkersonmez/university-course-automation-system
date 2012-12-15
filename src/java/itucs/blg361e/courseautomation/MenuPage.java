@@ -56,7 +56,7 @@ public final class MenuPage extends BasePage {
            menuList.add(new MenuObject("Weekly Program", new WeeklyProgramPage()));
            
         } else if (user.getType() == User.TYPE_TEACHER) {
-            menuList.add(new MenuObject("Open Course", new OpenCourse()));
+            menuList.add(new MenuObject("Open Course", new TeacherOpenCourse()));
         }
         
 
