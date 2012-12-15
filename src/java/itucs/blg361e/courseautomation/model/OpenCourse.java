@@ -4,11 +4,14 @@
  */
 package itucs.blg361e.courseautomation.model;
 
+import itucs.blg361e.courseautomation.utility.SelectOption;
+import java.sql.Time;
+
 /**
  *
  * @author Oguzzo
  */
-public class OpenCourse {    
+public class OpenCourse extends Course{    
 
     
     private Integer CRN;
@@ -17,14 +20,18 @@ public class OpenCourse {
     private Integer currentStudentCount;
     private Integer teacherID;
     private Integer classID;
-    private String beginTime;
-    private String endTime;
+    private Time beginTime;
+    private Time endTime;
+    private String day = null;
+    private SelectOption course;
 
+    
+    
     public OpenCourse(){
         
     };
     
-    public OpenCourse(Integer CRN, Integer courseID, Integer quota, Integer currentStudentCount, Integer teacherID, Integer classID, String beginTime, String endTime) {
+    public OpenCourse(Integer CRN, Integer courseID, Integer quota, Integer currentStudentCount, Integer teacherID, Integer classID, Time beginTime, Time endTime) {
         this.CRN = CRN;
         this.courseID = courseID;
         this.quota = quota;
@@ -43,6 +50,14 @@ public class OpenCourse {
         this.CRN = CRN;
     }
 
+    public SelectOption getCourse() {
+        return course;
+    }
+
+    public void setCourse(SelectOption course) {
+        this.course = course;
+    }
+    
     public Integer getCourseID() {
         return courseID;
     }
@@ -83,20 +98,28 @@ public class OpenCourse {
         this.classID = classID;
     }
 
-    public String getBeginTime() {
+    public Time getBeginTime() {
         return beginTime;
     }
 
-    public void setBeginTime(String beginTime) {
+    public void setBeginTime(Time beginTime) {
         this.beginTime = beginTime;
     }
 
-    public String getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(Time endTime) {
         this.endTime = endTime;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
 }

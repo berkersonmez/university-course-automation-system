@@ -6,19 +6,18 @@ package itucs.blg361e.courseautomation;
 
 import itucs.blg361e.courseautomation.model.StudentCourse;
 import itucs.blg361e.courseautomation.model.User;
-import org.apache.wicket.markup.html.WebPage;
+
 
 /**
  *
- * @author Oguzzo
+ * @author Can
  */
-public final class AddDropPage extends BasePage {
+public final class OpenCourse extends BasePage {
 
-    public AddDropPage() {
+    public OpenCourse() {
         User user = ((CustomSession)getSession()).getUser();
         replace(new HeaderPanel("headerpanel", "Add / Drop " + user.getName()));
-        add(new AddCRNForm("add_crn", new StudentCourse()));
-        add(new DropCRNForm("drop_crn", new StudentCourse()));
+        add(new AddCRNForm("add_drop", new StudentCourse()));
         
         
     }

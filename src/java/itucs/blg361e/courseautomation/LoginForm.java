@@ -53,6 +53,8 @@ public class LoginForm extends Form {
             this.setResponsePage(new MenuPage());
             
             
+        } else {
+            error("Username or password is not correct!");
         }
     }
     

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket="http://wicket.apache.org">
+    <head>
+        <wicket:head>
+            <title>Edit Course</title>
+        </wicket:head>
+    </head>
+    <body>
+        <wicket:extend>
+            <h2>Edit your account. If you leave "password" empty, it will not be changed.</h2>
+            <form action="#" wicket:id="admin_edit">
+                <table>
+                    <tr>
+                        <th>Name:</th>
+                        <td><input wicket:id="name" type="text"/></td>
+                    </tr>
+                    <tr>
+                        <th>Password:</th>
+                        <td><input wicket:id="password" type="text" size="8"/></td>
+                    </tr>
+                </table>
+                <input value="Edit" name="edit" type="submit"/>
+            </form>
+        </wicket:extend>
+    </body>
+</html>

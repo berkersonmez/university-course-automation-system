@@ -44,6 +44,30 @@ public class AdminCollectionJDBC extends DBConnection {
         }
         return admins;
     }
+    
+    public Admin getAdmin(Admin admin) {
+        try {
+            String query = "SELECT user.id, admin.id, name, username, password FROM user JOIN admin ON (userID = user.id) WHERE user.id = ?";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, admin.getId());
+            ResultSet results = statement.executeQuery();
+            if (results.next()) {
+                Integer adminID = results.getInt("admin.id");
+                String name = results.getString("name");
+                String username = results.getString("username");
+                String password = results.getString("password");
+                admin.setAdminID(adminID);
+                admin.setName(name);
+                admin.setUsername(username);
+                admin.setPassword(password);
+            }
+            results.close();
+            statement.close();
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+        return admin;
+    }
 
     public void addAdmin(Admin admin) {
         try {
@@ -85,6 +109,22 @@ public class AdminCollectionJDBC extends DBConnection {
             statement.executeUpdate();
             statement.close();
             userC.updateUser(admin);
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+    }
+    
+    public void updateAdminPreparedPassword(Admin admin) {
+        try {
+            UserCollectionJDBC userC = new UserCollectionJDBC();
+            
+            String query = "UPDATE admin SET userID = ? WHERE (id = ?)";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, admin.getId());
+            statement.setInt(2, admin.getAdminID());
+            statement.executeUpdate();
+            statement.close();
+            userC.updateUserPreparedPassword(admin);
         } catch (SQLException e) {
             throw new UnsupportedOperationException(e.getMessage());
         }

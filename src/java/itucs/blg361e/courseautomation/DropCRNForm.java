@@ -4,18 +4,11 @@
  */
 package itucs.blg361e.courseautomation;
 
-import itucs.blg361e.courseautomation.model.AdminCollectionJDBC;
-import itucs.blg361e.courseautomation.model.OpenCourse;
-import itucs.blg361e.courseautomation.model.OpenCourseCollectionJDBC;
-import itucs.blg361e.courseautomation.model.StudentCollectionJDBC;
 import itucs.blg361e.courseautomation.model.StudentCourse;
 import itucs.blg361e.courseautomation.model.StudentCourseCollectionJDBC;
-import itucs.blg361e.courseautomation.model.TeacherCollectionJDBC;
 import itucs.blg361e.courseautomation.model.User;
-import itucs.blg361e.courseautomation.model.UserCollectionJDBC;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
 
@@ -23,9 +16,9 @@ import org.apache.wicket.model.CompoundPropertyModel;
  *
  * @author Oguzzo
  */
-public class AddDropForm extends Form {
+public class DropCRNForm extends Form {
 
-    public AddDropForm(String id, StudentCourse iStudentCourse) {
+    public DropCRNForm(String id, StudentCourse iStudentCourse) {
         super(id);
 
         CompoundPropertyModel model = new CompoundPropertyModel(iStudentCourse);
@@ -38,11 +31,11 @@ public class AddDropForm extends Form {
     public void onSubmit() {
         StudentCourse nStudentCourse = (StudentCourse) this.getModelObject();
         Application app = (Application) this.getApplication();
-        OpenCourseCollectionJDBC nOpenCourseCollectionJDBC = new OpenCourseCollectionJDBC();
+        StudentCourseCollectionJDBC nStudentCourseCollectionJDBC = new StudentCourseCollectionJDBC();
         User nUser = ((CustomSession)getSession()).getUser();
         nStudentCourse.setUserID(nUser.getId());
      
-        nOpenCourseCollectionJDBC.addStudentCourse(nStudentCourse);
+        nStudentCourseCollectionJDBC.deleteStudentCourse(nStudentCourse);
           
         }
     }

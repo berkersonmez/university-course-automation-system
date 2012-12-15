@@ -3,18 +3,15 @@
 <html xmlns:wicket="http://wicket.apache.org">
     <head>
         <wicket:head>
-            <title>Weekly Program</title>
+            <title>Distribute Open Courses</title>
         </wicket:head>
     </head>
     <body>
         <wicket:extend>
-            <h2>CRN List</h2>
-            <table>
-                <tr wicket:id="crn_list">
-                    <td><span wicket:id="CRN"></span> | <span wicket:id="Begin Time"></span> | <span wicket:id="End Time"></span>
-                    </td>
-                </tr>
-            </table>
+            <h2>Distribute open courses to appropriate classes automatically.</h2>
+            <form action="#" wicket:id="course_distribute">
+                <input value="Distribute Open Courses to Classes" name="edit" type="submit"/>
+            </form>
         </wicket:extend>
     </body>
 </html>

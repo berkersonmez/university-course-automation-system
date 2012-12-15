@@ -3,13 +3,13 @@
 <html xmlns:wicket="http://wicket.apache.org">
     <head>
         <wicket:head>
-            <title>Edit Course</title>
+            <title>Add / Drop</title>
         </wicket:head>
     </head>
     <body>
         <wicket:extend>
-            <h2>Edit the course by changing the fields below.</h2>
-            <form action="#" wicket:id="course_edit">
+            <h2>Fill in the form to add new course.</h2>
+            <form action="#" wicket:id="course_add">
                 <table>
                     <tr>
                         <th>Name:</th>
@@ -25,7 +25,7 @@
                     </tr>
                     <tr>
                         <th>Faculty:</th>
-                        <td><select wicket:id="faculty">
+                        <td><select wicket:id="course">
                                 <option value="0">Please select...</option>
                             </select></td>
                     </tr>
@@ -34,7 +34,7 @@
                         <td><input wicket:id="length" type="text"/></td>
                     </tr>
                 </table>
-                <input value="Edit" name="edit" type="submit"/>
+                <input value="Add" name="add" type="submit"/>
             </form>
         </wicket:extend>
     </body>
