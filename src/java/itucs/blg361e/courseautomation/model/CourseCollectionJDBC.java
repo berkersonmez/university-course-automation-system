@@ -4,7 +4,6 @@
  */
 package itucs.blg361e.courseautomation.model;
 
-
 import itucs.blg361e.courseautomation.DBConnection;
 import java.sql.*;
 import java.util.LinkedList;
