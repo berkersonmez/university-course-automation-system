@@ -25,7 +25,7 @@
                     </tr>
                     <tr>
                         <th>Faculty:</th>
-                        <td><select wicket:id="faculty">
+                        <td><select id="dropdown" wicket:id="faculty">
                                 <option value="0">Please select...</option>
                             </select></td>
                     </tr>
@@ -34,8 +34,8 @@
                         <td><input wicket:id="length" type="text"/></td>
                     </tr>
                 </table>
-                <input value="Edit" name="edit" type="submit"/>
-            </form>
+               
+            </form> <input id="button" value="Edit" name="edit" type="submit"/>
         </wicket:extend>
     </body>
 </html>

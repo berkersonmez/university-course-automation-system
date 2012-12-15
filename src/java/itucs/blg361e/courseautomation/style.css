@@ -112,8 +112,8 @@ pre {
 th {
 	color: white;
 	font-weight: bold;
-        border: 1px solid;
 }
+
 
 tr.b {
 	background: #F5F5F5;
@@ -131,10 +131,50 @@ a.none {
 	background: transparent;
 	padding-right: 0px;
 }
-input {
-    
-    
+input, textarea{
+    -moz-box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #80b5ea), color-stop(1, #bddbfa) );
+	background:-moz-linear-gradient( center top, #80b5ea 5%, #bddbfa 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eac380', endColorstr='#fae4bd');
+	background-color:#eac380;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #133bb1;
+	display:inline-block;
+	color:#ffffff;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:3px 12px;
+        margin-left: 5px;
+        margin-top: 5px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #528ecc;
+        width:100px;
          
+}
+
+select{
+    border-radius:6px;
+	border:1px solid #133bb1;
+    color:#EEE; 
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #80b5ea), color-stop(1, #bddbfa) );
+	background:-moz-linear-gradient( center top, #80b5ea 5%, #bddbfa 100% );
+font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:3px 12px;
+        margin-left: 5px;
+        margin-top: 5px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #528ecc; 
+width:125px;
+-webkit-appearance: none; 
+    
+    
 }
 
 #menu{margin:5px;}
@@ -162,6 +202,7 @@ input {
 	text-decoration:none;
 	text-shadow:1px 1px 0px #528ecc;
 }
+
 #button:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #80b5ea), color-stop(1, #bddbfa) );
 	background:-moz-linear-gradient( center top, #80b5ea 5%, #bddbfa 100% );
@@ -179,13 +220,12 @@ input {
         color:white;
 }
 #inputForm {
-	width: 300px; color: purple;
+	width: 300px; 
 }
 
 #inputForm label {
 	display: block;
 	margin-top: 5px;
-         color: purple;
 }
 
 #inputForm label.non {
@@ -207,4 +247,34 @@ input {
 
 #siteSelection {
 	width: 200px;
+}
+
+option {
+    color:purple;
+    font-family:helvetica;
+font-weight: normal;
+}
+#crn{color:white;}
+#squaredTwo {
+  width: 19px;
+  height: 25px;
+  border: 5px solid purple;
+  padding: 0 5px 0 0;
+  background: url(checkbox.png) no-repeat;
+  display: block;
+  clear: left;
+  float: left;
+}
+.radio {
+  background: url(radio.png) no-repeat;
+}
+.select {
+  position: absolute;
+  width: 158px;
+  height: 21px;
+  padding: 0 24px 0 8px;
+  color: #fff;
+  font: 12px/21px arial,sans-serif;
+  background: url(select.png) no-repeat;
+  overflow: hidden;
 }

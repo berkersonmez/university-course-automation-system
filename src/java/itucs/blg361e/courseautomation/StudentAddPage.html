@@ -10,9 +10,9 @@
         <wicket:extend>
             <h2>Fill in the form to add new student.</h2>
             <form action="#" wicket:id="student_add">
-                <table>
+                <table border="0">
                     <tr>
-                        <th>Name:</th>
+                        <th nowrap="1">Name:</th>
                         <td><input wicket:id="name" type="text"/></td>
                     </tr>
                     <tr>
@@ -32,7 +32,7 @@
                         <td><input wicket:id="creditLimit" type="text"/></td>
                     </tr>
                 </table>
-                <input value="Add" name="add" type="submit"/>
+                <input id="button" value="Add" name="add" type="submit"/>
             </form>
         </wicket:extend>
     </body>
