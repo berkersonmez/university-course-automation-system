@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS `open_course` (
     `current_student_count` smallint(3) NOT NULL,
     `teacherID` int(10) unsigned NOT NULL REFERENCES `teacher`,
     `classID` int(10) unsigned NOT NULL REFERENCES `class`,
+    `day` ENUM('Mon', 'Tue', 'Wed', 'Thu', 'Fri') NOT NULL,
     `begin_time` time NULL, 
     `end_time` time NULL,
     PRIMARY KEY (`CRN`)
@@ -113,18 +114,18 @@ INSERT INTO `admin` (`userID`) VALUES (6);
 INSERT INTO `building` (`code`, `name`, `location`) VALUES ('EEB', 'Elektrik Elektronik Fakültesi Binası', 'Maslak Kampüsü'); 
 INSERT INTO `building` (`code`, `name`, `location`) VALUES ('FEB', 'Fen Edebiyat Fakültesi Binası', 'Maslak Kampüsü'); 
 
-INSERT INTO `faculty` (`id`, `building`, `name`, `code`) VALUES ('4', 1, 'Elektrik Elektronik Fakültesi', 'EE'); 
-INSERT INTO `faculty` (`id`, `building`, `name`, `code`) VALUES ('3', 2, 'Fen Edebiyat Fakültesi', 'FE'); 
+INSERT INTO `faculty` (`id`, `buildingID`, `name`, `code`) VALUES ('4', 1, 'Elektrik Elektronik Fakültesi', 'EE'); 
+INSERT INTO `faculty` (`id`, `buildingID`, `name`, `code`) VALUES ('3', 2, 'Fen Edebiyat Fakültesi', 'FE'); 
 
-INSERT INTO `class` (`quota`, `name`, `buildingID`, `is_lab` ) VALUES ('100', '5301', 1, 0); 
-INSERT INTO `class` (`quota`, `name`, `buildingID`, `is_lab` ) VALUES ('120', '5302', 2, 0); 
-INSERT INTO `class` (`quota`, `name`, `buildingID`, `is_lab` ) VALUES ('30', 'F-Lab', 2, 1);
+INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('100', '5301', 1, 0); 
+INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('120', '5302', 2, 0); 
+INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('30', 'F-Lab', 2, 1);
 
 INSERT INTO `course` (`name`, `code`, `credits`, `facultyID`, `length` ) VALUES ('Mathematic 1', 'MAT101', 5, 3, 6);
 INSERT INTO `course` (`name`, `code`, `credits`, `facultyID`, `length` ) VALUES ('Turkish 1', 'TUR101', 2, 3, 2);
 
-INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `classID`, `begin_time`, `end_time` ) VALUES (1, 80, 60, 1, 1, '8:30', '10:30');
-INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `classID`, `begin_time`, `end_time` ) VALUES (2, 50, 40, 2, 2, '8:30', '11:30');
+INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `classID`, `day`, `begin_time`, `end_time` ) VALUES (1, 80, 60, 1, 1, 'Mon', '8:30', '10:30');
+INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `classID`, `day`, `begin_time`, `end_time` ) VALUES (2, 50, 40, 2, 2, 'Thu', '8:30', '11:30');
 
 INSERT INTO `course` (`name`, `code`, `credits`, `facultyID`, `length`) VALUES ('Database Management Systems', 'BLG361E', 3, 1, 3); 
 
