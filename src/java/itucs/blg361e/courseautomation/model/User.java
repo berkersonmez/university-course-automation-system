@@ -57,8 +57,8 @@ public class User {
         this.password = newPassword;
     }
     
-    public void setPassword(String newPassword) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        this.password = preparePassword(newPassword);
+    public void setPassword(String newPassword){
+        this.password = newPassword;
     }
 
     public String getPassword() {

@@ -48,6 +48,28 @@ public class StudentCollectionJDBC extends DBConnection {
         }
         return students;
     }
+    
+    public boolean checkUsernameAndNumber(Student student) {
+        
+        try {
+            String query = "SELECT COUNT(*) FROM user JOIN student ON (userID = user.id) WHERE username = ? OR number = ?";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setString(1, student.getUsername());
+            statement.setInt(2, student.getNumber());
+            ResultSet results = statement.executeQuery();
+            if (results.next()) {
+                Integer count = results.getInt("COUNT(*)");
+                if (count > 0) {
+                    return true;
+                }
+            }
+            results.close();
+            statement.close();
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+        return false;
+    }
 
      public Student getOneStudent(int user_id) {
         try {
@@ -78,10 +100,11 @@ public class StudentCollectionJDBC extends DBConnection {
         try {
             UserCollectionJDBC userC = new UserCollectionJDBC();
             Integer userID = userC.addUser(student);
-            String query = "INSERT INTO student (number, userID) VALUES (?, ?)";
+            String query = "INSERT INTO student (number, userID, credit_limit) VALUES (?, ?, ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, student.getNumber());
             statement.setInt(2, userID);
+            statement.setInt(3, student.getCreditLimit());
             statement.executeUpdate();
             
         } catch (SQLException e) {

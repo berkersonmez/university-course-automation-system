@@ -110,9 +110,9 @@ pre {
 }
 
 th {
-	background: #C3C3C3;
 	color: white;
 	font-weight: bold;
+        border: 1px solid;
 }
 
 tr.b {

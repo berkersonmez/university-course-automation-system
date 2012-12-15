@@ -5,6 +5,8 @@
 package itucs.blg361e.courseautomation.model;
 
 import itucs.blg361e.courseautomation.DBConnection;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -50,14 +52,19 @@ public class UserCollectionJDBC extends DBConnection {
             PreparedStatement statement = this.db.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getName());
             statement.setString(2, user.getUsername());
-            statement.setString(3, user.getPassword());
+            statement.setString(3, user.preparePassword(user.getPassword()));
             statement.executeUpdate();
             ResultSet generatedKeys = statement.getGeneratedKeys();
             generatedKeys.next();
             return generatedKeys.getInt(1);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UserCollectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(UserCollectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException e) {
             throw new UnsupportedOperationException(e.getMessage());
         }
+        return null;
     }
 
     public void deleteUser(User user) {
@@ -78,6 +85,25 @@ public class UserCollectionJDBC extends DBConnection {
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setString(1, user.getName());
             statement.setString(2, user.getUsername());
+            statement.setString(3, user.preparePassword(user.getPassword()));
+            statement.setInt(4, user.getId());
+            statement.executeUpdate();
+            statement.close();
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UserCollectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(UserCollectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+    }
+    
+    public void updateUserPreparedPassword(User user) {
+        try {
+            String query = "UPDATE user SET name = ?, username = ?, password = ? WHERE (id = ?)";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getUsername());
             statement.setString(3, user.getPassword());
             statement.setInt(4, user.getId());
             statement.executeUpdate();
@@ -93,7 +119,7 @@ public class UserCollectionJDBC extends DBConnection {
             String query = "SELECT * FROM user WHERE (username = ? AND password = ?) ";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setString(1, user.getUsername());
-            statement.setString(2, user.getPassword());
+            statement.setString(2, user.preparePassword(user.getPassword()));
             ResultSet result = statement.executeQuery();
             if(result.next()){       
                 user.setName(result.getString("name"));
@@ -105,9 +131,14 @@ public class UserCollectionJDBC extends DBConnection {
             
             return user;
                    
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UserCollectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(UserCollectionJDBC.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException e) {
             throw new UnsupportedOperationException(e.getMessage());
         }
+        return user;
     }
     
     

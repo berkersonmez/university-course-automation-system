@@ -46,7 +46,7 @@ public class Student extends User{
         this.creditLimit = newCreditLimit;
     }
 
-    public Integer getCreditLİmit() {
+    public Integer getCreditLimit() {
         return this.creditLimit;
     }
     

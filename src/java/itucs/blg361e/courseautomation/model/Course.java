@@ -1,40 +1,52 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package itucs.blg361e.courseautomation.model;
+
+import itucs.blg361e.courseautomation.utility.SelectOption;
+import java.util.List;
 
 /**
  *
- * @author Oguzzo
+ * @author Berker
  */
-public class Course {
+public class Course{
 
-    private int id;
+    private Integer id = null;
     private String name;
-    private int code;
-    private int credits;
-    private int facultyID;
-    private int length;
+    private String code;
+    private Integer credits;
+    private Integer facultyID;
+    private Integer length; 
+    
+    private SelectOption faculty;
     
     public Course() {
     }
-
-    public Course(int id, String name, int code, int credits, int facultyID, int length) {
-        this.id = id;
+    
+    public Course(String name, String code, Integer credits, Integer facultyID, Integer length) {
         this.name = name;
         this.code = code;
         this.credits = credits;
         this.facultyID = facultyID;
         this.length = length;
     }
+    
+    public SelectOption getFaculty() {
+        return faculty;
+    }
 
-    public int getId() {
+    public void setFaculty(SelectOption faculty) {
+        this.faculty = faculty;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+    
+    public void setId(SelectOption selection) {
+        this.id = Integer.parseInt(selection.getValue());
     }
 
     public String getName() {
@@ -45,37 +57,36 @@ public class Course {
         this.name = name;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
-    public int getCredits() {
+    public Integer getCredits() {
         return credits;
     }
 
-    public void setCredits(int credits) {
+    public void setCredits(Integer credits) {
         this.credits = credits;
     }
 
-    public int getFacultyID() {
+    public Integer getFacultyID() {
         return facultyID;
     }
 
-    public void setFacultyID(int facultyID) {
+    public void setFacultyID(Integer facultyID) {
         this.facultyID = facultyID;
     }
 
-    public int getLength() {
+    public Integer getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(Integer length) {
         this.length = length;
     }
-    
     
 }

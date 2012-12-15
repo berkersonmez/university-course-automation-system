@@ -10,34 +10,34 @@ package itucs.blg361e.courseautomation.model;
  */
 public class Faculty {
 
-    private int id;
-    private int buildingID;
+    private Integer id;
+    private Integer buildingID;
     private String name;
-    private int code;
+    private String code;
     
     public Faculty() {
     }
 
-    public Faculty(int id, int buildingID, String name, int code) {
+    public Faculty(Integer id, Integer buildingID, String name, String code) {
         this.id = id;
         this.buildingID = buildingID;
         this.name = name;
         this.code = code;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getBuildingID() {
+    public Integer getBuildingID() {
         return buildingID;
     }
 
-    public void setBuildingID(int buildingID) {
+    public void setBuildingID(Integer buildingID) {
         this.buildingID = buildingID;
     }
 
@@ -49,11 +49,11 @@ public class Faculty {
         this.name = name;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
     
