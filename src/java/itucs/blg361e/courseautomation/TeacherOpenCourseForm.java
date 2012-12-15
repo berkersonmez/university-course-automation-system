@@ -65,7 +65,7 @@ class TeacherOpenCourseForm extends Form {
             for (ClassRoom nClassRoom : crCollection.getClassRooms()) {
                 SelectOption selection2 = new SelectOption(nClassRoom.getId().toString() ,bCollection.getBuilding(nClassRoom.getBuildingID()).getCode() + " - " + nClassRoom.getName());
                 selectChoices2.add(selection2);
-                if (iOpenCourse.getClass_roomID() == nClassRoom.getId()){
+                if (iOpenCourse.getClassID() == nClassRoom.getId()){
                     iOpenCourse.setClass_room(selection2);
                 }
             }
@@ -74,7 +74,7 @@ class TeacherOpenCourseForm extends Form {
             classRoomSelect = (DropDownChoice<ClassRoom>) new DropDownChoice("class_room", 
                     new PropertyModel(iOpenCourse,"class_room"), 
                     selectChoices2, 
-                    cr2).setRequired(true);
+                    cr2).setRequired(false);
             add(classRoomSelect);
         }
 
@@ -82,7 +82,7 @@ class TeacherOpenCourseForm extends Form {
         public void onSubmit() {
             OpenCourse formResult = (OpenCourse) getModelObject();
             formResult.setCourseID(Integer.parseInt(formResult.getCourse().getKey()));
-            formResult.setClass_roomID(Integer.parseInt(formResult.getCourse().getKey()));
+            formResult.setClassID(Integer.parseInt(formResult.getCourse().getKey()));
             
             TeacherCollectionJDBC tCollection = new TeacherCollectionJDBC();
             formResult.setTeacherID(tCollection.getTeacher(user.getId()).getTeacherID());

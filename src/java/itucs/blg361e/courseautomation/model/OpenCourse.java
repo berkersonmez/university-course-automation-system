@@ -19,7 +19,7 @@ public class OpenCourse extends Course{
     private Integer quota;
     private Integer currentStudentCount;
     private Integer teacherID;
-    private Integer class_roomID;
+    private Integer classID;
     private Time beginTime;
     private Time endTime;
     private String day = null;
@@ -40,7 +40,7 @@ public class OpenCourse extends Course{
         this.quota = quota;
         this.currentStudentCount = currentStudentCount;
         this.teacherID = teacherID;
-        this.class_roomID = classID;
+        this.classID = classID;
         this.beginTime = beginTime;
         this.endTime = endTime;
     }
@@ -101,12 +101,12 @@ public class OpenCourse extends Course{
         this.teacherID = teacherID;
     }
 
-    public Integer getClass_roomID() {
-        return class_roomID;
+    public Integer getClassID() {
+        return classID;
     }
 
-    public void setClass_roomID(Integer classID) {
-        this.class_roomID = classID;
+    public void setClassID(Integer classID) {
+        this.classID = classID;
     }
 
     public Time getBeginTime() {

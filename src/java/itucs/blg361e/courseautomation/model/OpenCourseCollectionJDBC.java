@@ -161,7 +161,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
             statement.setInt(2, iOpenCourse.getQuota());
             statement.setInt(2, iOpenCourse.getCurrentStudentCount());
             statement.setInt(2, iOpenCourse.getTeacherID());
-            statement.setInt(2, iOpenCourse.getClass_roomID());
+            statement.setInt(2, iOpenCourse.getClassID());
             statement.setTime(2, iOpenCourse.getBeginTime());
             statement.setTime(2, iOpenCourse.getEndTime());
             statement.executeUpdate();
@@ -217,6 +217,26 @@ public class OpenCourseCollectionJDBC extends DBConnection {
         }
     }
     
+    public void updateOpenCourse(OpenCourse iOpenCourse) {
+        try {      
+            String query = "UPDATE open_course SET CRN = ?, quota = ?, current_student_count = ?, teacherID = ?, Class_roomID = ?, begin_time = ?, end_time = ? WHERE (CRN = ?)";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, iOpenCourse.getCRN());
+            statement.setInt(2, iOpenCourse.getCourseID());
+            statement.setInt(3, iOpenCourse.getQuota());
+            statement.setInt(4, iOpenCourse.getCurrentStudentCount());
+            statement.setInt(5, iOpenCourse.getTeacherID());
+            statement.setInt(6, iOpenCourse.getClassID());
+            statement.setTime(7, iOpenCourse.getBeginTime());
+            statement.setTime(8, iOpenCourse.getEndTime());
+            statement.setInt(9, iOpenCourse.getCRN());
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+    }
+    
     public void updateStudent(OpenCourse iOpenCourse) {
         try {      
             String query = "UPDATE open_course SET CRN = ?, quota = ?, current_student_count = ?, teacherID = ?, Class_roomID = ?, begin_time = ?, end_time = ? WHERE (userID = ?)";
@@ -226,7 +246,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
             statement.setInt(2, iOpenCourse.getQuota());
             statement.setInt(2, iOpenCourse.getCurrentStudentCount());
             statement.setInt(2, iOpenCourse.getTeacherID());
-            statement.setInt(2, iOpenCourse.getClass_roomID());
+            statement.setInt(2, iOpenCourse.getClassID());
             statement.setTime(2, iOpenCourse.getBeginTime());
             statement.setTime(2, iOpenCourse.getEndTime());
             statement.executeUpdate();
