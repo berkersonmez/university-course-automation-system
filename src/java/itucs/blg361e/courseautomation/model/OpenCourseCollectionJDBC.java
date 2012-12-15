@@ -153,17 +153,20 @@ public class OpenCourseCollectionJDBC extends DBConnection {
     }
     
     public void addOpenCourse(OpenCourse iOpenCourse) {
+        iOpenCourse.setCurrentStudentCount(0);
         try {
-            String query = "INSERT INTO open_course VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO open_course VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, iOpenCourse.getCRN());
             statement.setInt(2, iOpenCourse.getCourseID());
-            statement.setInt(2, iOpenCourse.getQuota());
-            statement.setInt(2, iOpenCourse.getCurrentStudentCount());
-            statement.setInt(2, iOpenCourse.getTeacherID());
-            statement.setInt(2, iOpenCourse.getClassID());
-            statement.setTime(2, iOpenCourse.getBeginTime());
-            statement.setTime(2, iOpenCourse.getEndTime());
+            statement.setInt(3, iOpenCourse.getQuota());
+            statement.setInt(4, iOpenCourse.getCurrentStudentCount());
+            statement.setInt(5, iOpenCourse.getTeacherID());
+            statement.setInt(6, iOpenCourse.getClassID());
+            statement.setString(7, iOpenCourse.getDay());
+            statement.setTime(8, iOpenCourse.getBeginTime());
+            statement.setTime(9, iOpenCourse.getEndTime());
+            
             statement.executeUpdate();
             
         } catch (SQLException e) {

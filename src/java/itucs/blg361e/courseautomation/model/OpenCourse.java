@@ -22,9 +22,15 @@ public class OpenCourse extends Course{
     private Integer classID;
     private Time beginTime;
     private Time endTime;
+    
+    private String beginTimeInString;
+    private String endTimeInString;
+    
     private String day = null;
     private SelectOption course;
     private SelectOption class_room;
+    
+    private SelectOption daySelect;
 
     
 
@@ -131,6 +137,30 @@ public class OpenCourse extends Course{
 
     public void setDay(String day) {
         this.day = day;
+    }
+
+    public SelectOption getDaySelect() {
+        return daySelect;
+    }
+
+    public void setDaySelect(SelectOption daySelect) {
+        this.daySelect = daySelect;
+    }
+
+    public String getBeginTimeInString() {
+        return beginTimeInString;
+    }
+
+    public void setBeginTimeInString(String beginTimeInString) {
+        this.beginTimeInString = beginTimeInString;
+    }
+
+    public String getEndTimeInString() {
+        return endTimeInString;
+    }
+
+    public void setEndTimeInString(String endTimeInString) {
+        this.endTimeInString = endTimeInString;
     }
 
 }

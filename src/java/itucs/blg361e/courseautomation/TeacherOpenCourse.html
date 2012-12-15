@@ -8,7 +8,7 @@
     </head>
     <body>
         <wicket:extend>
-            <h2>Fill in the form to add new course.</h2>
+            <h2>Fill in the form to add new course. (Time format example: "13:30:00")</h2>
             <form action="#" wicket:id="course_add">
                 <table>
                     <tr>
@@ -23,10 +23,27 @@
                     </tr>
                     <tr>
                         <th>Quota:</th>
-                        <td><input wicket:id="quota" type="text" size="8"/></td>
+                        <td><input wicket:id="quota" type="text"/></td>
+                    </tr>
+                    
+                    <tr>
+                        <th>Day:</th>
+                        <td><select wicket:id="daySelect">
+                                <option value="0">Please select...</option>
+                            </select></td>
+                    </tr>
+                    
+                    <tr>
+                        <th>Starting time (HH:MM:SS):</th>
+                        <td><input wicket:id="beginTimeInString" type="text"/></td>
+                    </tr>
+                    
+                    <tr>
+                        <th>Ending time (HH:MM:SS):</th>
+                        <td><input wicket:id="endTimeInString" type="text"/></td>
                     </tr>
                     <tr>
-                        <th>Class:</th>
+                        <th>Class (Optional):</th>
                         <td><select wicket:id="class_room">
                                 <option value="0">Please select...</option>
                             </select></td>

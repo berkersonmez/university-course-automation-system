@@ -49,10 +49,10 @@ public class TeacherCollectionJDBC extends DBConnection {
 
     public Teacher getTeacher(Integer userID){
         try {
-            String query = "SELECT user.id, teacher.id, name, username, password FROM user WHERE (userID = ?)";
+            String query = "SELECT user.id, teacher.id, name, username, password FROM user JOIN teacher ON (user.id = teacher.userID) WHERE (user.id = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, userID);
-            ResultSet results = statement.executeQuery(query);
+            ResultSet results = statement.executeQuery();
             if (results.next()) {
                 Integer id = results.getInt("user.id");
                 Integer teacherID = results.getInt("teacher.id");
