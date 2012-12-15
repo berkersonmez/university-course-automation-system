@@ -6,7 +6,11 @@ package itucs.blg361e.courseautomation.model;
 
 import itucs.blg361e.courseautomation.DBConnection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -16,6 +20,30 @@ public class ClassRoomCollectionJDBC extends DBConnection {
 
     public ClassRoomCollectionJDBC() {
         super();
+    }
+    
+    public List<ClassRoom> getClassRooms(){
+        List<ClassRoom> classRooms = new LinkedList<ClassRoom>();
+        try {
+            String query = "SELECT * FROM class_room";
+            Statement statement = this.db.createStatement();
+            ResultSet results = statement.executeQuery(query);
+            while (results.next()) {
+                Integer id = results.getInt("id");
+                Integer quota = results.getInt("quota");
+                String name = results.getString("name");
+                Integer buildingID = results.getInt("buildingID");
+                Boolean lab = results.getBoolean("lab");
+                
+                ClassRoom nClassRoom = new ClassRoom(id,quota,name,buildingID,lab);
+                classRooms.add(nClassRoom);
+            }
+            results.close();
+            statement.close();
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+        return classRooms;
     }
     
     public void addClassRoom(ClassRoom iClassRoom) {

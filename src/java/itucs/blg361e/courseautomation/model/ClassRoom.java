@@ -10,16 +10,16 @@ package itucs.blg361e.courseautomation.model;
  */
 public class ClassRoom {
 
-    private int id;
-    private int quota;
+    private Integer id;
+    private Integer quota;
     private String name;
-    private int buildingID;
+    private Integer buildingID;
     private boolean lab;
     
     public ClassRoom() {
     }
 
-    public ClassRoom(int id, int quota, String name, int buildingID, boolean is_lab) {
+    public ClassRoom(Integer id, Integer quota, String name, Integer buildingID, boolean is_lab) {
         this.id = id;
         this.quota = quota;
         this.name = name;
@@ -27,19 +27,19 @@ public class ClassRoom {
         this.lab = lab;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getQuota() {
+    public Integer getQuota() {
         return quota;
     }
 
-    public void setQuota(int quota) {
+    public void setQuota(Integer quota) {
         this.quota = quota;
     }
 
@@ -51,11 +51,11 @@ public class ClassRoom {
         this.name = name;
     }
 
-    public int getBuildingID() {
+    public Integer getBuildingID() {
         return buildingID;
     }
 
-    public void setBuildingID(int buildingID) {
+    public void setBuildingID(Integer buildingID) {
         this.buildingID = buildingID;
     }
 

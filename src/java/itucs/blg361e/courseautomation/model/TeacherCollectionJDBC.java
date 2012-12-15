@@ -47,6 +47,36 @@ public class TeacherCollectionJDBC extends DBConnection {
         return teachers;
     }
 
+    public Teacher getTeacher(Integer userID){
+        try {
+            String query = "SELECT user.id, teacher.id, name, username, password FROM user WHERE (userID = ?)";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, userID);
+            ResultSet results = statement.executeQuery(query);
+            if (results.next()) {
+                Integer id = results.getInt("user.id");
+                Integer teacherID = results.getInt("teacher.id");
+                String name = results.getString("name");
+                String username = results.getString("username");
+                String password = results.getString("password");
+                
+                Teacher teacher = new Teacher(name, username, password);
+                teacher.setId(id);
+                teacher.setTeacherID(teacherID);
+                results.close();
+                statement.close();
+                return teacher;
+            }
+            else{
+                results.close();
+                statement.close();
+                return null;
+            }
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+    }
+    
     public void addTeacher(Teacher teacher) {
         try {
             UserCollectionJDBC userC = new UserCollectionJDBC();

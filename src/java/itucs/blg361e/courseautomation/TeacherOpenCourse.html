@@ -12,27 +12,26 @@
             <form action="#" wicket:id="course_add">
                 <table>
                     <tr>
-                        <th>Name:</th>
-                        <td><input wicket:id="name" type="text"/></td>
+                        <th>CRN:</th>
+                        <td><input wicket:id="CRN" type="text"/></td>
                     </tr>
                     <tr>
-                        <th>Code:</th>
-                        <td><input wicket:id="code" type="text" size="8"/></td>
-                    </tr>
-                    <tr>
-                        <th>Credits:</th>
-                        <td><input wicket:id="credits" type="text"/></td>
-                    </tr>
-                    <tr>
-                        <th>Faculty:</th>
+                        <th>Course:</th>
                         <td><select wicket:id="course">
                                 <option value="0">Please select...</option>
                             </select></td>
                     </tr>
                     <tr>
-                        <th>Duration (Hours/Week):</th>
-                        <td><input wicket:id="length" type="text"/></td>
+                        <th>Quota:</th>
+                        <td><input wicket:id="quota" type="text" size="8"/></td>
                     </tr>
+                    <tr>
+                        <th>Class:</th>
+                        <td><select wicket:id="class_room">
+                                <option value="0">Please select...</option>
+                            </select></td>
+                    </tr>
+                    
                 </table>
                 <input value="Add" name="add" type="submit"/>
             </form>
