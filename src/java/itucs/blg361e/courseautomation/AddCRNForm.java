@@ -41,7 +41,8 @@ public class AddCRNForm extends Form {
         StudentCourseCollectionJDBC nStudentCourseCollectionJDBC = new StudentCourseCollectionJDBC();
         User nUser = ((CustomSession)getSession()).getUser();
         nStudentCourse.setUserID(nUser.getId());
-     
+        
+        
         nStudentCourseCollectionJDBC.addStudentCourse(nStudentCourse);
           
         }

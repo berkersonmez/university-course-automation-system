@@ -4,6 +4,7 @@
  */
 package itucs.blg361e.courseautomation.model;
 
+import itucs.blg361e.courseautomation.utility.SelectOption;
 import java.sql.Time;
 
 /**
@@ -22,7 +23,10 @@ public class OpenCourse extends Course{
     private Time beginTime;
     private Time endTime;
     private String day = null;
+    private SelectOption course;
 
+    
+    
     public OpenCourse(){
         
     };
@@ -46,6 +50,14 @@ public class OpenCourse extends Course{
         this.CRN = CRN;
     }
 
+    public SelectOption getCourse() {
+        return course;
+    }
+
+    public void setCourse(SelectOption course) {
+        this.course = course;
+    }
+    
     public Integer getCourseID() {
         return courseID;
     }

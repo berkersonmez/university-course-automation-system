@@ -164,6 +164,27 @@ public class OpenCourseCollectionJDBC extends DBConnection {
         }
     }
 
+    public boolean checkCode(OpenCourse iOpenCourse) {
+        
+        try {
+            String query = "SELECT COUNT(*) FROM course WHERE CRN = ?";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, iOpenCourse.getCRN());
+            ResultSet results = statement.executeQuery();
+            if (results.next()) {
+                Integer count = results.getInt("COUNT(*)");
+                if (count > 0) {
+                    return true;
+                }
+            }
+            results.close();
+            statement.close();
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+        return false;
+    }
+    
     public void deleteOpenCourse(OpenCourse iOpenCourse) {
         try {
             String query = "DELETE FROM open_course WHERE (CRN = ?)";
@@ -176,7 +197,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
         }
     }
 
-    public void updateStudent(OpenCourse iOpenCourse) {
+    public void updateOpenCourse(OpenCourse iOpenCourse) {
         try {      
             String query = "UPDATE open_course SET CRN = ?, quota = ?, current_student_count = ?, teacherID = ?, ClassID = ?, begin_time = ?, end_time = ? WHERE (userID = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
