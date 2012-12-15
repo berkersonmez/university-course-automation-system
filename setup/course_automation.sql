@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS `student`, `teacher`, `admin`, `user`, `course`, `open_course`,`class`,`building`,`faculty`, `options`;
+DROP TABLE IF EXISTS `student`, `teacher`, `admin`, `user`, `course`, `open_course`,`building`,`faculty`, `options`, `class_room`, `student_course`;
 CREATE TABLE IF NOT EXISTS `user` (
     `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
     `name` varchar(225) COLLATE utf8_unicode_ci NOT NULL,
@@ -114,23 +114,25 @@ INSERT INTO `admin` (`userID`) VALUES (6);
 INSERT INTO `building` (`code`, `name`, `location`) VALUES ('EEB', 'Elektrik Elektronik Fakültesi Binası', 'Maslak Kampüsü'); 
 INSERT INTO `building` (`code`, `name`, `location`) VALUES ('FEB', 'Fen Edebiyat Fakültesi Binası', 'Maslak Kampüsü'); 
 
-INSERT INTO `faculty` (`id`, `buildingID`, `name`, `code`) VALUES ('4', 1, 'Elektrik Elektronik Fakültesi', 'EE'); 
-INSERT INTO `faculty` (`id`, `buildingID`, `name`, `code`) VALUES ('3', 2, 'Fen Edebiyat Fakültesi', 'FE'); 
+INSERT INTO `faculty` (`buildingID`, `name`, `code`) VALUES (1, 'Elektrik Elektronik Fakültesi', 'EE'); 
+INSERT INTO `faculty` (`buildingID`, `name`, `code`) VALUES (2, 'Fen Edebiyat Fakültesi', 'FE'); 
 
 INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('100', '5301', 1, 0); 
 INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('120', '5302', 2, 0); 
 INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('30', 'F-Lab', 2, 1);
-INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('40', '5102', 2, 0);
-INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('100', '5101', 2, 0);
-INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('60', '5103', 2, 0);
-INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('10', '5207', 2, 0);
+INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('40', '5102', 1, 0);
+INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('100', '5101', 1, 0);
+INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('60', '5103', 1, 0);
+INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('10', '5207', 1, 0);
 
-INSERT INTO `course` (`name`, `code`, `credits`, `facultyID`, `length` ) VALUES ('Mathematic 1', 'MAT101', 5, 3, 6);
-INSERT INTO `course` (`name`, `code`, `credits`, `facultyID`, `length` ) VALUES ('Turkish 1', 'TUR101', 2, 3, 2);
+INSERT INTO `course` (`name`, `code`, `credits`, `facultyID`, `length` ) VALUES ('Mathematic 1', 'MAT101', 5, 2, 6);
+INSERT INTO `course` (`name`, `code`, `credits`, `facultyID`, `length` ) VALUES ('Turkish 1', 'TUR101', 2, 2, 2);
 
-INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `classID`, `day`, `begin_time`, `end_time` ) VALUES (1, 80, 60, 1, 1, 'Mon', '8:30', '10:30');
-INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `classID`, `day`, `begin_time`, `end_time` ) VALUES (2, 50, 40, 2, 2, 'Thu', '8:30', '11:30');
+INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `classID`, `day`, `begin_time`, `end_time` ) VALUES (1, 80, 60, 1, 4, 'Mon', '8:30', '10:30');
+INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `classID`, `day`, `begin_time`, `end_time` ) VALUES (2, 50, 40, 2, 5, 'Thu', '8:30', '11:30');
 
 INSERT INTO `course` (`name`, `code`, `credits`, `facultyID`, `length`) VALUES ('Database Management Systems', 'BLG361E', 3, 1, 3); 
+
+INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `classID`, `day`, `begin_time`, `end_time` ) VALUES (3, 60, 30, 2, 0, 'Fri', '13:30', '15:30');
 
 INSERT INTO `options` (`isAddDrop`) VALUES (true); 

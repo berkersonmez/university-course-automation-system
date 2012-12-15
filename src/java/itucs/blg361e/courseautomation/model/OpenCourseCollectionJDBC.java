@@ -87,7 +87,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
     public List<OpenCourse> getOpenCoursesJoinCourses() {
         try {
             List<OpenCourse> openCourseList = new LinkedList<OpenCourse>();
-            String query = "SELECT * FROM open_course JOIN course ON (courseID = id)" ;
+            String query = "SELECT * FROM open_course JOIN course ON (courseID = id) WHERE open_course.classID = 0 ORDER BY quota DESC" ;
             Statement statement = this.db.createStatement();
             ResultSet results = statement.executeQuery(query);
             
@@ -98,15 +98,22 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                 Integer currentStudentCount = results.getInt("current_student_count");
                 Integer teacherID = results.getInt("teacherID");
                 Integer classID = results.getInt("classID");
+                String day = results.getString("day");
                 Time beginTime = results.getTime("begin_time");
                 Time endTime = results.getTime("end_time");
                 String name = results.getString("name");
                 String code = results.getString("code");
                 Integer credits = results.getInt("credits");
                 Integer facultyID = results.getInt("facultyID");
-                Integer length = results.getInt("facultyID");
+                Integer length = results.getInt("length");
                 
                 OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  classID,  beginTime,  endTime);
+                nOpenCourse.setDay(day);
+                nOpenCourse.setName(name);
+                nOpenCourse.setCode(code);
+                nOpenCourse.setCredits(credits);
+                nOpenCourse.setFacultyID(facultyID);
+                nOpenCourse.setLength(length);
                 openCourseList.add(nOpenCourse);
             }
             results.close();
@@ -176,6 +183,19 @@ public class OpenCourseCollectionJDBC extends DBConnection {
         }
     }
 
+    public void updateOpenCourseClass(OpenCourse iOpenCourse) {
+        try {      
+            String query = "UPDATE open_course SET classID = ? WHERE (CRN = ?)";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, iOpenCourse.getClassID());
+            statement.setInt(2, iOpenCourse.getCRN());
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+    }
+    
     public void updateStudent(OpenCourse iOpenCourse) {
         try {      
             String query = "UPDATE open_course SET CRN = ?, quota = ?, current_student_count = ?, teacherID = ?, ClassID = ?, begin_time = ?, end_time = ? WHERE (userID = ?)";

@@ -70,6 +70,12 @@ h1,h2,h3,h4,h5,h6,h7,h8 {
 	font-weight: bold;
 }
 
+.feedbackPanelWARNING {
+	color: orange;
+	list-style: circle;
+	font-weight: bold;
+}
+
 #hellomessage {
 	font-size: 30pt;
 }
