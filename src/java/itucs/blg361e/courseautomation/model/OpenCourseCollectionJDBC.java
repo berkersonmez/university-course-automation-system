@@ -48,6 +48,38 @@ public class OpenCourseCollectionJDBC extends DBConnection {
         }
         
     }
+    
+    public OpenCourse getOpenCourseByCRN(Integer iCRN){
+        try {
+            String query = "SELECT * FROM open_course WHERE (CRN = ?)" ;
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, iCRN);
+            ResultSet results = statement.executeQuery();
+            Integer CRN, courseID, quota, currentStudentCount, teacherID, classID;
+            String beginTime, endTime;
+            if (results.next()) {
+                CRN = results.getInt("CRN");
+                courseID = results.getInt("courseID");
+                quota = results.getInt("quota");
+                currentStudentCount = results.getInt("current_student_count");
+                teacherID = results.getInt("teacherID");
+                classID = results.getInt("classID");
+                beginTime = results.getString("begin_time");
+                endTime = results.getString("end_time");
+            }
+            else{
+               results.close();
+               statement.close();
+               return null;
+            }
+            OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  classID,  beginTime,  endTime); 
+            results.close();
+            statement.close();
+            return nOpenCourse;
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+    }
 
     public void addStudentCourse(StudentCourse sCourse) {
         try {
