@@ -19,6 +19,10 @@ public class User {
     public static final int TYPE_TEACHER= 2;
     public static final int TYPE_STUDENT= 3;
     
+    public User(){
+        
+    }
+    
     public User(String nName, String nUsername, String nPassword) {
         username = nUsername;
         name = nName;
@@ -49,8 +53,12 @@ public class User {
         return this.name;
     }
     
-    public void setPassword(String newPassword) {
+    public void setPasswordDirectly(String newPassword){
         this.password = newPassword;
+    }
+    
+    public void setPassword(String newPassword) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        this.password = preparePassword(newPassword);
     }
 
     public String getPassword() {

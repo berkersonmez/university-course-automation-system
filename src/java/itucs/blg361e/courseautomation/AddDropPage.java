@@ -19,6 +19,7 @@ public final class AddDropPage extends BasePage {
         replace(new HeaderPanel("headerpanel", "Add / Drop " + user.getName()));
         add(new AddDropForm("add_drop", new StudentCourse()));
         
+        
     }
     
     

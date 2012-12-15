@@ -1,31 +1,61 @@
 body {
 	background-color: white;
-	background-image: url('wicket-logo.png');
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: 96% 96%;
-	color: #6F6F6F;
+        background-image: url('bckgrd2.jpg');
+        background-size: cover;
+	color: black;
 	font-family: 'Lucida Sans', 'Helvetica', 'Sans-serif', 'sans';
 	font-size: 9pt;
 	line-height: 1.8em;
 	padding: 10px 10px 10px 10px;
 	margin: 10px auto;
         width: 960px;
-        border-width: 2px;
-        border-color: #1A7BE9;
-        border-radius: 5px;
-        border-style: solid;
+       
+}
+
+#bigwrapper{
+	background-color: #292929;
+        background-image: url('bckgrd.jpg');
+        background-size: cover;
+	border: 2px solid black;
+	border-radius: 15px;
+	width:1000px;
+        padding:20px 20px 20px 20px;
+	margin: 20px auto;
+	text-align:left;
+	
+	-webkit-box-shadow: 0px 0px 24px 6px #D2D2D2;
+	
+}
+
+#listeler{
+	background: rgba(0, 0, 0, 0.6);
+	border-radius: 15px;
+        padding: 10px 10px 10px 10px;
+        width: 600px;
+        color: graytext;
+        margin-top: 10px;
+        margin-bottom: 20px;
+	text-align:left;
+	
+	
 }
 
 h1,h2,h3,h4,h5,h6,h7,h8 {
-	color: #1A7BE9;
+	color: white;
 }
 
 #extitle {
 	font-size: 12pt;
 	font-weight: bold;
-	color: #1A7BE9;
+	color: white;
 	padding: 10px 10px 10px 10px;
+}
+
+#footerpanel{
+    padding-left: 10px;
 }
 
 .feedbackPanelERROR {
@@ -45,16 +75,21 @@ h1,h2,h3,h4,h5,h6,h7,h8 {
 }
 
 #titleblock {
-	background: #2B86C2;
-	color: white;
-	font-weight: bold;
-	border-bottom: solid #1A7BE9;
-	border-width: thin;
-	padding: 2px 2px 2px 6px;
+	text-align:left;
+	background: rgba(0, 0, 0, 0.5);
+	border: 1px solid #6c8cb6;
+	border-radius:10px;
+	padding: 20px;
+        color: wheat;
+	
+	display:-webkit-box;
+	-webkit-box-flex:1;
 }
 
 h2 {
 	font-size: 1.25em;
+        margin: 5px;
+        color: white;
 }
 
 h3 {
@@ -96,14 +131,57 @@ a.none {
 	background: transparent;
 	padding-right: 0px;
 }
+input {
+    
+         
+}
 
+#loginbutton {
+   -moz-box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #21dcdc), color-stop(1, #1b82db) );
+	background:-moz-linear-gradient( center top, #1b82db 5%, #21dcdc 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bddbfa', endColorstr='#80b5ea');
+	background-color:#bddbfa;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #133bb1;
+	display:inline-block;
+	color:#ffffff;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:3px 12px;
+        margin-left: 5px;
+        margin-top: 5px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #528ecc;
+}
+#loginbutton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #80b5ea), color-stop(1, #bddbfa) );
+	background:-moz-linear-gradient( center top, #80b5ea 5%, #bddbfa 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eac380', endColorstr='#fae4bd');
+	background-color:#eac380;
+}
+#loginbutton:active {
+	position:relative;
+	top:1px;
+}
+
+#logintable {
+	font-family: 'Lucida Sans', 'Helvetica', 'Sans serif', 'sans';
+        color:white;
+}
 #inputForm {
-	width: 300px;
+	width: 300px; color: purple;
 }
 
 #inputForm label {
 	display: block;
 	margin-top: 5px;
+         color: purple;
 }
 
 #inputForm label.non {

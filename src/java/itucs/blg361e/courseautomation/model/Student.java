@@ -10,6 +10,10 @@ public class Student extends User{
     private Integer creditLimit = null;
     private Integer currentCredit = null;
     
+    public Student() {
+        super();
+    }
+    
     public Student(String nName, String nUsername, String nPassword, Integer nNumber) {
         super(nName, nUsername, nPassword);
         number = nNumber;
