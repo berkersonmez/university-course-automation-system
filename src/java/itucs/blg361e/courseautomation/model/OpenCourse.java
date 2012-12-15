@@ -24,6 +24,9 @@ public class OpenCourse extends Course{
     private Time endTime;
     private String day = null;
     private SelectOption course;
+    private SelectOption class_room;
+
+    
 
     
     
@@ -56,6 +59,14 @@ public class OpenCourse extends Course{
 
     public void setCourse(SelectOption course) {
         this.course = course;
+    }
+    
+    public SelectOption getClass_room() {
+        return class_room;
+    }
+
+    public void setClass_room(SelectOption class_room) {
+        this.class_room = class_room;
     }
     
     public Integer getCourseID() {

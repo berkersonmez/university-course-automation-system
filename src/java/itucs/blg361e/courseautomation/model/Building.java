@@ -11,11 +11,11 @@ package itucs.blg361e.courseautomation.model;
 public class Building {
 
     private int id;
-    private int code;
+    private String code;
     private String name;
     private String location;
     
-    public Building(int id, int code, String name, String location) {
+    public Building(int id, String code, String name, String location) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -34,11 +34,11 @@ public class Building {
         this.id = id;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
