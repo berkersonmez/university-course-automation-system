@@ -20,12 +20,12 @@ public class StudentCourseCollectionJDBC extends DBConnection {
         super();
     }
 
-    public List<StudentCourse> getStudentCourses(StudentCourse sCourse) {       
+    public List<StudentCourse> getOneStudentsCourses(User iUser) {       
         try {
             List<StudentCourse> sCourses = new LinkedList<StudentCourse>();
-            String query = "SELECT userID, CRN FROM student_course WHERE (userID = ?)" ;
+            String query = "SELECT * FROM student_course WHERE (userID = ?)" ;
             PreparedStatement statement = this.db.prepareStatement(query);
-            statement.setInt(1, sCourse.getUserID());
+            statement.setInt(1, iUser.getId());
             ResultSet results = statement.executeQuery();
             
             while (results.next()) {

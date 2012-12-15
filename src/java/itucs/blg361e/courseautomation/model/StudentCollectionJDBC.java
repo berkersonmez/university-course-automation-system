@@ -49,6 +49,31 @@ public class StudentCollectionJDBC extends DBConnection {
         return students;
     }
 
+     public Student getOneStudent(int user_id) {
+        try {
+            String query = "SELECT user.id, student.id, number, name, username, password, credit_limit, current_credit FROM user JOIN student ON (userID = user.id)";
+            Statement statement = this.db.createStatement();
+            ResultSet results = statement.executeQuery(query);
+            Student nStudent = new Student();
+            if (results.next()) {
+                nStudent.setId(results.getInt("user.id"));
+                nStudent.setStudentID(results.getInt("number"));
+                nStudent.setName(results.getString("name"));
+                nStudent.setUsername(results.getString("username"));
+                nStudent.setPasswordDirectly(results.getString("password"));
+                nStudent.setCreditLimit(results.getInt("credit_limit"));
+                nStudent.setCurrentCredit(results.getInt("current_credit"));
+            }
+            results.close();
+            statement.close();
+            return nStudent;
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+       
+    }
+    
+    
     public void addStudent(Student student) {
         try {
             UserCollectionJDBC userC = new UserCollectionJDBC();
