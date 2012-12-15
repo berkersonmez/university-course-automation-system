@@ -4,6 +4,8 @@
  */
 package itucs.blg361e.courseautomation;
 
+import itucs.blg361e.courseautomation.model.OpenCourse;
+import itucs.blg361e.courseautomation.model.OpenCourseCollectionJDBC;
 import itucs.blg361e.courseautomation.model.StudentCourse;
 import itucs.blg361e.courseautomation.model.StudentCourseCollectionJDBC;
 import itucs.blg361e.courseautomation.model.User;
@@ -23,12 +25,16 @@ public final class WeeklyProgramPage extends BasePage {
         replace(new HeaderPanel("headerpanel", "Weekly Program" + user.getName()));
         
         StudentCourseCollectionJDBC collectionA = new StudentCourseCollectionJDBC();
+        final OpenCourseCollectionJDBC collectionB = new OpenCourseCollectionJDBC();
         List<StudentCourse> studentCourseList = collectionA.getOneStudentsCourses(user);
-        ListView studentCourseListView = new ListView("student_courses", studentCourseList) {
+        ListView studentCourseListView = new ListView("crn_list", studentCourseList) {
             @Override
             protected void populateItem(ListItem li) {
                 StudentCourse nStudentCourse = (StudentCourse) li.getModelObject();
-                li.add(new Label("CRN", nStudentCourse.getCRN().toString()));
+                OpenCourse nOpenCourse = collectionB.getOpenCourseByCRN(nStudentCourse.getCRN());
+                li.add(new Label("CRN", nOpenCourse.getCRN().toString()));
+                li.add(new Label("Begin Time", nOpenCourse.getBeginTime()));
+                li.add(new Label("End Time", nOpenCourse.getEndTime()));
             }
         };
         this.add(studentCourseListView);

@@ -23,9 +23,9 @@ import org.apache.wicket.model.CompoundPropertyModel;
  *
  * @author Oguzzo
  */
-public class AddDropForm extends Form {
+public class AddCRNForm extends Form {
 
-    public AddDropForm(String id, StudentCourse iStudentCourse) {
+    public AddCRNForm(String id, StudentCourse iStudentCourse) {
         super(id);
 
         CompoundPropertyModel model = new CompoundPropertyModel(iStudentCourse);
@@ -38,11 +38,11 @@ public class AddDropForm extends Form {
     public void onSubmit() {
         StudentCourse nStudentCourse = (StudentCourse) this.getModelObject();
         Application app = (Application) this.getApplication();
-        OpenCourseCollectionJDBC nOpenCourseCollectionJDBC = new OpenCourseCollectionJDBC();
+        StudentCourseCollectionJDBC nStudentCourseCollectionJDBC = new StudentCourseCollectionJDBC();
         User nUser = ((CustomSession)getSession()).getUser();
         nStudentCourse.setUserID(nUser.getId());
      
-        nOpenCourseCollectionJDBC.addStudentCourse(nStudentCourse);
+        nStudentCourseCollectionJDBC.addStudentCourse(nStudentCourse);
           
         }
     }

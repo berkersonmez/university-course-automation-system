@@ -17,7 +17,8 @@ public final class AddDropPage extends BasePage {
     public AddDropPage() {
         User user = ((CustomSession)getSession()).getUser();
         replace(new HeaderPanel("headerpanel", "Add / Drop " + user.getName()));
-        add(new AddDropForm("add_drop", new StudentCourse()));
+        add(new AddCRNForm("add_crn", new StudentCourse()));
+        add(new DropCRNForm("drop_crn", new StudentCourse()));
         
         
     }

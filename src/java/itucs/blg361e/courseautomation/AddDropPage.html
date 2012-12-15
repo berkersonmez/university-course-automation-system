@@ -9,16 +9,29 @@
     <body>
         <wicket:extend>
             <div id="AddDropForm">
-            <h2>Add / Drop</h2>
-            <form action="#" wicket:id="add_drop">
+            
+            <form action="#" wicket:id="add_crn">
+                <h2>Add</h2>
                 <table>
                     <tr>
-                        <th>CRN:</th>
+                        <td>CRN:</td>
                         <td><input wicket:id="CRN" type="text"/></td>
                     </tr>
                 </table>
-                <input value="Add/Drop" name="add_drop" type="submit"/>
+                <input value="Add" name="add_drop" type="submit"/>
             </form>
+                
+            <form action="#" wicket:id="drop_crn">
+                <h2>Add</h2>
+                <table>
+                    <tr>
+                        <td>CRN:</td>
+                        <td><input wicket:id="CRN" type="text"/></td>
+                    </tr>
+                </table>
+                <input value="Drop" name="add_drop" type="submit"/>
+            </form>
+                
             </div>
         </wicket:extend>
     </body>

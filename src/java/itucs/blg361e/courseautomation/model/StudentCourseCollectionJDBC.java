@@ -58,7 +58,7 @@ public class StudentCourseCollectionJDBC extends DBConnection {
         }
     }
 
-    public void deleteStudent(StudentCourse sCourse) {
+    public void deleteStudentCourse(StudentCourse sCourse) {
         try {
             String query = "DELETE FROM student_course WHERE (userID = ?) AND (CRN = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
