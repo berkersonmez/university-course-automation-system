@@ -31,7 +31,7 @@ public class FacultyCollectionJDBC extends DBConnection {
                 Integer id = results.getInt("id");
                 String name = results.getString("name");
                 String code = results.getString("code");
-                Integer building = results.getInt("building");
+                Integer building = results.getInt("buildingID");
                 Faculty faculty = new Faculty(id, building, name, code);
                 //faculty.setId(id);
                 faculties.add(faculty);

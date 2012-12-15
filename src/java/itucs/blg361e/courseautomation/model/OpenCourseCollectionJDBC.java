@@ -82,6 +82,8 @@ public class OpenCourseCollectionJDBC extends DBConnection {
         }
     }
 
+    
+    
     public OpenCourse getOpenCourse(OpenCourse iOpenCourse) {
         try {
             String query = "SELECT * FROM open_course WHERE (CRN = ?)" ;

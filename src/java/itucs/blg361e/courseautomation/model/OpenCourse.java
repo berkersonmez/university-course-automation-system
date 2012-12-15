@@ -19,6 +19,7 @@ public class OpenCourse {
     private Integer classID;
     private String beginTime;
     private String endTime;
+    private String day = null;
 
     public OpenCourse(){
         
@@ -97,6 +98,14 @@ public class OpenCourse {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
 }

@@ -120,6 +120,10 @@ INSERT INTO `faculty` (`id`, `buildingID`, `name`, `code`) VALUES ('3', 2, 'Fen 
 INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('100', '5301', 1, 0); 
 INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('120', '5302', 2, 0); 
 INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('30', 'F-Lab', 2, 1);
+INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('40', '5102', 2, 0);
+INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('100', '5101', 2, 0);
+INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('60', '5103', 2, 0);
+INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('10', '5207', 2, 0);
 
 INSERT INTO `course` (`name`, `code`, `credits`, `facultyID`, `length` ) VALUES ('Mathematic 1', 'MAT101', 5, 3, 6);
 INSERT INTO `course` (`name`, `code`, `credits`, `facultyID`, `length` ) VALUES ('Turkish 1', 'TUR101', 2, 3, 2);
