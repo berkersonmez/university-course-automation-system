@@ -33,8 +33,8 @@ public final class WeeklyProgramPage extends BasePage {
                 StudentCourse nStudentCourse = (StudentCourse) li.getModelObject();
                 OpenCourse nOpenCourse = collectionB.getOpenCourseByCRN(nStudentCourse.getCRN());
                 li.add(new Label("CRN", nOpenCourse.getCRN().toString()));
-                li.add(new Label("Begin Time", nOpenCourse.getBeginTime()));
-                li.add(new Label("End Time", nOpenCourse.getEndTime()));
+                li.add(new Label("Begin Time", nOpenCourse.getBeginTime().toString()));
+                li.add(new Label("End Time", nOpenCourse.getEndTime().toString()));
             }
         };
         this.add(studentCourseListView);
