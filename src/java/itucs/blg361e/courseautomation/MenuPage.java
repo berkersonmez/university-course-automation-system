@@ -79,6 +79,7 @@ public final class MenuPage extends BasePage {
             menuList.add(new MenuObject("Edit Teacher", new UserEditPage()));
             
         }
+        oCollection.close();
         
 
         ListView menuListView = new ListView("menu", menuList) {

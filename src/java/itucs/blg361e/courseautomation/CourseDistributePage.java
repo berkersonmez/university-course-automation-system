@@ -9,6 +9,7 @@ import itucs.blg361e.courseautomation.model.BuildingCollectionJDBC;
 import itucs.blg361e.courseautomation.model.ClassRoom;
 import itucs.blg361e.courseautomation.model.ClassRoomCollectionJDBC;
 import itucs.blg361e.courseautomation.model.Course;
+import itucs.blg361e.courseautomation.model.FacultyCollectionJDBC;
 import itucs.blg361e.courseautomation.model.OpenCourse;
 import itucs.blg361e.courseautomation.model.OpenCourseCollectionJDBC;
 import java.util.ArrayList;
@@ -94,10 +95,13 @@ public final class CourseDistributePage extends BasePage {
                 li.add(new Label("CRN", openCourse.getCRN().toString()));
                 li.add(new Label("Name", openCourse.getName()));
                 li.add(new Label("Code", openCourse.getCode()));
+                li.add(new Label("Quota", openCourse.getCurrentStudentCount().toString() 
+                        + "/" 
+                        + openCourse.getQuota().toString()));
                 li.add(new Label("Day", openCourse.getDay()));
                 li.add(new Label("Begin Time", openCourse.getBeginTime().toString()));
                 li.add(new Label("End Time", openCourse.getEndTime().toString()));
-                
+
                 if (openCourse.getClassID() == 0) {
                     li.add(new Label("Building", "*NOT ASSIGNED*"));
                     li.add(new Label("Class", "*NOT ASSIGNED*"));
@@ -117,6 +121,23 @@ public final class CourseDistributePage extends BasePage {
         };
         this.add(openCourseListView);
         ocCollection.close();
+        
+        ClassRoomCollectionJDBC crCollection = new ClassRoomCollectionJDBC();
+        List<ClassRoom> classrooms = crCollection.getClassRooms();
+        ListView classroomeListView = new ListView("classroom_list", classrooms) {
+            @Override
+            protected void populateItem(ListItem li) {
+                ClassRoom classroom = (ClassRoom) li.getModelObject();
+                BuildingCollectionJDBC bCollection = new BuildingCollectionJDBC();
+                Building building = bCollection.getBuilding(classroom.getBuildingID());
+                li.add(new Label("Building", building.getCode()));
+                li.add(new Label("Name", classroom.getName()));
+                li.add(new Label("Quota", classroom.getQuota().toString()));
+                bCollection.close();
+            }
+        };
+        this.add(classroomeListView);
+        crCollection.close();
     }
     
     public void refreshList() {
@@ -130,10 +151,13 @@ public final class CourseDistributePage extends BasePage {
                 li.add(new Label("CRN", openCourse.getCRN().toString()));
                 li.add(new Label("Name", openCourse.getName()));
                 li.add(new Label("Code", openCourse.getCode()));
+                li.add(new Label("Quota", openCourse.getCurrentStudentCount().toString() 
+                        + "/" 
+                        + openCourse.getQuota().toString()));
                 li.add(new Label("Day", openCourse.getDay()));
                 li.add(new Label("Begin Time", openCourse.getBeginTime().toString()));
                 li.add(new Label("End Time", openCourse.getEndTime().toString()));
-                
+
                 if (openCourse.getClassID() == 0) {
                     li.add(new Label("Building", "*NOT ASSIGNED*"));
                     li.add(new Label("Class", "*NOT ASSIGNED*"));

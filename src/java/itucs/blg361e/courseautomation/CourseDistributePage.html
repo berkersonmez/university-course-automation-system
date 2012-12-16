@@ -18,6 +18,7 @@
                     <th>CRN</th>
                     <th>Name</th>
                     <th>Code</th>
+                    <th>Quota</th>
                     <th>Day</th>
                     <th>Begin Time</th>
                     <th>End Time</th>
@@ -28,11 +29,25 @@
                     <td><span wicket:id="CRN"></span></td>
                     <td><span wicket:id="Name"></span></td>
                     <td><span wicket:id="Code"></span></td>
+                    <td><span wicket:id="Quota"></span></td>
                     <td><span wicket:id="Day"></span></td>
                     <td><span wicket:id="Begin Time"></span></td>
                     <td><span wicket:id="End Time"></span></td>
                     <td><span wicket:id="Building"></span></td>
                     <td><span wicket:id="Class"></span></td>
+                </tr>
+            </table>
+            <h2>Classroom List</h2>
+            <table>
+                <tr>
+                    <th>Building</th>
+                    <th>Name</th>
+                    <th>Quota</th>
+                </tr>
+                <tr wicket:id="classroom_list">
+                    <td><span wicket:id="Building"></span></td>
+                    <td><span wicket:id="Name"></span></td>
+                    <td><span wicket:id="Quota"></span></td>
                 </tr>
             </table>
         </wicket:extend>

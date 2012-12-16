@@ -25,7 +25,7 @@ public class ClassRoomCollectionJDBC extends DBConnection {
     public List<ClassRoom> getClassRooms(){
         List<ClassRoom> classRooms = new LinkedList<ClassRoom>();
         try {
-            String query = "SELECT * FROM class_room";
+            String query = "SELECT * FROM class_room ORDER BY buildingID";
             Statement statement = this.db.createStatement();
             ResultSet results = statement.executeQuery(query);
             while (results.next()) {
