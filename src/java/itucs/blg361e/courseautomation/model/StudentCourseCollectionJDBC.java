@@ -23,7 +23,8 @@ public class StudentCourseCollectionJDBC extends DBConnection {
     public List<StudentCourse> getOneStudentsCourses(User iUser) {       
         try {
             List<StudentCourse> sCourses = new LinkedList<StudentCourse>();
-            String query = "SELECT * FROM student_course WHERE (userID = ?)" ;
+            String query = "SELECT * FROM student_course JOIN open_course ON (open_course.CRN = student_course.CRN)"
+                    + " WHERE (userID = ?) ORDER BY day,begin_time" ;
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, iUser.getId());
             ResultSet results = statement.executeQuery();

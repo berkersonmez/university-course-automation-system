@@ -36,7 +36,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                 Integer quota = results.getInt("quota");
                 Integer currentStudentCount = results.getInt("current_student_count");
                 Integer teacherID = results.getInt("teacherID");
-                Integer class_roomID = results.getInt("class_roomID");
+                Integer class_roomID = results.getInt("classID");
                 Time beginTime = results.getTime("begin_time");
                 Time endTime = results.getTime("end_time");
                 String day = results.getString("day");
@@ -68,7 +68,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                 quota = results.getInt("quota");
                 currentStudentCount = results.getInt("current_student_count");
                 teacherID = results.getInt("teacherID");
-                class_roomID = results.getInt("class_roomID");
+                class_roomID = results.getInt("classID");
                 beginTime = results.getTime("begin_time");
                 endTime = results.getTime("end_time");
                 day = results.getString("day");
@@ -80,6 +80,46 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                return null;
             }
             OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  class_roomID,  beginTime,  endTime, day); 
+            results.close();
+            statement.close();
+            return nOpenCourse;
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+    }
+    
+    public OpenCourse getOpenCourseJoinCourseByCRN(Integer iCRN){
+        try {
+            String query = "SELECT * FROM open_course JOIN course ON (open_course.courseID = course.id) "
+                    + " WHERE (CRN = ?)" ;
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, iCRN);
+            ResultSet results = statement.executeQuery();
+            String day, name, code;
+            Integer CRN, courseID, quota, currentStudentCount, teacherID, class_roomID;
+            Time beginTime, endTime;
+            if (results.next()) {
+                CRN = results.getInt("CRN");
+                courseID = results.getInt("courseID");
+                quota = results.getInt("quota");
+                currentStudentCount = results.getInt("current_student_count");
+                teacherID = results.getInt("teacherID");
+                class_roomID = results.getInt("classID");
+                beginTime = results.getTime("begin_time");
+                endTime = results.getTime("end_time");
+                day = results.getString("day");
+                name = results.getString("name");
+                code = results.getString("code");
+                
+            }
+            else{
+               results.close();
+               statement.close();
+               return null;
+            }
+            OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  class_roomID,  beginTime,  endTime, day);
+            nOpenCourse.setName(name);
+            nOpenCourse.setCode(code);
             results.close();
             statement.close();
             return nOpenCourse;
@@ -140,7 +180,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                 Integer quota = results.getInt("quota");
                 Integer currentStudentCount = results.getInt("current_student_count");
                 Integer teacherID = results.getInt("teacherID");
-                Integer class_roomID = results.getInt("class_roomID");
+                Integer class_roomID = results.getInt("classID");
                 Time beginTime = results.getTime("begin_time");
                 Time endTime = results.getTime("end_time");
                 String day = results.getString("day");
@@ -247,7 +287,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
     
     public void updateOpenCourse(OpenCourse iOpenCourse){
         try {      
-            String query = "UPDATE open_course SET CRN = ?, quota = ?, current_student_count = ?, teacherID = ?, Class_roomID = ?, begin_time = ?, end_time = ?, day = ? WHERE (CRN = ?)";
+            String query = "UPDATE open_course SET CRN = ?, quota = ?, current_student_count = ?, teacherID = ?, classID = ?, begin_time = ?, end_time = ?, day = ? WHERE (CRN = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, iOpenCourse.getCRN());
             statement.setInt(2, iOpenCourse.getCourseID());

@@ -120,6 +120,9 @@ th {
 	font-weight: bold;
 }
 
+tr {
+    color: white;
+}
 
 tr.b {
 	background: #F5F5F5;

@@ -4,6 +4,8 @@
  */
 package itucs.blg361e.courseautomation;
 
+import itucs.blg361e.courseautomation.model.ClassRoom;
+import itucs.blg361e.courseautomation.model.ClassRoomCollectionJDBC;
 import itucs.blg361e.courseautomation.model.OpenCourse;
 import itucs.blg361e.courseautomation.model.OpenCourseCollectionJDBC;
 import itucs.blg361e.courseautomation.model.StudentCourse;
@@ -22,7 +24,7 @@ public final class WeeklyProgramPage extends BasePage {
 
     public WeeklyProgramPage() {
         User user = ((CustomSession)getSession()).getUser();
-        replace(new HeaderPanel("headerpanel", "Weekly Program" + user.getName()));
+        replace(new HeaderPanel("headerpanel", "Weekly Program of " + user.getName()));
         
         StudentCourseCollectionJDBC collectionA = new StudentCourseCollectionJDBC();
         final OpenCourseCollectionJDBC collectionB = new OpenCourseCollectionJDBC();
@@ -31,11 +33,18 @@ public final class WeeklyProgramPage extends BasePage {
             @Override
             protected void populateItem(ListItem li) {
                 StudentCourse nStudentCourse = (StudentCourse) li.getModelObject();
-                OpenCourse nOpenCourse = collectionB.getOpenCourseByCRN(nStudentCourse.getCRN());
+                OpenCourse nOpenCourse = collectionB.getOpenCourseJoinCourseByCRN(nStudentCourse.getCRN());
+                ClassRoom classRoom = new ClassRoom();
+                classRoom.setId(nOpenCourse.getClassID());
+                ClassRoomCollectionJDBC crCollection = new ClassRoomCollectionJDBC();
+                classRoom = crCollection.getClassRoom(classRoom);
                 li.add(new Label("CRN", nOpenCourse.getCRN().toString()));
+                li.add(new Label("Name", nOpenCourse.getName()));
+                li.add(new Label("Code", nOpenCourse.getCode()));
                 li.add(new Label("Day", nOpenCourse.getDay()));
                 li.add(new Label("Begin Time", nOpenCourse.getBeginTime().toString()));
                 li.add(new Label("End Time", nOpenCourse.getEndTime().toString()));
+                li.add(new Label("Class", classRoom.getName()));
             }
         };
         this.add(studentCourseListView);

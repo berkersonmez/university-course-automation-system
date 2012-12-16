@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `open_course` (
     `quota` smallint(3) NOT NULL,
     `current_student_count` smallint(3) NOT NULL,
     `teacherID` int(10) unsigned NOT NULL REFERENCES `teacher`,
-    `class_roomID` int(10) unsigned NOT NULL REFERENCES `class_room`,
+    `classID` int(10) unsigned NOT NULL REFERENCES `class_room`,
     `day` ENUM('Mon', 'Tue', 'Wed', 'Thu', 'Fri') NOT NULL,
     `begin_time` time NOT NULL, 
     `end_time` time NOT NULL,
