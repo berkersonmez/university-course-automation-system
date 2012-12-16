@@ -53,6 +53,42 @@ public class OpenCourseCollectionJDBC extends DBConnection {
         
     }
     
+    public List<OpenCourse> getOneTeacherCourses(Teacher teacher) {       
+        try {
+            List<OpenCourse> sCourses = new LinkedList<OpenCourse>();
+            String query = "SELECT * FROM open_course JOIN course ON (open_course.courseID = course.id)"
+                    + " WHERE (teacherID = ?) ORDER BY day,begin_time" ;
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, teacher.getTeacherID());
+            ResultSet results = statement.executeQuery();
+            
+            while (results.next()) {
+                Integer CRN = results.getInt("CRN");
+                Integer courseID = results.getInt("courseID");
+                Integer quota = results.getInt("quota");
+                Integer currentStudentCount = results.getInt("current_student_count");
+                Integer teacherID = results.getInt("teacherID");
+                Integer class_roomID = results.getInt("classID");
+                Time beginTime = results.getTime("begin_time");
+                Time endTime = results.getTime("end_time");
+                String day = results.getString("day");
+                String name = results.getString("course.name");
+                String code = results.getString("course.code");
+                
+                OpenCourse teacherCourse = new OpenCourse(CRN, courseID, quota, currentStudentCount, teacherID, class_roomID, beginTime, endTime, day);
+                teacherCourse.setName(name);
+                teacherCourse.setCode(code);
+                sCourses.add(teacherCourse);
+            }
+            results.close();
+            statement.close();
+            return sCourses;
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+        
+    }
+    
     public OpenCourse getOpenCourseByCRN(Integer iCRN){
         try {
             String query = "SELECT * FROM open_course WHERE (CRN = ?)" ;

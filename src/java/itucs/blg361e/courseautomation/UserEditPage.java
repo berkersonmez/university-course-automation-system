@@ -11,6 +11,7 @@ import itucs.blg361e.courseautomation.model.CourseCollectionJDBC;
 import itucs.blg361e.courseautomation.model.Faculty;
 import itucs.blg361e.courseautomation.model.FacultyCollectionJDBC;
 import itucs.blg361e.courseautomation.model.User;
+import itucs.blg361e.courseautomation.model.UserCollectionJDBC;
 import itucs.blg361e.courseautomation.utility.SelectOption;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -30,16 +31,16 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
  *
  * @author Berker
  */
-public final class AdminEditPage extends BasePage {
+public final class UserEditPage extends BasePage {
     
-    class AdminEditForm extends Form {
+    class UserEditForm extends Form {
         private String oldPassword;
         
-        public AdminEditForm(String property, Admin admin) {
+        public UserEditForm(String property, User user) {
             super(property);
-            oldPassword = admin.getPassword();
-            admin.setPassword("");
-            CompoundPropertyModel model = new CompoundPropertyModel(admin);
+            oldPassword = user.getPassword();
+            user.setPassword("");
+            CompoundPropertyModel model = new CompoundPropertyModel(user);
             this.setModel(model);
             this.add(new TextField("name").setRequired(true));
             this.add(new TextField("password").setRequired(false));
@@ -47,31 +48,27 @@ public final class AdminEditPage extends BasePage {
 
         @Override
         public void onSubmit() {
-            Admin formResult = (Admin) getModelObject();
-            AdminCollectionJDBC aCollection = new AdminCollectionJDBC();
+            User formResult = (User) getModelObject();
+            UserCollectionJDBC uCollection = new UserCollectionJDBC();
             if (formResult.getPassword() == null) {
                 formResult.setPassword(oldPassword);
             } else {
                 try {
                     formResult.setPassword(formResult.preparePassword(formResult.getPassword()));
                 } catch (NoSuchAlgorithmException ex) {
-                    Logger.getLogger(AdminEditPage.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(UserEditPage.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (UnsupportedEncodingException ex) {
-                    Logger.getLogger(AdminEditPage.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(UserEditPage.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            aCollection.updateAdminPreparedPassword(formResult);
+            uCollection.updateUserPreparedPassword(formResult);
             setResponsePage(new MenuPage());
         }
     }
 
-    public AdminEditPage() {
+    public UserEditPage() {
         replace(new HeaderPanel("headerpanel","Edit Personal Info"));
         User user = ((CustomSession)getSession()).getUser();
-        AdminCollectionJDBC aCollection = new AdminCollectionJDBC();
-        Admin admin = new Admin("", "", "");
-        admin.setId(user.getId());
-        admin = aCollection.getAdmin(admin);
-        add(new AdminEditForm("admin_edit", admin));
+        add(new UserEditForm("user_edit", user));
     }
 }

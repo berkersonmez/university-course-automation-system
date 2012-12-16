@@ -48,15 +48,19 @@ public final class MenuPage extends BasePage {
             menuList.add(new MenuObject("Add Course", new CourseAddPage()));
             menuList.add(new MenuObject("Edit Course", new CourseSelectPage()));
             menuList.add(new MenuObject("Distribute Courses", new CourseDistributePage()));
-            menuList.add(new MenuObject("Edit Admin", new AdminEditPage()));
+            menuList.add(new MenuObject("Edit Admin", new UserEditPage()));
             menuList.add(new MenuObject("Options", new OptionsPage()));
             
         } else if (user.getType() == User.TYPE_STUDENT) {
            menuList.add(new MenuObject("Add / Drop", new AddDropPage()));
            menuList.add(new MenuObject("Weekly Program", new WeeklyProgramPage()));
+           menuList.add(new MenuObject("Edit Student", new UserEditPage()));
            
         } else if (user.getType() == User.TYPE_TEACHER) {
             menuList.add(new MenuObject("Open Course", new TeacherOpenCourse()));
+            menuList.add(new MenuObject("Weekly Program", new TeacherProgram()));
+            menuList.add(new MenuObject("Edit Teacher", new UserEditPage()));
+            
         }
         
 
