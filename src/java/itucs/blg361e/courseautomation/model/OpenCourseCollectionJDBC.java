@@ -36,7 +36,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                 Integer quota = results.getInt("quota");
                 Integer currentStudentCount = results.getInt("current_student_count");
                 Integer teacherID = results.getInt("teacherID");
-                Integer class_roomID = results.getInt("classID");
+                Integer class_roomID = results.getInt("class_roomID");
                 Time beginTime = results.getTime("begin_time");
                 Time endTime = results.getTime("end_time");
                 String day = results.getString("day");
@@ -68,7 +68,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                 quota = results.getInt("quota");
                 currentStudentCount = results.getInt("current_student_count");
                 teacherID = results.getInt("teacherID");
-                class_roomID = results.getInt("classID");
+                class_roomID = results.getInt("class_roomID");
                 beginTime = results.getTime("begin_time");
                 endTime = results.getTime("end_time");
                 day = results.getString("day");
@@ -104,7 +104,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                 quota = results.getInt("quota");
                 currentStudentCount = results.getInt("current_student_count");
                 teacherID = results.getInt("teacherID");
-                class_roomID = results.getInt("classID");
+                class_roomID = results.getInt("class_roomID");
                 beginTime = results.getTime("begin_time");
                 endTime = results.getTime("end_time");
                 day = results.getString("day");
@@ -141,7 +141,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                 Integer quota = results.getInt("quota");
                 Integer currentStudentCount = results.getInt("current_student_count");
                 Integer teacherID = results.getInt("teacherID");
-                Integer classID = results.getInt("classID");
+                Integer classID = results.getInt("class_roomID");
                 String day = results.getString("day");
                 Time beginTime = results.getTime("begin_time");
                 Time endTime = results.getTime("end_time");
@@ -180,7 +180,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                 Integer quota = results.getInt("quota");
                 Integer currentStudentCount = results.getInt("current_student_count");
                 Integer teacherID = results.getInt("teacherID");
-                Integer class_roomID = results.getInt("classID");
+                Integer class_roomID = results.getInt("class_roomID");
                 Time beginTime = results.getTime("begin_time");
                 Time endTime = results.getTime("end_time");
                 String day = results.getString("day");
@@ -287,7 +287,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
     
     public void updateOpenCourse(OpenCourse iOpenCourse){
         try {      
-            String query = "UPDATE open_course SET CRN = ?, quota = ?, current_student_count = ?, teacherID = ?, classID = ?, begin_time = ?, end_time = ?, day = ? WHERE (CRN = ?)";
+            String query = "UPDATE open_course SET CRN = ?, quota = ?, current_student_count = ?, teacherID = ?, class_roomID = ?, begin_time = ?, end_time = ?, day = ? WHERE (CRN = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, iOpenCourse.getCRN());
             statement.setInt(2, iOpenCourse.getCourseID());
