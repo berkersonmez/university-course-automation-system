@@ -39,8 +39,9 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                 Integer class_roomID = results.getInt("class_roomID");
                 Time beginTime = results.getTime("begin_time");
                 Time endTime = results.getTime("end_time");
+                String day = results.getString("day");
                 
-                OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  class_roomID,  beginTime,  endTime);
+                OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  class_roomID,  beginTime,  endTime, day);
                 openCourseList.add(nOpenCourse);
             }
             results.close();
@@ -58,6 +59,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, iCRN);
             ResultSet results = statement.executeQuery();
+            String day;
             Integer CRN, courseID, quota, currentStudentCount, teacherID, class_roomID;
             Time beginTime, endTime;
             if (results.next()) {
@@ -69,13 +71,15 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                 class_roomID = results.getInt("class_roomID");
                 beginTime = results.getTime("begin_time");
                 endTime = results.getTime("end_time");
+                day = results.getString("day");
+                
             }
             else{
                results.close();
                statement.close();
                return null;
             }
-            OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  class_roomID,  beginTime,  endTime); 
+            OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  class_roomID,  beginTime,  endTime, day); 
             results.close();
             statement.close();
             return nOpenCourse;
@@ -107,8 +111,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                 Integer facultyID = results.getInt("facultyID");
                 Integer length = results.getInt("length");
                 
-                OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  classID,  beginTime,  endTime);
-                nOpenCourse.setDay(day);
+                OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  classID,  beginTime,  endTime, day);
                 nOpenCourse.setName(name);
                 nOpenCourse.setCode(code);
                 nOpenCourse.setCredits(credits);
@@ -140,8 +143,9 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                 Integer class_roomID = results.getInt("class_roomID");
                 Time beginTime = results.getTime("begin_time");
                 Time endTime = results.getTime("end_time");
+                String day = results.getString("day");
                 
-                OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  class_roomID,  beginTime,  endTime);
+                OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  class_roomID,  beginTime,  endTime, day);
                 iOpenCourse = nOpenCourse;
             }
             results.close();
@@ -241,9 +245,9 @@ public class OpenCourseCollectionJDBC extends DBConnection {
         }
     }
     
-    public void updateOpenCourse(OpenCourse iOpenCourse) {
+    public void updateOpenCourse(OpenCourse iOpenCourse){
         try {      
-            String query = "UPDATE open_course SET CRN = ?, quota = ?, current_student_count = ?, teacherID = ?, Class_roomID = ?, begin_time = ?, end_time = ? WHERE (CRN = ?)";
+            String query = "UPDATE open_course SET CRN = ?, quota = ?, current_student_count = ?, teacherID = ?, Class_roomID = ?, begin_time = ?, end_time = ?, day = ? WHERE (CRN = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, iOpenCourse.getCRN());
             statement.setInt(2, iOpenCourse.getCourseID());
@@ -254,6 +258,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
             statement.setTime(7, iOpenCourse.getBeginTime());
             statement.setTime(8, iOpenCourse.getEndTime());
             statement.setInt(9, iOpenCourse.getCRN());
+            statement.setString(10, iOpenCourse.getDay());
             statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
@@ -261,22 +266,4 @@ public class OpenCourseCollectionJDBC extends DBConnection {
         }
     }
     
-    public void updateStudent(OpenCourse iOpenCourse) {
-        try {      
-            String query = "UPDATE open_course SET CRN = ?, quota = ?, current_student_count = ?, teacherID = ?, Class_roomID = ?, begin_time = ?, end_time = ? WHERE (userID = ?)";
-            PreparedStatement statement = this.db.prepareStatement(query);
-            statement.setInt(1, iOpenCourse.getCRN());
-            statement.setInt(2, iOpenCourse.getCourseID());
-            statement.setInt(2, iOpenCourse.getQuota());
-            statement.setInt(2, iOpenCourse.getCurrentStudentCount());
-            statement.setInt(2, iOpenCourse.getTeacherID());
-            statement.setInt(2, iOpenCourse.getClassID());
-            statement.setTime(2, iOpenCourse.getBeginTime());
-            statement.setTime(2, iOpenCourse.getEndTime());
-            statement.executeUpdate();
-            statement.close();
-        } catch (SQLException e) {
-            throw new UnsupportedOperationException(e.getMessage());
-        }
-    }
 }

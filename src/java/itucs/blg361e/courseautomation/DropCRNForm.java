@@ -36,11 +36,11 @@ public class DropCRNForm extends Form {
         nStudentCourse.setUserID(nUser.getId());
      
         if(nStudentCourseCollectionJDBC.checkCode(nStudentCourse) == false){
-            error("Selected Course is not in your course list");
+            error("DELETING FAILED: (CRN:" + nStudentCourse.getCRN().toString() + ") is not in your course list");
             return;
         }
         
         nStudentCourseCollectionJDBC.deleteStudentCourse(nStudentCourse);
-          
+        info("(CRN:" + nStudentCourse.getCRN().toString() + ") is successfully deleted"); 
         }
     }

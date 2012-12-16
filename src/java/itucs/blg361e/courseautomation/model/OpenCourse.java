@@ -26,7 +26,7 @@ public class OpenCourse extends Course{
     private String beginTimeInString;
     private String endTimeInString;
     
-    private String day = null;
+    private String day;
     private SelectOption course;
     private SelectOption class_room;
     
@@ -40,7 +40,7 @@ public class OpenCourse extends Course{
         
     };
     
-    public OpenCourse(Integer CRN, Integer courseID, Integer quota, Integer currentStudentCount, Integer teacherID, Integer classID, Time beginTime, Time endTime) {
+    public OpenCourse(Integer CRN, Integer courseID, Integer quota, Integer currentStudentCount, Integer teacherID, Integer classID, Time beginTime, Time endTime, String day) {
         this.CRN = CRN;
         this.courseID = courseID;
         this.quota = quota;
@@ -49,6 +49,7 @@ public class OpenCourse extends Course{
         this.classID = classID;
         this.beginTime = beginTime;
         this.endTime = endTime;
+        this.day = day;
     }
     
     public Integer getCRN() {

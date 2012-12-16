@@ -128,11 +128,11 @@ INSERT INTO `class_room` (`quota`, `name`, `buildingID`, `lab` ) VALUES ('10', '
 INSERT INTO `course` (`name`, `code`, `credits`, `facultyID`, `length` ) VALUES ('Mathematic 1', 'MAT101', 5, 2, 6);
 INSERT INTO `course` (`name`, `code`, `credits`, `facultyID`, `length` ) VALUES ('Turkish 1', 'TUR101', 2, 2, 2);
 
-INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `classID`, `day`, `begin_time`, `end_time` ) VALUES (1, 80, 60, 1, 4, 'Mon', '8:30', '10:30');
-INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `classID`, `day`, `begin_time`, `end_time` ) VALUES (2, 50, 40, 2, 5, 'Thu', '8:30', '11:30');
+INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `class_roomID`, `day`, `begin_time`, `end_time` ) VALUES (1, 80, 60, 1, 4, 'Mon', '8:30', '10:30');
+INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `class_roomID`, `day`, `begin_time`, `end_time` ) VALUES (2, 50, 40, 2, 5, 'Thu', '8:30', '11:30');
 
 INSERT INTO `course` (`name`, `code`, `credits`, `facultyID`, `length`) VALUES ('Database Management Systems', 'BLG361E', 3, 1, 3); 
 
-INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `classID`, `day`, `begin_time`, `end_time` ) VALUES (3, 60, 30, 2, 0, 'Fri', '13:30', '15:30');
+INSERT INTO `open_course` (`courseId`, `quota`, `current_student_count`, `teacherID`, `class_roomID`, `day`, `begin_time`, `end_time` ) VALUES (3, 60, 30, 2, 0, 'Fri', '13:30', '15:30');
 
 INSERT INTO `options` (`isAddDrop`) VALUES (true); 
