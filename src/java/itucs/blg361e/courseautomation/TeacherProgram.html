@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket="http://wicket.apache.org">
+    <head>
+        <wicket:head>
+            <title>Weekly Program</title>
+        </wicket:head>
+    </head>
+    <body>
+        <wicket:extend>
+            <h2>CRN List</h2>
+            <table>
+                <tr>
+                    <th>CRN</th>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Day</th>
+                    <th>Begin Time</th>
+                    <th>End Time</th>
+                    <th>Building</th>
+                    <th>Class</th>
+                </tr>
+                <tr wicket:id="crn_list">
+                    <td><span wicket:id="CRN"></span></td>
+                    <td><span wicket:id="Name"></span></td>
+                    <td><span wicket:id="Code"></span></td>
+                    <td><span wicket:id="Day"></span></td>
+                    <td><span wicket:id="Begin Time"></span></td>
+                    <td><span wicket:id="End Time"></span></td>
+                    <td><span wicket:id="Building"></span></td>
+                    <td><span wicket:id="Class"></span></td>
+                </tr>
+            </table>
+        </wicket:extend>
+    </body>
+</html>

@@ -58,7 +58,9 @@ public final class MenuPage extends BasePage {
            
         } else if (user.getType() == User.TYPE_TEACHER) {
             menuList.add(new MenuObject("Open Course", new TeacherOpenCourse()));
+            menuList.add(new MenuObject("Weekly Program", new TeacherProgram()));
             menuList.add(new MenuObject("Edit Teacher", new UserEditPage()));
+            
         }
         
 
