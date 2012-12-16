@@ -46,6 +46,30 @@ public class ClassRoomCollectionJDBC extends DBConnection {
         return classRooms;
     }
     
+    public ClassRoom getClassRoom(ClassRoom classRoom){
+        try {
+            String query = "SELECT * FROM class_room WHERE id = ?";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, classRoom.getId());
+            ResultSet results = statement.executeQuery();
+            if (results.next()) {
+                Integer quota = results.getInt("quota");
+                String name = results.getString("name");
+                Integer buildingID = results.getInt("buildingID");
+                Boolean lab = results.getBoolean("lab");
+                classRoom.setQuota(quota);
+                classRoom.setName(name);
+                classRoom.setLab(lab);
+                classRoom.setBuildingID(buildingID);
+            }
+            results.close();
+            statement.close();
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+        return classRoom;
+    }
+    
     public void addClassRoom(ClassRoom iClassRoom) {
         try {
             String query = "INSERT INTO class_room (id, code, quota, name, buildingID) VALUES (?, ?, ?, ?, ?)";
@@ -124,6 +148,32 @@ public class ClassRoomCollectionJDBC extends DBConnection {
             throw new UnsupportedOperationException(e.getMessage());
         }
         return classroom;
+    }
+    
+    public boolean isClassRoomAvailable(OpenCourse course) {
+        try {
+            String query = "SELECT CRN FROM open_course WHERE classID = ? AND"
+                    + "(((begin_time <= ? AND end_time > ?) " +
+                    "OR (begin_time < ? AND end_time >= ?)) AND day = ?)";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, course.getClassID());
+            statement.setTime(2, course.getBeginTime());
+            statement.setTime(3, course.getBeginTime());
+            statement.setTime(4, course.getEndTime());
+            statement.setTime(5, course.getEndTime());
+            statement.setString(6, course.getDay());
+            ResultSet results = statement.executeQuery();
+            if (results.next()) {
+                results.close();
+                statement.close();
+                return false;
+            }
+            results.close();
+            statement.close();
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+        return true;
     }
     
     public void deleteClassRoom(ClassRoom iClassRoom) {
