@@ -36,6 +36,7 @@ public final class OptionsPage extends BasePage {
             Options formResult = (Options) getModelObject();
             OptionsCollectionJDBC oCollection = new OptionsCollectionJDBC();
             oCollection.updateOptions(formResult);
+            getSession().info("Options are changed!");
             setResponsePage(new MenuPage());
             oCollection.close();
         }

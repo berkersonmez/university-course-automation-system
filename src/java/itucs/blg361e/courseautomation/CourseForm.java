@@ -58,6 +58,7 @@ class CourseForm extends Form {
             formResult.setFacultyID(Integer.parseInt(formResult.getFaculty().getKey()));
             CourseCollectionJDBC cCollection = new CourseCollectionJDBC();
             cCollection.updateCourse(formResult);
+            getSession().info("Course is updated successfully!");
             setResponsePage(new CourseSelectPage());
             cCollection.close();
             

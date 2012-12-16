@@ -38,6 +38,7 @@ public final class StudentAddPage extends BasePage {
                 error("Username and number must be unique!");
             } else {
                 sCollection.addStudent(formResult);
+                getSession().info("New student is added!");
                 setResponsePage(new MenuPage());
             }
             sCollection.close();

@@ -136,8 +136,9 @@ class TeacherOpenCourseForm extends Form {
             }
                
             oCollection.addOpenCourse(formResult);
-            setResponsePage(new MenuPage());
             tCollection.close();
             oCollection.close();
+            getSession().info("Course is opened successfully!");
+            setResponsePage(new MenuPage());
         }
     }

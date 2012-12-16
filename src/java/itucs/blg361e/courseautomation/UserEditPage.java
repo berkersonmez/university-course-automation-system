@@ -49,6 +49,7 @@ public final class UserEditPage extends BasePage {
                 }
             }
             uCollection.updateUserPreparedPassword(formResult);
+            getSession().info("You have edited yourself successfully!");
             setResponsePage(new MenuPage());
             uCollection.close();
         }

@@ -290,3 +290,6 @@ font-weight: normal;
   background: url(select.png) no-repeat;
   overflow: hidden;
 }
+.white {
+    color: white;
+}

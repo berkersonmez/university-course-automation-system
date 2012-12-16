@@ -27,6 +27,7 @@ public final class CourseAddPage extends BasePage {
                     error("Code must be unique!");
                 } else {
                     cCollection.addCourse(formResult);
+                    getSession().info("Course is added successfully!");
                     setResponsePage(new MenuPage());
                 }
                 cCollection.close();
