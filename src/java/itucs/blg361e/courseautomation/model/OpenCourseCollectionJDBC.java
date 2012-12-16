@@ -68,7 +68,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                 Integer quota = results.getInt("quota");
                 Integer currentStudentCount = results.getInt("current_student_count");
                 Integer teacherID = results.getInt("teacherID");
-                Integer class_roomID = results.getInt("classID");
+                Integer class_roomID = results.getInt("class_roomID");
                 Time beginTime = results.getTime("begin_time");
                 Time endTime = results.getTime("end_time");
                 String day = results.getString("day");
@@ -167,7 +167,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
     public List<OpenCourse> getOpenCoursesJoinCourses() {
         try {
             List<OpenCourse> openCourseList = new LinkedList<OpenCourse>();
-            String query = "SELECT * FROM open_course JOIN course ON (courseID = id) WHERE open_course.classID = 0 ORDER BY quota DESC" ;
+            String query = "SELECT * FROM open_course JOIN course ON (courseID = id) WHERE open_course.class_roomID = 0 ORDER BY quota DESC" ;
             Statement statement = this.db.createStatement();
             ResultSet results = statement.executeQuery(query);
             
@@ -310,7 +310,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
 
     public void updateOpenCourseClass(OpenCourse iOpenCourse) {
         try {      
-            String query = "UPDATE open_course SET classID = ? WHERE (CRN = ?)";
+            String query = "UPDATE open_course SET class_roomID = ? WHERE (CRN = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, iOpenCourse.getClassID());
             statement.setInt(2, iOpenCourse.getCRN());
