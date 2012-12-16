@@ -92,7 +92,7 @@ public class ClassRoomCollectionJDBC extends DBConnection {
             String query = "SELECT class_room.id, class_room.name FROM class_room JOIN building ON (class_room.buildingID = building.id) " +
                             "JOIN faculty ON (faculty.buildingID = building.id) WHERE faculty.id = ? AND " +
                             "class_room.quota >= ? AND " +
-                            "class_room.id NOT IN (SELECT classID from open_course " +
+                            "class_room.id NOT IN (SELECT class_roomID from open_course " +
                             "WHERE (((begin_time <= ? AND end_time > ?) " +
                             "OR (begin_time < ? AND end_time >= ?)) AND day = ?)) "+ 
                             "ORDER BY quota DESC";
@@ -124,7 +124,7 @@ public class ClassRoomCollectionJDBC extends DBConnection {
             String query = "SELECT class_room.id, class_room.name FROM class_room JOIN building ON (class_room.buildingID = building.id) " +
                             "JOIN faculty ON (faculty.buildingID = building.id) WHERE faculty.id <> ? AND " +
                             "class_room.quota >= ? AND " +
-                            "class_room.id NOT IN (SELECT classID from open_course " +
+                            "class_room.id NOT IN (SELECT class_roomID from open_course " +
                             "WHERE (((begin_time <= ? AND end_time > ?) " +
                             "OR (begin_time < ? AND end_time >= ?)) AND day = ?)) "+ 
                             "ORDER BY quota DESC";
@@ -152,7 +152,7 @@ public class ClassRoomCollectionJDBC extends DBConnection {
     
     public boolean isClassRoomAvailable(OpenCourse course) {
         try {
-            String query = "SELECT CRN FROM open_course WHERE classID = ? AND"
+            String query = "SELECT CRN FROM open_course WHERE class_roomID = ? AND"
                     + "(((begin_time <= ? AND end_time > ?) " +
                     "OR (begin_time < ? AND end_time >= ?)) AND day = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);

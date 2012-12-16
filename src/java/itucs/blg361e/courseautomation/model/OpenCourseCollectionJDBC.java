@@ -253,6 +253,32 @@ public class OpenCourseCollectionJDBC extends DBConnection {
             throw new UnsupportedOperationException(e.getMessage());
         }
     }
+    
+    public boolean isTeacherAvailable(OpenCourse course) {
+        try {
+            String query = "SELECT CRN FROM open_course WHERE teacherID = ? AND"
+                    + "(((begin_time <= ? AND end_time > ?) " +
+                    "OR (begin_time < ? AND end_time >= ?)) AND day = ?)";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, course.getClassID());
+            statement.setTime(2, course.getBeginTime());
+            statement.setTime(3, course.getBeginTime());
+            statement.setTime(4, course.getEndTime());
+            statement.setTime(5, course.getEndTime());
+            statement.setString(6, course.getDay());
+            ResultSet results = statement.executeQuery();
+            if (results.next()) {
+                results.close();
+                statement.close();
+                return false;
+            }
+            results.close();
+            statement.close();
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+        return true;
+    }
 
     public boolean checkCode(OpenCourse iOpenCourse) {
         

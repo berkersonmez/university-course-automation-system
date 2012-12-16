@@ -120,6 +120,10 @@ class TeacherOpenCourseForm extends Form {
                 selectedClassroom.setId(formResult.getClassID());
                 ClassRoomCollectionJDBC crCollection = new ClassRoomCollectionJDBC();
                 selectedClassroom = crCollection.getClassRoom(selectedClassroom);
+                if (!oCollection.isTeacherAvailable(formResult)) {
+                    error("You are not available for given timespan!");
+                    return;
+                }
                 if (!(selectedClassroom.getQuota() >= formResult.getQuota())) {
                     error("Classroom quota is not high enough!");
                     return;
