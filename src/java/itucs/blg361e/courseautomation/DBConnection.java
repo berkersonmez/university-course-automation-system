@@ -5,6 +5,8 @@
 package itucs.blg361e.courseautomation;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,6 +26,14 @@ public class DBConnection {
             String jdbcURL = "jdbc:mysql://localhost/course_automation?" +
                              "user=root&password=mbotm361";
             this.db = DriverManager.getConnection(jdbcURL);
+        } catch (SQLException ex) {
+            throw new UnsupportedOperationException(ex.getMessage());
+        }
+    }
+    
+    public void close() {
+        try {
+            db.close();
         } catch (SQLException ex) {
             throw new UnsupportedOperationException(ex.getMessage());
         }

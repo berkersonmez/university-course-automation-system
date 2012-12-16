@@ -115,6 +115,10 @@ pre {
 	font-family: 'Lucida Sans', 'Helvetica', 'Sans serif', 'sans';
 }
 
+table.wide {
+    width: 100%;
+}
+
 th {
 	color: white;
 	font-weight: bold;

@@ -21,6 +21,40 @@ public class OpenCourseCollectionJDBC extends DBConnection {
     public OpenCourseCollectionJDBC() {
         super();
     }
+    
+    public List<OpenCourse> getAllOpenCourses() {       
+        try {
+            List<OpenCourse> openCourseList = new LinkedList<OpenCourse>();
+            String query = "SELECT * FROM open_course JOIN course ON (open_course.courseID = course.id) ORDER BY day, begin_time" ;
+            Statement statement = this.db.createStatement();
+            ResultSet results = statement.executeQuery(query);
+            
+            while (results.next()) {
+                Integer CRN = results.getInt("CRN");
+                Integer courseID = results.getInt("courseID");
+                Integer quota = results.getInt("quota");
+                Integer currentStudentCount = results.getInt("current_student_count");
+                Integer teacherID = results.getInt("teacherID");
+                Integer class_roomID = results.getInt("class_roomID");
+                Time beginTime = results.getTime("begin_time");
+                Time endTime = results.getTime("end_time");
+                String day = results.getString("day");
+                String name = results.getString("name");
+                String code = results.getString("code");
+                
+                OpenCourse nOpenCourse = new OpenCourse(CRN,  courseID,  quota,  currentStudentCount,  teacherID,  class_roomID,  beginTime,  endTime, day);
+                nOpenCourse.setName(name);
+                nOpenCourse.setCode(code);
+                openCourseList.add(nOpenCourse);
+            }
+            results.close();
+            statement.close();
+            return openCourseList;
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+        
+    }
 
     public List<OpenCourse> getAllOpenCourses(OpenCourse iOpenCourse) {       
         try {

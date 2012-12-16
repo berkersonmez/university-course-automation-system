@@ -36,20 +36,27 @@ public final class WeeklyProgramPage extends BasePage {
             protected void populateItem(ListItem li) {
                 StudentCourse nStudentCourse = (StudentCourse) li.getModelObject();
                 OpenCourse nOpenCourse = collectionB.getOpenCourseJoinCourseByCRN(nStudentCourse.getCRN());
-                ClassRoom classRoom = new ClassRoom();
-                classRoom.setId(nOpenCourse.getClassID());
-                ClassRoomCollectionJDBC crCollection = new ClassRoomCollectionJDBC();
-                classRoom = crCollection.getClassRoom(classRoom);
-                BuildingCollectionJDBC bCollection = new BuildingCollectionJDBC();
-                Building building = bCollection.getBuilding(classRoom.getBuildingID());
+                
                 li.add(new Label("CRN", nOpenCourse.getCRN().toString()));
                 li.add(new Label("Name", nOpenCourse.getName()));
                 li.add(new Label("Code", nOpenCourse.getCode()));
                 li.add(new Label("Day", nOpenCourse.getDay()));
                 li.add(new Label("Begin Time", nOpenCourse.getBeginTime().toString()));
                 li.add(new Label("End Time", nOpenCourse.getEndTime().toString()));
-                li.add(new Label("Building", building.getCode()));
-                li.add(new Label("Class", classRoom.getName()));
+                
+                if (nOpenCourse.getClassID() == 0) {
+                    li.add(new Label("Building", "*NOT ASSIGNED*"));
+                    li.add(new Label("Class", "*NOT ASSIGNED*"));
+                } else {
+                    ClassRoom classRoom = new ClassRoom();
+                    classRoom.setId(nOpenCourse.getClassID());
+                    ClassRoomCollectionJDBC crCollection = new ClassRoomCollectionJDBC();
+                    classRoom = crCollection.getClassRoom(classRoom);
+                    BuildingCollectionJDBC bCollection = new BuildingCollectionJDBC();
+                    Building building = bCollection.getBuilding(classRoom.getBuildingID());
+                    li.add(new Label("Building", building.getCode()));
+                    li.add(new Label("Class", classRoom.getName()));
+                }
             }
         };
         this.add(studentCourseListView);

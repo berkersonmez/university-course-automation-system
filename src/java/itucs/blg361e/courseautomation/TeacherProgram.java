@@ -37,7 +37,7 @@ public final class TeacherProgram extends BasePage {
         teacher = tCollection.getTeacher(teacher.getId());
         final OpenCourseCollectionJDBC collectionB = new OpenCourseCollectionJDBC();
         List<OpenCourse> teacherCoursesList = collectionB.getOneTeacherCourses(teacher);
-        ListView studentCourseListView = new ListView("crn_list", teacherCoursesList) {
+        ListView teacherCourseListView = new ListView("crn_list", teacherCoursesList) {
             @Override
             protected void populateItem(ListItem li) {
                 OpenCourse nTeacherCourse = (OpenCourse) li.getModelObject();
@@ -64,7 +64,7 @@ public final class TeacherProgram extends BasePage {
                 }
             }
         };
-        this.add(studentCourseListView);
+        this.add(teacherCourseListView);
     }
     
 }
