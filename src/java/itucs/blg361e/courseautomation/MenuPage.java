@@ -4,6 +4,8 @@
  */
 package itucs.blg361e.courseautomation;
 
+import itucs.blg361e.courseautomation.model.Options;
+import itucs.blg361e.courseautomation.model.OptionsCollectionJDBC;
 import itucs.blg361e.courseautomation.model.User;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,12 +23,21 @@ import org.apache.wicket.markup.html.panel.Panel;
 public final class MenuPage extends BasePage {
     
     public class MenuObject {
+
         private String label;
         private BasePage link;
+        private boolean disabled;
         
         public MenuObject(String label, BasePage link) {
             this.label = label;
             this.link = link;
+            this.disabled = false;
+        }
+        
+        public MenuObject(String label, BasePage link, boolean disabled) {
+            this.label = label;
+            this.link = link;
+            this.disabled = disabled;
         }
         
         public String getLabel() {
@@ -36,6 +47,10 @@ public final class MenuPage extends BasePage {
         public BasePage getLink() {
             return this.link;
         }
+        
+        public boolean isDisabled() {
+            return disabled;
+        }
     }
 
     public MenuPage() {
@@ -43,6 +58,8 @@ public final class MenuPage extends BasePage {
         replace(new HeaderPanel("headerpanel", "Welcome " + user.getName()));
         
         List<MenuObject> menuList= new LinkedList<MenuObject>();
+        OptionsCollectionJDBC oCollection = new OptionsCollectionJDBC();
+        Options options = oCollection.getOptions();
         if (user.getType() == User.TYPE_ADMIN) {
             menuList.add(new MenuObject("Add Student", new StudentAddPage()));
             menuList.add(new MenuObject("Add Course", new CourseAddPage()));
@@ -52,7 +69,7 @@ public final class MenuPage extends BasePage {
             menuList.add(new MenuObject("Options", new OptionsPage()));
             
         } else if (user.getType() == User.TYPE_STUDENT) {
-           menuList.add(new MenuObject("Add / Drop", new AddDropPage()));
+           menuList.add(new MenuObject("Add / Drop", new AddDropPage(), !options.isIsAddDrop()));
            menuList.add(new MenuObject("Weekly Program", new WeeklyProgramPage()));
            menuList.add(new MenuObject("Edit Student", new UserEditPage()));
            
@@ -72,9 +89,14 @@ public final class MenuPage extends BasePage {
 
                     @Override
                     public void onClick() {
-                        this.setResponsePage(menuObj.getLink());
+                        if (menuObj.isDisabled()) {
+                            getSession().error("You can't do that at this time!");
+                        } else {
+                            this.setResponsePage(menuObj.getLink());
+                        }
                     }
                 };
+                
                 li.add(link.add(new Label("menu_label", menuObj.getLabel())));
             }
         };
