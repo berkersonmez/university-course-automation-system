@@ -114,16 +114,16 @@ class TeacherOpenCourseForm extends Form {
                 error("(CRN: " + formResult.getCRN().toString() + ") already exists");
                 return;
             }
+            if (!oCollection.isTeacherAvailable(formResult)) {
+                error("You are not available for given timespan!");
+                return;
+            }
             
             if (formResult.getClassID() != 0) {
                 ClassRoom selectedClassroom = new ClassRoom();
                 selectedClassroom.setId(formResult.getClassID());
                 ClassRoomCollectionJDBC crCollection = new ClassRoomCollectionJDBC();
                 selectedClassroom = crCollection.getClassRoom(selectedClassroom);
-                if (!oCollection.isTeacherAvailable(formResult)) {
-                    error("You are not available for given timespan!");
-                    return;
-                }
                 if (!(selectedClassroom.getQuota() >= formResult.getQuota())) {
                     error("Classroom quota is not high enough!");
                     return;

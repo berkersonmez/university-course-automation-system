@@ -260,7 +260,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
                     + "(((begin_time <= ? AND end_time > ?) " +
                     "OR (begin_time < ? AND end_time >= ?)) AND day = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
-            statement.setInt(1, course.getClassID());
+            statement.setInt(1, course.getTeacherID());
             statement.setTime(2, course.getBeginTime());
             statement.setTime(3, course.getBeginTime());
             statement.setTime(4, course.getEndTime());
