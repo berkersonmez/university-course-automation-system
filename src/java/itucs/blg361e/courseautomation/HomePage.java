@@ -15,7 +15,6 @@ import itucs.blg361e.courseautomation.model.TeacherCollectionJDBC;
 import itucs.blg361e.courseautomation.model.User;
 import java.util.List;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 
@@ -63,6 +62,9 @@ public class HomePage extends BasePage {
             }
         };
         this.add(adminListView);
+        collection.close();
+        collectionT.close();
+        collectionA.close();
     }
 
 }

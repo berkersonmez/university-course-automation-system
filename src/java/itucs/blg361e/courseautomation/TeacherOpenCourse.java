@@ -4,12 +4,7 @@
  */
 package itucs.blg361e.courseautomation;
 
-import itucs.blg361e.courseautomation.model.Course;
-import itucs.blg361e.courseautomation.model.CourseCollectionJDBC;
 import itucs.blg361e.courseautomation.model.OpenCourse;
-import itucs.blg361e.courseautomation.model.OpenCourseCollectionJDBC;
-import itucs.blg361e.courseautomation.model.StudentCourse;
-import itucs.blg361e.courseautomation.model.User;
 
 
 /**

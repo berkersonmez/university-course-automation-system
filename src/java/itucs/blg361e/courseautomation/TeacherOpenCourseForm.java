@@ -9,8 +9,6 @@ import itucs.blg361e.courseautomation.model.ClassRoom;
 import itucs.blg361e.courseautomation.model.ClassRoomCollectionJDBC;
 import itucs.blg361e.courseautomation.model.Course;
 import itucs.blg361e.courseautomation.model.CourseCollectionJDBC;
-import itucs.blg361e.courseautomation.model.Faculty;
-import itucs.blg361e.courseautomation.model.FacultyCollectionJDBC;
 import itucs.blg361e.courseautomation.model.OpenCourse;
 import itucs.blg361e.courseautomation.model.OpenCourseCollectionJDBC;
 import itucs.blg361e.courseautomation.model.TeacherCollectionJDBC;
@@ -24,7 +22,6 @@ import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.PropertyModel;
 
 /**
  *
@@ -91,6 +88,9 @@ class TeacherOpenCourseForm extends Form {
                     selectChoices2, 
                     cr2).setRequired(false);
             add(classRoomSelect);
+            cCollection.close();
+            crCollection.close();
+            bCollection.close();
         }
 
         @Override
@@ -132,9 +132,12 @@ class TeacherOpenCourseForm extends Form {
                     error("Classroom is not available for given timespan!");
                     return;
                 }
+                crCollection.close();
             }
                
             oCollection.addOpenCourse(formResult);
             setResponsePage(new MenuPage());
+            tCollection.close();
+            oCollection.close();
         }
     }

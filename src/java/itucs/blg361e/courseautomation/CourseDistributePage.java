@@ -11,22 +11,15 @@ import itucs.blg361e.courseautomation.model.ClassRoomCollectionJDBC;
 import itucs.blg361e.courseautomation.model.Course;
 import itucs.blg361e.courseautomation.model.OpenCourse;
 import itucs.blg361e.courseautomation.model.OpenCourseCollectionJDBC;
-import itucs.blg361e.courseautomation.utility.SelectOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
-import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.LoadableDetachableModel;
-import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 /**
  *
@@ -81,6 +74,8 @@ public final class CourseDistributePage extends BasePage {
                 }
             }
             refreshList();
+            ocCollection.close();
+            crCollection.close();
         }
     }
 
@@ -115,10 +110,13 @@ public final class CourseDistributePage extends BasePage {
                     Building building = bCollection.getBuilding(classRoom.getBuildingID());
                     li.add(new Label("Building", building.getCode()));
                     li.add(new Label("Class", classRoom.getName()));
+                    crCollection.close();
+                    bCollection.close();
                 }
             }
         };
         this.add(openCourseListView);
+        ocCollection.close();
     }
     
     public void refreshList() {
@@ -148,9 +146,13 @@ public final class CourseDistributePage extends BasePage {
                     Building building = bCollection.getBuilding(classRoom.getBuildingID());
                     li.add(new Label("Building", building.getCode()));
                     li.add(new Label("Class", classRoom.getName()));
+                    crCollection.close();
+                    bCollection.close();
                 }
             }
         };
         this.replace(openCourseListView);
+        ocCollection.close();
+        
     }
 }

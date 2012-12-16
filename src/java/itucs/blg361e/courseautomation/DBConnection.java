@@ -5,8 +5,6 @@
 package itucs.blg361e.courseautomation;
 
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

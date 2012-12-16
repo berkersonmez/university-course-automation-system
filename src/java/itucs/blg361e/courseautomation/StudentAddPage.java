@@ -4,22 +4,11 @@
  */
 package itucs.blg361e.courseautomation;
 
-import itucs.blg361e.courseautomation.model.Course;
-import itucs.blg361e.courseautomation.model.CourseCollectionJDBC;
-import itucs.blg361e.courseautomation.model.Faculty;
-import itucs.blg361e.courseautomation.model.FacultyCollectionJDBC;
 import itucs.blg361e.courseautomation.model.Student;
 import itucs.blg361e.courseautomation.model.StudentCollectionJDBC;
-import itucs.blg361e.courseautomation.utility.SelectOption;
-import java.util.ArrayList;
-import java.util.List;
-import org.apache.wicket.markup.html.form.ChoiceRenderer;
-import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 /**
  *
@@ -51,6 +40,7 @@ public final class StudentAddPage extends BasePage {
                 sCollection.addStudent(formResult);
                 setResponsePage(new MenuPage());
             }
+            sCollection.close();
         }
     }
 

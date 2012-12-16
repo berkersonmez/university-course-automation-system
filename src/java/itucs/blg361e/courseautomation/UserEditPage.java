@@ -4,28 +4,15 @@
  */
 package itucs.blg361e.courseautomation;
 
-import itucs.blg361e.courseautomation.model.Admin;
-import itucs.blg361e.courseautomation.model.AdminCollectionJDBC;
-import itucs.blg361e.courseautomation.model.Course;
-import itucs.blg361e.courseautomation.model.CourseCollectionJDBC;
-import itucs.blg361e.courseautomation.model.Faculty;
-import itucs.blg361e.courseautomation.model.FacultyCollectionJDBC;
 import itucs.blg361e.courseautomation.model.User;
 import itucs.blg361e.courseautomation.model.UserCollectionJDBC;
-import itucs.blg361e.courseautomation.utility.SelectOption;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.wicket.markup.html.form.ChoiceRenderer;
-import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 /**
  *
@@ -63,6 +50,7 @@ public final class UserEditPage extends BasePage {
             }
             uCollection.updateUserPreparedPassword(formResult);
             setResponsePage(new MenuPage());
+            uCollection.close();
         }
     }
 

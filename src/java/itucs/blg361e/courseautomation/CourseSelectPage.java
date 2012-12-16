@@ -9,13 +9,10 @@ import itucs.blg361e.courseautomation.model.CourseCollectionJDBC;
 import itucs.blg361e.courseautomation.utility.SelectOption;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.LoadableDetachableModel;
-import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 /**
@@ -55,6 +52,7 @@ public final class CourseSelectPage extends BasePage {
             ChoiceRenderer cr = new ChoiceRenderer("value", "key");
             ddc = (DropDownChoice<Course>) new DropDownChoice("selection", selectChoices, cr).setRequired(true);
             add(ddc);
+            cCollection.close();
         }
 
         @Override

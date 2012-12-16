@@ -8,8 +8,6 @@ import itucs.blg361e.courseautomation.DBConnection;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -85,7 +83,7 @@ public class TeacherCollectionJDBC extends DBConnection {
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, userID);
             statement.executeUpdate();
-            
+            userC.close();
         } catch (SQLException e) {
             throw new UnsupportedOperationException(e.getMessage());
         }
@@ -101,6 +99,7 @@ public class TeacherCollectionJDBC extends DBConnection {
             statement.executeUpdate();
             statement.close();
             userC.deleteUser(teacher);
+            userC.close();
         } catch (SQLException e) {
             throw new UnsupportedOperationException(e.getMessage());
         }
@@ -117,6 +116,7 @@ public class TeacherCollectionJDBC extends DBConnection {
             statement.executeUpdate();
             statement.close();
             userC.updateUser(teacher);
+            userC.close();
         } catch (SQLException e) {
             throw new UnsupportedOperationException(e.getMessage());
         }

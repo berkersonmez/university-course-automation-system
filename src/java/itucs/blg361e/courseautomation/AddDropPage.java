@@ -6,7 +6,6 @@ package itucs.blg361e.courseautomation;
 
 import itucs.blg361e.courseautomation.model.StudentCourse;
 import itucs.blg361e.courseautomation.model.User;
-import org.apache.wicket.markup.html.WebPage;
 
 /**
  *

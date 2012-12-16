@@ -56,10 +56,15 @@ public final class WeeklyProgramPage extends BasePage {
                     Building building = bCollection.getBuilding(classRoom.getBuildingID());
                     li.add(new Label("Building", building.getCode()));
                     li.add(new Label("Class", classRoom.getName()));
+                    crCollection.close();
+                    bCollection.close();
                 }
             }
         };
         this.add(studentCourseListView);
+        collectionA.close();
+        collectionB.close();
+        
     }
     
 }

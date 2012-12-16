@@ -10,8 +10,8 @@ package itucs.blg361e.courseautomation;
  */
 
 import itucs.blg361e.courseautomation.model.User;
-import org.apache.wicket.request.Request;
 import org.apache.wicket.protocol.http.WebSession;
+import org.apache.wicket.request.Request;
 
 public class CustomSession extends WebSession {
     private User user;

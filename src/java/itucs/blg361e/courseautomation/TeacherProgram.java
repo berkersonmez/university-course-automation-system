@@ -10,8 +10,6 @@ import itucs.blg361e.courseautomation.model.ClassRoom;
 import itucs.blg361e.courseautomation.model.ClassRoomCollectionJDBC;
 import itucs.blg361e.courseautomation.model.OpenCourse;
 import itucs.blg361e.courseautomation.model.OpenCourseCollectionJDBC;
-import itucs.blg361e.courseautomation.model.StudentCourse;
-import itucs.blg361e.courseautomation.model.StudentCourseCollectionJDBC;
 import itucs.blg361e.courseautomation.model.Teacher;
 import itucs.blg361e.courseautomation.model.TeacherCollectionJDBC;
 import itucs.blg361e.courseautomation.model.User;
@@ -61,10 +59,15 @@ public final class TeacherProgram extends BasePage {
                     Building building = bCollection.getBuilding(classRoom.getBuildingID());
                     li.add(new Label("Building", building.getCode()));
                     li.add(new Label("Class", classRoom.getName()));
+                    crCollection.close();
+                    bCollection.close();
                 }
             }
         };
         this.add(teacherCourseListView);
+        tCollection.close();
+        collectionB.close();
+        
     }
     
 }

@@ -106,7 +106,7 @@ public class StudentCollectionJDBC extends DBConnection {
             statement.setInt(2, userID);
             statement.setInt(3, student.getCreditLimit());
             statement.executeUpdate();
-            
+            userC.close();
         } catch (SQLException e) {
             throw new UnsupportedOperationException(e.getMessage());
         }
@@ -122,6 +122,7 @@ public class StudentCollectionJDBC extends DBConnection {
             statement.executeUpdate();
             statement.close();
             userC.deleteUser(student);
+            userC.close();
         } catch (SQLException e) {
             throw new UnsupportedOperationException(e.getMessage());
         }
@@ -139,6 +140,7 @@ public class StudentCollectionJDBC extends DBConnection {
             statement.executeUpdate();
             statement.close();
             userC.updateUser(student);
+            userC.close();
         } catch (SQLException e) {
             throw new UnsupportedOperationException(e.getMessage());
         }

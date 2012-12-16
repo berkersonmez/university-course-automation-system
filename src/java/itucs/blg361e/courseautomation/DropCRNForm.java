@@ -7,7 +7,6 @@ package itucs.blg361e.courseautomation;
 import itucs.blg361e.courseautomation.model.StudentCourse;
 import itucs.blg361e.courseautomation.model.StudentCourseCollectionJDBC;
 import itucs.blg361e.courseautomation.model.User;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -42,5 +41,6 @@ public class DropCRNForm extends Form {
         
         nStudentCourseCollectionJDBC.deleteStudentCourse(nStudentCourse);
         info("(CRN:" + nStudentCourse.getCRN().toString() + ") is successfully deleted"); 
-        }
+        nStudentCourseCollectionJDBC.close();
+    }
     }

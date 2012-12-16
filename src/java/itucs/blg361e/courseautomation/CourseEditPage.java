@@ -22,5 +22,6 @@ public final class CourseEditPage extends BasePage {
         CourseCollectionJDBC cCollection = new CourseCollectionJDBC();
         course = cCollection.getCourse(course);
         add(new CourseForm("course_edit", course));
+        cCollection.close();
     }
 }

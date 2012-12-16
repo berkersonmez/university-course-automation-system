@@ -4,19 +4,12 @@
  */
 package itucs.blg361e.courseautomation;
 
-import itucs.blg361e.courseautomation.model.AdminCollectionJDBC;
 import itucs.blg361e.courseautomation.model.CourseCollectionJDBC;
-import itucs.blg361e.courseautomation.model.OpenCourse;
 import itucs.blg361e.courseautomation.model.OpenCourseCollectionJDBC;
-import itucs.blg361e.courseautomation.model.StudentCollectionJDBC;
 import itucs.blg361e.courseautomation.model.StudentCourse;
 import itucs.blg361e.courseautomation.model.StudentCourseCollectionJDBC;
-import itucs.blg361e.courseautomation.model.TeacherCollectionJDBC;
 import itucs.blg361e.courseautomation.model.User;
-import itucs.blg361e.courseautomation.model.UserCollectionJDBC;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
 
@@ -78,5 +71,8 @@ public class AddCRNForm extends Form {
         //Add new CRN
         nStudentCourseCollectionJDBC.addStudentCourse(nStudentCourse);
         info("CRN is successfully added");
+        nStudentCourseCollectionJDBC.close();
+        nOpenCourseCollectionJDBC.close();
+        nCourseCollectionJDBC.close();
         }
     }

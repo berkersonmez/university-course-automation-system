@@ -61,11 +61,13 @@ public class LoginForm extends Form {
             }
             ((CustomSession)getSession()).setUser(user);
             this.setResponsePage(new MenuPage());
-            
-            
+            sCollection.close();
+            tCollection.close();
+            aCollection.close();
         } else {
             error("Username or password is not correct!");
         }
+        collection.close();
     }
     
     public CustomSession getCustomSession(){

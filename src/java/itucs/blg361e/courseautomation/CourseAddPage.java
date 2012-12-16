@@ -6,7 +6,6 @@ package itucs.blg361e.courseautomation;
 
 import itucs.blg361e.courseautomation.model.Course;
 import itucs.blg361e.courseautomation.model.CourseCollectionJDBC;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 /**
  *
@@ -30,6 +29,7 @@ public final class CourseAddPage extends BasePage {
                     cCollection.addCourse(formResult);
                     setResponsePage(new MenuPage());
                 }
+                cCollection.close();
             }
             
         });

@@ -49,6 +49,7 @@ class CourseForm extends Form {
                     cr).setRequired(true);
             add(facultySelect);
             this.add(new TextField("length").setRequired(true));
+            fCollection.close();
         }
 
         @Override
@@ -58,5 +59,7 @@ class CourseForm extends Form {
             CourseCollectionJDBC cCollection = new CourseCollectionJDBC();
             cCollection.updateCourse(formResult);
             setResponsePage(new CourseSelectPage());
+            cCollection.close();
+            
         }
     }

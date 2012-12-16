@@ -77,6 +77,7 @@ public class AdminCollectionJDBC extends DBConnection {
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, userID);
             statement.executeUpdate();
+            userC.close();
             
         } catch (SQLException e) {
             throw new UnsupportedOperationException(e.getMessage());
@@ -93,6 +94,7 @@ public class AdminCollectionJDBC extends DBConnection {
             statement.executeUpdate();
             statement.close();
             userC.deleteUser(admin);
+            userC.close();
         } catch (SQLException e) {
             throw new UnsupportedOperationException(e.getMessage());
         }
@@ -109,6 +111,7 @@ public class AdminCollectionJDBC extends DBConnection {
             statement.executeUpdate();
             statement.close();
             userC.updateUser(admin);
+            userC.close();
         } catch (SQLException e) {
             throw new UnsupportedOperationException(e.getMessage());
         }
@@ -125,6 +128,7 @@ public class AdminCollectionJDBC extends DBConnection {
             statement.executeUpdate();
             statement.close();
             userC.updateUserPreparedPassword(admin);
+            userC.close();
         } catch (SQLException e) {
             throw new UnsupportedOperationException(e.getMessage());
         }
