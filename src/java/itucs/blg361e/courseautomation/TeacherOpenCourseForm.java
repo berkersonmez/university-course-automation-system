@@ -110,6 +110,11 @@ class TeacherOpenCourseForm extends Form {
             formResult.setTeacherID(tCollection.getTeacher(user.getId()).getTeacherID());
             
             OpenCourseCollectionJDBC oCollection = new OpenCourseCollectionJDBC();
+            if(oCollection.checkCode(formResult.getCRN())){
+                error("(CRN: " + formResult.getCRN().toString() + ") already exists");
+                return;
+            }
+               
             oCollection.addOpenCourse(formResult);
             setResponsePage(new MenuPage());
         }
