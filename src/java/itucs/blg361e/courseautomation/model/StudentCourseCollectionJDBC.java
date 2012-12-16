@@ -71,6 +71,18 @@ public class StudentCourseCollectionJDBC extends DBConnection {
             throw new UnsupportedOperationException(e.getMessage());
         }
     }
+    
+    public void deleteStudentCourseByCRN(Integer CRN) {
+        try {
+            String query = "DELETE FROM student_course WHERE CRN = ?";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, CRN);
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+    }
 
     public boolean checkCode(StudentCourse sCourse) {
         

@@ -124,5 +124,26 @@ public class CourseCollectionJDBC extends DBConnection {
             throw new UnsupportedOperationException(e.getMessage());
         }
     }
+    
+    public void deleteCourseByID(Integer courseID) {
+        try {
+            OpenCourseCollectionJDBC ocCollection = new OpenCourseCollectionJDBC();
+            List<OpenCourse> openCourses = ocCollection.getOpenCoursesByCourseID(courseID);
+            StudentCourseCollectionJDBC scCollection = new StudentCourseCollectionJDBC();
+            for (OpenCourse oc : openCourses) {
+                scCollection.deleteStudentCourseByCRN(oc.getCRN());
+            }
+            ocCollection.deleteOpenCourseByCourseID(courseID);
+            String query = "DELETE FROM course WHERE (id = ?)";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, courseID);
+            statement.executeUpdate();
+            statement.close();
+            ocCollection.close();
+            scCollection.close();
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+    }
 
 }

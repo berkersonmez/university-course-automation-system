@@ -6,9 +6,11 @@ package itucs.blg361e.courseautomation;
 
 import itucs.blg361e.courseautomation.model.Course;
 import itucs.blg361e.courseautomation.model.CourseCollectionJDBC;
+import itucs.blg361e.courseautomation.model.OpenCourseCollectionJDBC;
 import itucs.blg361e.courseautomation.utility.SelectOption;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
@@ -53,17 +55,51 @@ public final class CourseSelectPage extends BasePage {
             ddc = (DropDownChoice<Course>) new DropDownChoice("selection", selectChoices, cr).setRequired(true);
             add(ddc);
             cCollection.close();
+            
+            Button edit = new Button("button_edit") {
+                @Override
+                public void onSubmit() {
+                    CourseSelectFormModel formResult = (CourseSelectFormModel) CourseSelectForm.this.getModelObject();
+                    if (!"0".equals(formResult.getSelection().getKey())) {
+                        PageParameters pageParameters = new PageParameters();
+                        pageParameters.add("id", formResult.getSelection().getKey());
+                        this.setResponsePage(CourseEditPage.class, pageParameters);
+                    }
+                }
+            };
+            add(edit);
+            
+            Button delete = new Button("button_delete") {
+                @Override
+                public void onSubmit() {
+                    CourseSelectFormModel formResult = (CourseSelectFormModel) CourseSelectForm.this.getModelObject();
+                    if (formResult.getSelection() != null) {
+                        CourseCollectionJDBC cCollection = new CourseCollectionJDBC();
+                        cCollection.deleteCourseByID(Integer.parseInt(formResult.getSelection().getKey()));
+                        info("Course is deleted!");
+                        cCollection.close();
+                    } else {
+                        error("Select a course to delete!");
+                    }
+                    refreshDropdown();
+                }
+            };
+            add(delete);
+        }
+        
+        public void refreshDropdown() {
+            final CourseCollectionJDBC cCollection = new CourseCollectionJDBC();
+            List<SelectOption> selectChoices = new ArrayList<SelectOption>();
+            for (Course crs : cCollection.getCourses()) {
+                selectChoices.add(new SelectOption(crs.getId().toString(), crs.getName() + " (" + crs.getCode() + ")"));
+            }
+            ChoiceRenderer cr = new ChoiceRenderer("value", "key");
+            ddc = (DropDownChoice<Course>) new DropDownChoice("selection", selectChoices, cr).setRequired(true);
+            cCollection.close();
+            replace(ddc);
         }
 
-        @Override
-        public void onSubmit() {
-            CourseSelectFormModel formResult = (CourseSelectFormModel) getModelObject();
-            if (!"0".equals(formResult.getSelection().getKey())) {
-                PageParameters pageParameters = new PageParameters();
-                pageParameters.add("id", formResult.getSelection().getKey());
-                this.setResponsePage(CourseEditPage.class, pageParameters);
-            }
-        }
+        
     }
 
     public CourseSelectPage() {

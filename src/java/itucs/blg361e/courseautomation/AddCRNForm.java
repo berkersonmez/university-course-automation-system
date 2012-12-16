@@ -5,6 +5,7 @@
 package itucs.blg361e.courseautomation;
 
 import itucs.blg361e.courseautomation.model.CourseCollectionJDBC;
+import itucs.blg361e.courseautomation.model.OpenCourse;
 import itucs.blg361e.courseautomation.model.OpenCourseCollectionJDBC;
 import itucs.blg361e.courseautomation.model.StudentCourse;
 import itucs.blg361e.courseautomation.model.StudentCourseCollectionJDBC;
@@ -26,7 +27,7 @@ public class AddCRNForm extends Form {
         CompoundPropertyModel model = new CompoundPropertyModel(iStudentCourse);
         this.setModel(model);
 
-        this.add(new TextField("CRN"));
+        this.add(new TextField("CRN").setRequired(true));
     }
 
     @Override
@@ -49,6 +50,7 @@ public class AddCRNForm extends Form {
         }
         else if(nOpenCourseCollectionJDBC.getOpenCourseByCRN(nStudentCourse.getCRN()).getCurrentStudentCount() >= nOpenCourseCollectionJDBC.getOpenCourseByCRN(nStudentCourse.getCRN()).getQuota()){
             error("ADDING FAILED: (CRN:" + nStudentCourse.getCRN().toString() + ") is FULL");
+            return;
         }
         //This Part Checks if the selected time is empty
         String beginTimeString = nOpenCourseCollectionJDBC.getOpenCourseByCRN(nStudentCourse.getCRN()).getBeginTime().toString();
@@ -69,6 +71,9 @@ public class AddCRNForm extends Form {
         }
         
         //Add new CRN
+        OpenCourse openCourse = nOpenCourseCollectionJDBC.getOpenCourseByCRN(nStudentCourse.getCRN());
+        openCourse.setCurrentStudentCount(openCourse.getCurrentStudentCount()+1);
+        nOpenCourseCollectionJDBC.updateOpenCourse(openCourse);
         nStudentCourseCollectionJDBC.addStudentCourse(nStudentCourse);
         info("CRN is successfully added");
         nStudentCourseCollectionJDBC.close();

@@ -87,6 +87,37 @@ public class OpenCourseCollectionJDBC extends DBConnection {
         
     }
     
+    public List<OpenCourse> getOpenCoursesByCourseID(Integer cID) {       
+        try {
+            List<OpenCourse> sCourses = new LinkedList<OpenCourse>();
+            String query = "SELECT * FROM open_course WHERE (courseID = ?)" ;
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, cID);
+            ResultSet results = statement.executeQuery();
+            
+            while (results.next()) {
+                Integer CRN = results.getInt("CRN");
+                Integer courseID = results.getInt("courseID");
+                Integer quota = results.getInt("quota");
+                Integer currentStudentCount = results.getInt("current_student_count");
+                Integer teacherID = results.getInt("teacherID");
+                Integer class_roomID = results.getInt("class_roomID");
+                Time beginTime = results.getTime("begin_time");
+                Time endTime = results.getTime("end_time");
+                String day = results.getString("day");
+                
+                OpenCourse teacherCourse = new OpenCourse(CRN, courseID, quota, currentStudentCount, teacherID, class_roomID, beginTime, endTime, day);
+                sCourses.add(teacherCourse);
+            }
+            results.close();
+            statement.close();
+            return sCourses;
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+        
+    }
+    
     public List<OpenCourse> getOneTeacherCourses(Teacher teacher) {       
         try {
             List<OpenCourse> sCourses = new LinkedList<OpenCourse>();
@@ -367,6 +398,18 @@ public class OpenCourseCollectionJDBC extends DBConnection {
             throw new UnsupportedOperationException(e.getMessage());
         }
     }
+    
+    public void deleteOpenCourseByCourseID(Integer courseID) {
+        try {
+            String query = "DELETE FROM open_course WHERE (courseID = ?)";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, courseID);
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+    }
 
     public void updateOpenCourseClass(OpenCourse iOpenCourse) {
         try {      
@@ -383,7 +426,7 @@ public class OpenCourseCollectionJDBC extends DBConnection {
     
     public void updateOpenCourse(OpenCourse iOpenCourse){
         try {      
-            String query = "UPDATE open_course SET CRN = ?, quota = ?, current_student_count = ?, teacherID = ?, class_roomID = ?, begin_time = ?, end_time = ?, day = ? WHERE (CRN = ?)";
+            String query = "UPDATE open_course SET CRN = ?, courseID = ?, quota = ?, current_student_count = ?, teacherID = ?, class_roomID = ?, begin_time = ?, end_time = ?, day = ? WHERE (CRN = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, iOpenCourse.getCRN());
             statement.setInt(2, iOpenCourse.getCourseID());
@@ -393,8 +436,8 @@ public class OpenCourseCollectionJDBC extends DBConnection {
             statement.setInt(6, iOpenCourse.getClassID());
             statement.setTime(7, iOpenCourse.getBeginTime());
             statement.setTime(8, iOpenCourse.getEndTime());
-            statement.setInt(9, iOpenCourse.getCRN());
-            statement.setString(10, iOpenCourse.getDay());
+            statement.setString(9, iOpenCourse.getDay());
+            statement.setInt(10, iOpenCourse.getCRN());
             statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
