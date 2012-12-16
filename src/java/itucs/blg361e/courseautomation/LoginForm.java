@@ -9,6 +9,10 @@ import itucs.blg361e.courseautomation.model.StudentCollectionJDBC;
 import itucs.blg361e.courseautomation.model.TeacherCollectionJDBC;
 import itucs.blg361e.courseautomation.model.User;
 import itucs.blg361e.courseautomation.model.UserCollectionJDBC;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
@@ -48,7 +52,13 @@ public class LoginForm extends Form {
             else if(sCollection.isStudent(user)){
                 user.setType(User.TYPE_STUDENT);
             }
-            
+            try {
+                user.setPassword(user.preparePassword(user.getPassword()));
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
             ((CustomSession)getSession()).setUser(user);
             this.setResponsePage(new MenuPage());
             
