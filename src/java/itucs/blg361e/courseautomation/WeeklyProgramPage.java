@@ -4,6 +4,8 @@
  */
 package itucs.blg361e.courseautomation;
 
+import itucs.blg361e.courseautomation.model.Building;
+import itucs.blg361e.courseautomation.model.BuildingCollectionJDBC;
 import itucs.blg361e.courseautomation.model.ClassRoom;
 import itucs.blg361e.courseautomation.model.ClassRoomCollectionJDBC;
 import itucs.blg361e.courseautomation.model.OpenCourse;
@@ -38,12 +40,15 @@ public final class WeeklyProgramPage extends BasePage {
                 classRoom.setId(nOpenCourse.getClassID());
                 ClassRoomCollectionJDBC crCollection = new ClassRoomCollectionJDBC();
                 classRoom = crCollection.getClassRoom(classRoom);
+                BuildingCollectionJDBC bCollection = new BuildingCollectionJDBC();
+                Building building = bCollection.getBuilding(classRoom.getBuildingID());
                 li.add(new Label("CRN", nOpenCourse.getCRN().toString()));
                 li.add(new Label("Name", nOpenCourse.getName()));
                 li.add(new Label("Code", nOpenCourse.getCode()));
                 li.add(new Label("Day", nOpenCourse.getDay()));
                 li.add(new Label("Begin Time", nOpenCourse.getBeginTime().toString()));
                 li.add(new Label("End Time", nOpenCourse.getEndTime().toString()));
+                li.add(new Label("Building", building.getCode()));
                 li.add(new Label("Class", classRoom.getName()));
             }
         };
