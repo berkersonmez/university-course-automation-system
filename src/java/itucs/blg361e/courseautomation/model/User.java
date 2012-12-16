@@ -14,7 +14,9 @@ public class User {
     protected String name;
     protected String username;
     protected String password;
+    private String email;
     protected Integer type;
+    private Long phone;
     public static final int TYPE_ADMIN= 1;
     public static final int TYPE_TEACHER= 2;
     public static final int TYPE_STUDENT= 3;
@@ -78,5 +80,21 @@ public class User {
     
     public int getType(){
         return type;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Long getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Long phone) {
+        this.phone = phone;
     }
 }

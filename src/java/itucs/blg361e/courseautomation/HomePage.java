@@ -33,6 +33,8 @@ public class HomePage extends BasePage {
                 li.add(new Label("name", student.getName()));
                 li.add(new Label("username", student.getUsername()));
                 li.add(new Label("password", student.getPassword()));
+                li.add(new Label("email", student.getEmail()));
+                li.add(new Label("phone", student.getPhone().toString()));
             }
         };
         this.add(studentListView);
@@ -46,6 +48,8 @@ public class HomePage extends BasePage {
                 li.add(new Label("t_name", teacher.getName()));
                 li.add(new Label("t_username", teacher.getUsername()));
                 li.add(new Label("t_password", teacher.getPassword()));
+                li.add(new Label("t_email", teacher.getEmail()));
+                li.add(new Label("t_phone", teacher.getPhone().toString()));
             }
         };
         this.add(teacherListView);
@@ -59,6 +63,8 @@ public class HomePage extends BasePage {
                 li.add(new Label("a_name", admin.getName()));
                 li.add(new Label("a_username", admin.getUsername()));
                 li.add(new Label("a_password", admin.getPassword()));
+                li.add(new Label("a_email", admin.getEmail()));
+                li.add(new Label("a_phone", admin.getPhone().toString()));
             }
         };
         this.add(adminListView);

@@ -6,6 +6,7 @@ package itucs.blg361e.courseautomation.model;
 
 import itucs.blg361e.courseautomation.DBConnection;
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.LinkedList;
@@ -26,7 +27,7 @@ public class UserCollectionJDBC extends DBConnection {
     public List<User> getUsers() {
         List<User> users = new LinkedList<User>();
         try {
-            String query = "SELECT id, name, username, password FROM user";
+            String query = "SELECT id, name, username, password, email, phone FROM user";
             Statement statement = this.db.createStatement();
             ResultSet results = statement.executeQuery(query);
             while (results.next()) {
@@ -34,8 +35,12 @@ public class UserCollectionJDBC extends DBConnection {
                 String name = results.getString("name");
                 String username = results.getString("username");
                 String password = results.getString("password");
+                String email = results.getString("email");
+                Long phone = results.getLong("phone");
                 User user = new User(name, username, password);
                 user.setId(id);
+                user.setEmail(email);
+                user.setPhone(phone);
                 users.add(user);
             }
             results.close();
@@ -100,12 +105,14 @@ public class UserCollectionJDBC extends DBConnection {
     
     public void updateUserPreparedPassword(User user) {
         try {
-            String query = "UPDATE user SET name = ?, username = ?, password = ? WHERE (id = ?)";
+            String query = "UPDATE user SET name = ?, username = ?, password = ?, email = ?, phone = ? WHERE (id = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setString(1, user.getName());
             statement.setString(2, user.getUsername());
             statement.setString(3, user.getPassword());
-            statement.setInt(4, user.getId());
+            statement.setString(4, user.getEmail());
+            statement.setLong(5, user.getPhone());
+            statement.setInt(6, user.getId());
             statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
@@ -124,6 +131,8 @@ public class UserCollectionJDBC extends DBConnection {
             if(result.next()){       
                 user.setName(result.getString("name"));
                 user.setId(result.getInt("id"));
+                user.setEmail(result.getString("email"));
+                user.setPhone(result.getLong("phone"));
             }
             
             statement.close();

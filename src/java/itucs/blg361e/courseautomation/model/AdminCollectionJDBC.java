@@ -22,7 +22,7 @@ public class AdminCollectionJDBC extends DBConnection {
     public List<Admin> getAdmins() {
         List<Admin> admins = new LinkedList<Admin>();
         try {
-            String query = "SELECT user.id, admin.id, name, username, password FROM user JOIN admin ON (userID = user.id)";
+            String query = "SELECT user.id, admin.id, name, username, password, email, phone FROM user JOIN admin ON (userID = user.id)";
             Statement statement = this.db.createStatement();
             ResultSet results = statement.executeQuery(query);
             while (results.next()) {
@@ -31,10 +31,14 @@ public class AdminCollectionJDBC extends DBConnection {
                 String name = results.getString("name");
                 String username = results.getString("username");
                 String password = results.getString("password");
+                String email = results.getString("email");
+                Long phone = results.getLong("phone");
                 
                 Admin admin = new Admin(name, username, password);
                 admin.setId(id);
                 admin.setAdminID(adminID);
+                admin.setEmail(email);
+                admin.setPhone(phone);
                 admins.add(admin);
             }
             results.close();

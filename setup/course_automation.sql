@@ -4,6 +4,8 @@ CREATE TABLE IF NOT EXISTS `user` (
     `name` varchar(225) COLLATE utf8_unicode_ci NOT NULL,
     `username` varchar(225) COLLATE utf8_unicode_ci NOT NULL,
     `password` varchar(225) COLLATE utf8_unicode_ci NOT NULL, /*MD5 Encrypted*/
+    `email` varchar(225) COLLATE utf8_unicode_ci NULL,
+    `phone` bigint(10) COLLATE utf8_unicode_ci NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
@@ -96,18 +98,18 @@ CREATE TABLE IF NOT EXISTS `student_course` (
        PRIMARY KEY (`id`)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
-INSERT INTO `user` (`name`, `username`, `password`) VALUES ('Berker Sönmez', 'sonmezbe', 'e10adc3949ba59abbe56e057f20f883e'); 
-INSERT INTO `user` (`name`, `username`, `password`) VALUES ('Oğuz Onur Kul', 'kulo', 'e10adc3949ba59abbe56e057f20f883e'); 
+INSERT INTO `user` (`name`, `username`, `password`, `email`, `phone`) VALUES ('Berker Sönmez', 'sonmezbe', 'e10adc3949ba59abbe56e057f20f883e', 'sonmezbe@itu.edu.tr', 5311002030); 
+INSERT INTO `user` (`name`, `username`, `password`, `email`, `phone`) VALUES ('Oğuz Onur Kul', 'kulo', 'e10adc3949ba59abbe56e057f20f883e', 'kulo@itu.edu.tr', 5322003004); 
 INSERT INTO `student` (`userID`, `number`, `credit_limit`) VALUES (1, 40100101, 25);
 INSERT INTO `student` (`userID`, `number`, `credit_limit`) VALUES (2, 40100105, 30);
 
-INSERT INTO `user` (`name`, `username`, `password`) VALUES ('Teacher1', 'tcr1', 'e10adc3949ba59abbe56e057f20f883e'); 
-INSERT INTO `user` (`name`, `username`, `password`) VALUES ('Teacher2', 'tcr2', 'e10adc3949ba59abbe56e057f20f883e'); 
+INSERT INTO `user` (`name`, `username`, `password`, `email`, `phone`) VALUES ('Teacher1', 'tcr1', 'e10adc3949ba59abbe56e057f20f883e', 'tcr1@itu.edu.tr', 5239863288); 
+INSERT INTO `user` (`name`, `username`, `password`, `email`, `phone`) VALUES ('Teacher2', 'tcr2', 'e10adc3949ba59abbe56e057f20f883e', 'tcr2@gmail.com', 2129558493); 
 INSERT INTO `teacher` (`userID`) VALUES (3);
 INSERT INTO `teacher` (`userID`) VALUES (4);
 
-INSERT INTO `user` (`name`, `username`, `password`) VALUES ('Admin1', 'admin', 'e10adc3949ba59abbe56e057f20f883e'); 
-INSERT INTO `user` (`name`, `username`, `password`) VALUES ('Admin2', 'admin2', 'e10adc3949ba59abbe56e057f20f883e'); 
+INSERT INTO `user` (`name`, `username`, `password`, `email`, `phone`) VALUES ('Admin1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'admin@gmail.com', 2127759933); 
+INSERT INTO `user` (`name`, `username`, `password`, `email`, `phone`) VALUES ('Admin2', 'admin2', 'e10adc3949ba59abbe56e057f20f883e', 'ads@gmail.com', 9111121550); 
 INSERT INTO `admin` (`userID`) VALUES (5);
 INSERT INTO `admin` (`userID`) VALUES (6); 
 

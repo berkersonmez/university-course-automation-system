@@ -31,6 +31,8 @@ public final class UserEditPage extends BasePage {
             this.setModel(model);
             this.add(new TextField("name").setRequired(true));
             this.add(new TextField("password").setRequired(false));
+            this.add(new TextField("email").setRequired(false));
+            this.add(new TextField("phone").setRequired(false));
         }
 
         @Override
