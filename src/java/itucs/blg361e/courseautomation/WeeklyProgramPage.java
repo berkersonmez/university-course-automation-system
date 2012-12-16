@@ -63,7 +63,7 @@ public final class WeeklyProgramPage extends BasePage {
         };
         this.add(studentCourseListView);
         collectionA.close();
-        collectionB.close();
+        
         
     }
     
