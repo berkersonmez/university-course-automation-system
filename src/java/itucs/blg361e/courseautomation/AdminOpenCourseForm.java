@@ -39,6 +39,7 @@ class AdminOpenCourseForm extends Form {
             this.setModel(model);
             this.add(new TextField("CRN").setRequired(true));
             this.add(new TextField("quota").setRequired(true));
+            this.add(new TextField("teacherID").setRequired(true));
             final CourseCollectionJDBC cCollection = new CourseCollectionJDBC();
             List<SelectOption> selectChoices = new ArrayList<SelectOption>();
             for (Course nCourse : cCollection.getCourses()) {
@@ -107,7 +108,6 @@ class AdminOpenCourseForm extends Form {
             formResult.setDay(formResult.getDaySelect().getKey());
             
             TeacherCollectionJDBC tCollection = new TeacherCollectionJDBC();
-            formResult.setTeacherID(0);
             
             OpenCourseCollectionJDBC oCollection = new OpenCourseCollectionJDBC();
             if(oCollection.checkCode(formResult.getCRN())){
@@ -115,7 +115,7 @@ class AdminOpenCourseForm extends Form {
                 return;
             }
             if (!oCollection.isTeacherAvailable(formResult)) {
-                error("You are not available for given timespan!");
+                error(formResult.getTeacherID().toString() + "(" + tCollection.getTeacherByTeacherId(formResult.getTeacherID()) + ") is not available for given timespan!");
                 return;
             }
             
