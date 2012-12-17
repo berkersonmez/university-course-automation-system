@@ -75,7 +75,7 @@ public class AddCRNForm extends Form {
         openCourse.setCurrentStudentCount(openCourse.getCurrentStudentCount()+1);
         nOpenCourseCollectionJDBC.updateOpenCourse(openCourse);
         nStudentCourseCollectionJDBC.addStudentCourse(nStudentCourse);
-        info("CRN is successfully added");
+        info("(CRN:" + nStudentCourse.getCRN().toString() + ") is successfully added");
         nStudentCourseCollectionJDBC.close();
         nOpenCourseCollectionJDBC.close();
         nCourseCollectionJDBC.close();

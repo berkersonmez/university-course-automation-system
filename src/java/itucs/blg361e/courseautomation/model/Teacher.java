@@ -7,6 +7,10 @@ package itucs.blg361e.courseautomation.model;
 public class Teacher extends User{
     private Integer teacherID = null; // corresponds to the id in the teacher table (not student no)
     
+    public Teacher(){
+        super();
+    }
+    
     public Teacher(String nName, String nUsername, String nPassword) {
         super(nName, nUsername, nPassword);
     }
