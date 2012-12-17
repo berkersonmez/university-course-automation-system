@@ -79,6 +79,36 @@ public class TeacherCollectionJDBC extends DBConnection {
         }
     }
     
+    public Teacher getTeacherByTeacherId(Integer teacher_id){
+        try {
+            String query = "SELECT user.id, teacher.id, name, username, password FROM user JOIN teacher ON (user.id = teacher.userID) WHERE (teacher.id = ?)";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, teacher_id);
+            ResultSet results = statement.executeQuery();
+            if (results.next()) {
+                Integer id = results.getInt("user.id");
+                Integer teacherID = results.getInt("teacher.id");
+                String name = results.getString("name");
+                String username = results.getString("username");
+                String password = results.getString("password");
+                
+                Teacher teacher = new Teacher(name, username, password);
+                teacher.setId(id);
+                teacher.setTeacherID(teacherID);
+                results.close();
+                statement.close();
+                return teacher;
+            }
+            else{
+                results.close();
+                statement.close();
+                return null;
+            }
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+    }
+    
     public void addTeacher(Teacher teacher) {
         try {
             UserCollectionJDBC userC = new UserCollectionJDBC();
@@ -93,10 +123,27 @@ public class TeacherCollectionJDBC extends DBConnection {
         }
     }
 
-    public void deleteTeacher(Teacher teacher) {
+    public void deleteTeacherByUserId(Teacher teacher) {
         try {
             UserCollectionJDBC userC = new UserCollectionJDBC();
             
+            String query = "DELETE FROM teacher WHERE (userID = ?)";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, teacher.getId());
+            statement.executeUpdate();
+            statement.close();
+            userC.deleteUser(teacher);
+            userC.close();
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+    }
+    
+    public void deleteTeacherByTeacherId(Teacher teacher) {
+        try {
+            UserCollectionJDBC userC = new UserCollectionJDBC();
+            
+            teacher = this.getTeacherByTeacherId(teacher.getTeacherID());
             String query = "DELETE FROM teacher WHERE (id = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, teacher.getTeacherID());
@@ -109,6 +156,27 @@ public class TeacherCollectionJDBC extends DBConnection {
         }
     }
 
+    public boolean checkCode(Teacher teacher) {
+        
+        try {
+            String query = "SELECT COUNT(*) FROM teacher WHERE id = ?";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, teacher.getTeacherID());
+            ResultSet results = statement.executeQuery();
+            if (results.next()) {
+                Integer count = results.getInt("COUNT(*)");
+                if (count > 0) {
+                    return true;
+                }
+            }
+            results.close();
+            statement.close();
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+        return false;
+    }
+    
     public void updateTeacher(Teacher teacher) {
         try {
             UserCollectionJDBC userC = new UserCollectionJDBC();
