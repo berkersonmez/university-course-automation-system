@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:wicket="http://wicket.apache.org">
+    <head>
+        <wicket:head>
+            <title>Delete Student</title>
+        </wicket:head>
+    </head>
+    <body>
+        <wicket:extend>
+            <div id="AddDropForm">
+                
+            <form action="#" wicket:id="delete_student">
+                <h2>Delete Studentr</h2>
+                <table>
+                    <tr>
+                        <td id="crn">Student id: </td>
+                        <td><input wicket:id="number" type="text"/></td>
+                    </tr>
+                </table>
+                <input id="button" value="Delete" name="delete" type="submit"/>
+            </form>
+                
+            </div>
+        </wicket:extend>
+    </body>
+</html>

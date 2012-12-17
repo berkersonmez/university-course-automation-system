@@ -34,13 +34,13 @@ public final class DeleteTeacherPage extends BasePage {
             TeacherCollectionJDBC nTeacherCollection = new TeacherCollectionJDBC();
             
             if(nTeacherCollection.checkCode(formResult) == false){
-                error("DELETING FAILED: Teacher id: " + formResult.getTeacherID() + " does not exist");
+                error("DELETING FAILED: Teacher id: " + formResult.getTeacherID() + " does not exist!");
                 return;
             }
             
             String teacher_name = nTeacherCollection.getTeacherByTeacherId(formResult.getTeacherID()).getName();
             nTeacherCollection.deleteTeacherByTeacherId(formResult);
-            info("SUCCESS: Teacher " + teacher_name  + " teacher is added!");
+            info("SUCCESS: Teacher " + teacher_name  + " is deleted.");
             
             nTeacherCollection.close();
         }

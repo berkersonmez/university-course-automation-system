@@ -53,6 +53,27 @@ public class StudentCollectionJDBC extends DBConnection {
         return students;
     }
     
+    public boolean checkCode(Student student) {
+        
+        try {
+            String query = "SELECT COUNT(*) FROM student WHERE number = ?";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, student.getNumber());
+            ResultSet results = statement.executeQuery();
+            if (results.next()) {
+                Integer count = results.getInt("COUNT(*)");
+                if (count > 0) {
+                    return true;
+                }
+            }
+            results.close();
+            statement.close();
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+        return false;
+    }
+    
     public boolean checkUsernameAndNumber(Student student) {
         
         try {
@@ -75,10 +96,11 @@ public class StudentCollectionJDBC extends DBConnection {
         return false;
     }
 
-     public Student getOneStudent(int user_id) {
+    public Student getOneStudent(int user_id) {
         try {
-            String query = "SELECT user.id, student.id, number, name, username, password, credit_limit, current_credit FROM user JOIN student ON (userID = user.id)";
-            Statement statement = this.db.createStatement();
+            String query = "SELECT user.id, student.id, number, name, username, password, credit_limit, current_credit FROM user JOIN student ON (userID = user.id) WHERE user.id = ?";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, user_id);
             ResultSet results = statement.executeQuery(query);
             Student nStudent = new Student();
             if (results.next()) {
@@ -99,7 +121,31 @@ public class StudentCollectionJDBC extends DBConnection {
        
     }
     
-    
+    public Student getOneStudentByStudentNumber(int student_number) {
+        try {
+            String query = "SELECT user.id, student.id, number, name, username, password, credit_limit, current_credit FROM user JOIN student ON (student.userID = user.id) WHERE (student.number = ?)";
+            PreparedStatement statement = this.db.prepareStatement(query);
+            statement.setInt(1, student_number);
+            ResultSet results = statement.executeQuery();
+            Student nStudent = new Student();
+            if (results.next()) {
+                nStudent.setId(results.getInt("user.id"));
+                nStudent.setStudentID(results.getInt("number"));
+                nStudent.setName(results.getString("name"));
+                nStudent.setUsername(results.getString("username"));
+                nStudent.setPasswordDirectly(results.getString("password"));
+                nStudent.setCreditLimit(results.getInt("credit_limit"));
+                nStudent.setCurrentCredit(results.getInt("current_credit"));
+            }
+            results.close();
+            statement.close();
+            return nStudent;
+        } catch (SQLException e) {
+            throw new UnsupportedOperationException(e.getMessage());
+        }
+       
+    }
+      
     public void addStudent(Student student) {
         try {
             UserCollectionJDBC userC = new UserCollectionJDBC();
@@ -116,10 +162,11 @@ public class StudentCollectionJDBC extends DBConnection {
         }
     }
 
-    public void deleteStudent(Student student) {
+    public void deleteStudentByStudentId(Student student) {
         try {
             UserCollectionJDBC userC = new UserCollectionJDBC();
             
+            student = this.getOneStudentByStudentNumber(student.getNumber());
             String query = "DELETE FROM student WHERE (id = ?)";
             PreparedStatement statement = this.db.prepareStatement(query);
             statement.setInt(1, student.getStudentID());
@@ -131,7 +178,7 @@ public class StudentCollectionJDBC extends DBConnection {
             throw new UnsupportedOperationException(e.getMessage());
         }
     }
-
+    
     public void updateStudent(Student student) {
         try {
             UserCollectionJDBC userC = new UserCollectionJDBC();

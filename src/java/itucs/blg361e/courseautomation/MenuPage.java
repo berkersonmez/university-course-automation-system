@@ -62,6 +62,7 @@ public final class MenuPage extends BasePage {
         Options options = oCollection.getOptions();
         if (user.getType() == User.TYPE_ADMIN) {
             menuList.add(new MenuObject("Add Student", new StudentAddPage()));
+            menuList.add(new MenuObject("Delete Student", new DeleteStudentPage()));
             menuList.add(new MenuObject("Add Teacher", new AddTeacherPage()));
             menuList.add(new MenuObject("Delete Teacher", new DeleteTeacherPage()));
             menuList.add(new MenuObject("Add Course", new CourseAddPage()));
