@@ -329,3 +329,14 @@ font-weight: normal;
 .white {
     color: white;
 }
+
+#program{
+	background: rgba(0, 0, 0, 0.6);
+	border-radius: 15px;
+        padding: 10px 10px 10px 10px;
+        color: graytext;
+        margin-top: 10px;
+        margin-bottom: 20px;
+	text-align:left;
+	
+}
