@@ -330,7 +330,7 @@ font-weight: normal;
     color: white;
 }
 
-#program{
+.program{
 	background: rgba(0, 0, 0, 0.6);
 	border-radius: 15px;
         padding: 10px 10px 10px 10px;
